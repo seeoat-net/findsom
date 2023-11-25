@@ -1,0 +1,15 @@
+package model.manager;
+
+public class NoiseManager {
+	//내 방의 소음 신고 개수, 현재 소음 순위(상위 3) 반환
+	public void findNoiseList() {
+		
+	}
+	
+	// 소음 신고
+	public void reportNoiseList() {
+		
+	}
+
+
+}
