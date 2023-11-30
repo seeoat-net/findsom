@@ -1,0 +1,52 @@
+package model.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.dto.MatchDTO;
+import model.dto.MatchDetailDTO;
+
+public class MatchDAO {
+	
+	private JDBCUtil jdbcUtil = null;
+	
+	public MatchDAO() {			
+		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
+	}
+	
+	//현재 룸메이트를 구인 중인 모든 유저의 MatchDTO
+	public ArrayList<MatchDTO> searchUsers() throws SQLException {
+		try {
+			StringBuilder query1 = new StringBuilder();
+	        query1.append("SELECT userID, nickname ");
+	        query1.append("FROM userinfo ");
+	        query1.append("WHERE isRecruite = ? ");
+	    	jdbcUtil.setSqlAndParameters(query1.toString(), new Object[]{"모집중"});
+	    	
+	    	ArrayList<MatchDTO> matchDTOList = new ArrayList<MatchDTO>();
+    	 
+			ResultSet rs = jdbcUtil.executeQuery();
+			while (rs.next()) {		// 검색 결과 존재
+				MatchDTO matchDTO = new MatchDTO(rs.getString("userID"), rs.getString("nickname"));
+				matchDTOList.add(matchDTO);
+			}
+			
+			
+			return matchDTOList;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();		// ResultSet, PreparedStatement, Connection 등 해제
+		}
+		
+		return null;
+	}
+	
+	//특정 유저의 MatchDetailDTO
+	public MatchDetailDTO searchUserDetail() {
+		return null;
+	}
+}
