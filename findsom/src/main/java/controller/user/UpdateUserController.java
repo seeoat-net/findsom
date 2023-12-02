@@ -11,10 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.service.UserManager;
-<<<<<<< Updated upstream
-import model.Community;
-=======
->>>>>>> Stashed changes
 import model.User;
 
 public class UpdateUserController implements Controller {
@@ -23,11 +19,7 @@ public class UpdateUserController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
  
-<<<<<<< Updated upstream
-    	if (request.getMethod().equals("GET")) {	
-=======
     	if (request.getMethod().equals("GET")) {
->>>>>>> Stashed changes
     		// GET request: 회원정보 수정 form 요청	
     		// 원래는 UpdateUserFormController가 처리하던 작업을 여기서 수행
     		String updateId = request.getParameter("userId");
@@ -42,12 +34,6 @@ public class UpdateUserController implements Controller {
 			if (UserSessionUtils.isLoginUser(updateId, session) ||
 				UserSessionUtils.isLoginUser("admin", session)) {
 				// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
-<<<<<<< Updated upstream
-								
-				List<Community> commList = manager.findCommunityList();	// 커뮤니티 리스트 검색
-				request.setAttribute("commList", commList);	
-=======
->>>>>>> Stashed changes
 				
 				return "/user/updateForm.jsp";   // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송     
 			}    
@@ -56,19 +42,6 @@ public class UpdateUserController implements Controller {
 			request.setAttribute("updateFailed", true);
 			request.setAttribute("exception", 
 					new IllegalStateException("타인의 정보는 수정할 수 없습니다."));            
-<<<<<<< Updated upstream
-			return "/user/view.jsp";	// 사용자 보기 화면으로 이동 (forwarding)
-	    }	
-    	
-    	// POST request (회원정보가 parameter로 전송됨)
-    	User updateUser = new User(
-    		request.getParameter("userId"),
-    		request.getParameter("password"),
-    		request.getParameter("name"),
-    		request.getParameter("email"),
-    		request.getParameter("phone"),
-			Integer.parseInt(request.getParameter("commId")));
-=======
 			return "/findsom/MypageMainView.jsp";	// 사용자 보기 화면으로 이동 (forwarding)
 	    }	
     	
@@ -93,16 +66,11 @@ public class UpdateUserController implements Controller {
               request.getParameter("nickname"),
               request.getParameter("isRecruite"),
               request.getParameter("roomInfo"));
->>>>>>> Stashed changes
 
     	log.debug("Update User : {}", updateUser);
 
 		UserManager manager = UserManager.getInstance();
 		manager.update(updateUser);			
-<<<<<<< Updated upstream
-        return "redirect:/user/list";			
-=======
         return "redirect:/findsom/MypageMainView.jsp";			
->>>>>>> Stashed changes
     }
 }
