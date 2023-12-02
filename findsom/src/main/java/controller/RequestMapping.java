@@ -6,7 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.user.*;
+<<<<<<< Updated upstream
 import controller.comm.*;
+=======
+>>>>>>> Stashed changes
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -20,7 +23,11 @@ public class RequestMapping {
         mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
+<<<<<<< Updated upstream
         mappings.put("/user/list", new ListUserController());
+=======
+//        mappings.put("/user/list", new ListUserController());
+>>>>>>> Stashed changes
         mappings.put("/user/view", new ViewUserController());
         
         // 회원 가입 폼 요청과 가입 요청 처리 병합 (폼에 커뮤니티 선택 메뉴 추가를 위함)
@@ -34,6 +41,7 @@ public class RequestMapping {
         mappings.put("/user/update", new UpdateUserController());
         
         mappings.put("/user/delete", new DeleteUserController());
+<<<<<<< Updated upstream
         
         // 커뮤니티 관련 request URI 추가
         mappings.put("/community/list", new ListCommunityController());
@@ -42,6 +50,9 @@ public class RequestMapping {
         mappings.put("/community/create", new CreateCommunityController());
         mappings.put("/community/update", new UpdateCommunityController());
         
+=======
+
+>>>>>>> Stashed changes
         logger.info("Initialized Request Mapping!");
     }
 

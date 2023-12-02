@@ -14,6 +14,10 @@ public class LogoutController implements Controller {
 		session.removeAttribute(UserSessionUtils.USER_SESSION_KEY);
 		session.invalidate();		
         
+<<<<<<< Updated upstream
         return "redirect:/user/list";
+=======
+        return "redirect:/findsom/RandingView.jsp";
+>>>>>>> Stashed changes
     }
 }
