@@ -1,6 +1,7 @@
 package controller.comm;
 
-import java.util.List;
+/*
+ * import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
@@ -19,3 +20,4 @@ public class ListCommunityController implements Controller {
 		return "/community/list.jsp";        
     }
 }
+ */

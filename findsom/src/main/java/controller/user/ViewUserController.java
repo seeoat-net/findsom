@@ -1,6 +1,6 @@
 package controller.user;
 
-import javax.servlet.http.HttpServletRequest;
+/*import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
@@ -29,4 +29,4 @@ public class ViewUserController implements Controller {
 		request.setAttribute("user", user);		// 사용자 정보 저장				
 		return "/user/view.jsp";				// 사용자 보기 화면으로 이동
     }
-}
+}*/

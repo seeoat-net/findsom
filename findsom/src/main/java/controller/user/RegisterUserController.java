@@ -1,6 +1,6 @@
 package controller.user;
 
-import java.util.List;
+/*import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,5 +52,5 @@ public class RegisterUserController implements Controller {
 			return "/user/registerForm.jsp";
 		}
     }
-}
+}*/
 

@@ -1,5 +1,6 @@
 package controller.user;
 
+/*
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,7 @@ public class DeleteUserController implements Controller {
 				return "redirect:/user/logout";		// logout 처리
 		}
 		
-		/* 삭제가 불가능한 경우 */
+		/* 삭제가 불가능한 경우 
 		User user = manager.findUser(deleteId);	// 사용자 정보 검색
 		request.setAttribute("user", user);						
 		request.setAttribute("deleteFailed", true);
@@ -46,3 +47,4 @@ public class DeleteUserController implements Controller {
 		return "/user/view.jsp";		// 사용자 보기 화면으로 이동 (forwarding)	
 	}
 }
+ */

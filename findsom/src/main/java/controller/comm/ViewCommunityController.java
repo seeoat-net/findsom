@@ -1,6 +1,7 @@
 package controller.comm;
 
-import javax.servlet.http.HttpServletRequest;
+/*
+ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
@@ -20,3 +21,5 @@ public class ViewCommunityController implements Controller {
 		return "/community/view.jsp";				// 커뮤니티 보기 화면으로 이동
     }
 }
+ 
+ */

@@ -1,6 +1,6 @@
 package controller.user;
 
-import java.util.List;
+/*import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,4 +64,4 @@ public class UpdateUserController implements Controller {
 		manager.update(updateUser);			
         return "redirect:/user/list";			
     }
-}
+}*/
