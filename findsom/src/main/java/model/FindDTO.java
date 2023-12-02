@@ -2,6 +2,7 @@ package model;
 
 /***  FindBoardPost 테이블과 대응됨 */
 public class FindDTO {
+
 	private int findpostID;
 	private String isAnonymous;
 	private String title;
@@ -82,7 +83,8 @@ public class FindDTO {
 	@Override
 	public String toString() {
 		return "FindDTO [findpostID=" + findpostID + ", isAnonymous=" + isAnonymous + ", title=" + title + ", prefer="
-				+ prefer + ", mycontent=" + mycontent + ", matecontent=" + matecontent + ", userID=" + userID + "]";
+				+ prefer + ", mycontent=" + mycontent + ", matecontent=" + matecontent + ", userID=" + userID + "]";	
+
 	}
 	
 }
