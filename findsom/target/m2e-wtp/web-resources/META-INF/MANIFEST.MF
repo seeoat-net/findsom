@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< Updated upstream
 Built-By: dada
 Build-Jdk: 17.0.9
+=======
+Built-By: mang3
+Build-Jdk: 17.0.5
+>>>>>>> Stashed changes
 Created-By: Maven Integration for Eclipse
 
