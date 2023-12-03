@@ -74,8 +74,8 @@ public class MatchDAO {
 	        ArrayList<FindDTO> finds = new ArrayList<FindDTO>();
 	        
 			while (rs.next()) {
-				FindDTO dto = new FindDTO(rs.getString("postID"), rs.getString("isAnonymous"), rs.getString("title"),
-						rs.getString("prefer"), rs.getString("userID"), rs.getString("content"));
+				FindDTO dto = new FindDTO(rs.getInt("postID"), rs.getString("isAnonymous"), rs.getString("title"),
+						rs.getString("prefer"), rs.getString("content"), rs.getString("content"), rs.getString("userID"));
 				finds.add(dto);
 			}
 			MatchDetailDTO detailDTO = new MatchDetailDTO(userID, nickname, finds);
