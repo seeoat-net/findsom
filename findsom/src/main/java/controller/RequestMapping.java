@@ -18,12 +18,12 @@ public class RequestMapping {
     	
     	// 쉿!게시판 
     	// 쉿 게시판 접근 시, roominfo가 있는 사람만!
-    	mappings.put("/noise/list", new ListNoiseController());
-    	mappings.put("/noise/report/form", new ReportNoiseController());
+    	mappings.put("/noise", new NoiseController());
+    	mappings.put("/noise", new NoiseController());
     	
     	// 매칭 게시판
-    	mappings.put("/matching/form", new MatchController());
-    	mappings.put("/matching/detail", new MatchController());
+    	mappings.put("/match/matching", new MatchController());
+    	mappings.put("/match/matching/detail", new MatchController());
    
 //        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
        

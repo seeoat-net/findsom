@@ -11,7 +11,7 @@ import model.dto.MatchDTO;
 import model.dto.MatchDetailDTO;
 import model.manager.MatchManager;
 
-public class MatchController implements Controller{
+public class MatchController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -19,13 +19,19 @@ public class MatchController implements Controller{
 		
 		if (request.getServletPath().equals("/match/matching")) {
 			if (request.getMethod().equals("GET")) {
-				return "MatchingResultView.jsp";
+				return "MatchingView.jsp";
 			}
 			else {
 				// 매칭 기능 구현
 				ArrayList<String> lifePatterns = new ArrayList<String>();
 				String[] strs = request.getParameterValues("lifePatterns");
+				String mbti = request.getParameter("mbti");
 				lifePatterns.addAll(Arrays.asList(strs));
+				lifePatterns.add(mbti);
+				
+				for(String s : lifePatterns) {
+					System.out.print(s + " ");
+				}
 
 				ArrayList<MatchDTO> matchingResult = matchMan.matching(lifePatterns);
 				request.setAttribute("matchingResult", matchingResult);
@@ -36,12 +42,11 @@ public class MatchController implements Controller{
 		else if (request.getServletPath().equals("/match/matching/detail")) {
 		    // 매칭 상세 기능 구현
 			String userID = request.getParameter("userID");
-			String nickname = request.getParameter("nickname");
-			
-			MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID, nickname);
+						
+			MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID);
 			request.setAttribute("matchingDetailResult", matchingDetailResult );
 			
-			return "MatchingResultDetailView.jsp";
+			return "MatchingDetailView.jsp";
 		}
 		return null;
 	}

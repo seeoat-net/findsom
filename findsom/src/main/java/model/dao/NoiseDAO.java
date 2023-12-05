@@ -3,7 +3,8 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
+import model.dto.NoiseDTO;
 
 public class NoiseDAO {
 	//방의 신고 개수, 순위, 신고
@@ -14,13 +15,13 @@ public class NoiseDAO {
 	}
 	
 	// 내 방의 신고 개수
-	public int myNoise(String roomInfo) throws SQLException {
+	public int myNoise(String userID) throws SQLException {
 		StringBuilder query = new StringBuilder();
         query.append("SELECT count ");
-        query.append("FROM noiseinfo ");
-        query.append("WHERE roomInfo = ? ");
-    	jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{roomInfo});	
-    	 
+        query.append("FROM room ");
+        query.append("WHERE roominfo = (SELECT roominfo FROM USERINFO WHERE userID = ? ) ");
+    	jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{userID});	
+    	
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			if (rs.next()) {		// 검색 결과 존재
@@ -39,18 +40,20 @@ public class NoiseDAO {
 	}
 
 	// 소음 순위
-	public List<String> noiseRank() throws SQLException {
+	public ArrayList<NoiseDTO> noiseRank() throws SQLException {
 		StringBuilder query = new StringBuilder();
 	    query.append("SELECT roominfo, count ");
-	    query.append("FROM noiseinfo ");
-	    query.append("ORDER BY count ");
-	    query.append("WHERE ROWNUM < 3");
+	    query.append("FROM ( SELECT roominfo, count FROM room ORDER BY count DESC ) ");
+	    query.append("WHERE ROWNUM < 10");
+	    jdbcUtil.setSqlAndParameters(query.toString(), null);
+	    
 	    	 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
-			List<String> ranking = new ArrayList<String>();
+			ArrayList<NoiseDTO> ranking = new ArrayList<NoiseDTO>();
 			while (rs.next()) {		// 검색 결과 존재
-				ranking.add(rs.getString("roominfo"));	
+				NoiseDTO dto = new NoiseDTO(rs.getString("roominfo"), rs.getInt("count"));
+				ranking.add(dto);
 			}
 			return ranking;
 		} catch (Exception ex) {
@@ -67,8 +70,8 @@ public class NoiseDAO {
 	// 원래 있는 방에 대해서만
 	public int noiseReport(String roomInfo) throws SQLException {
 		StringBuilder query = new StringBuilder();
-	    query.append("UPDATE noiseinfo SET count = ");
-	    query.append("(SELECT count FROM noiseinfo WHERE roominfo = ?) + 1");
+	    query.append("UPDATE room SET count = ");
+	    query.append("(SELECT count FROM room WHERE roominfo = ?) + 1 ");
 	    query.append("WHERE roominfo = ?");
 	    jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{roomInfo, roomInfo});
 	    	 
@@ -84,6 +87,5 @@ public class NoiseDAO {
 		}
 		return -1;
 	}
-
 
 }

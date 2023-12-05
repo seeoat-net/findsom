@@ -123,7 +123,7 @@ ALTER TABLE MessageInfo
 CREATE TABLE Room
 (
 	roomInfo             VARCHAR2(18)  NOT NULL ,
-	count                VARCHAR2(18)  NULL 
+	count                NUMBER(4)  NULL 
 );
 
 CREATE UNIQUE INDEX XPKNoiseInfo ON Room

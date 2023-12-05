@@ -63,19 +63,21 @@ public class MatchDAO {
 	}
 	
 	//특정 유저의 MatchDetailDTO
-	public MatchDetailDTO searchUserDetail(String userID, String nickname) {
+	public MatchDetailDTO searchUserDetail(String userID) {
 		try {
 			StringBuilder query = new StringBuilder();
-	        query.append("SELECT postID, isAnonymous, title, prefer, userID, content ");
-	        query.append("FROM FindBoardPost ");
-	        query.append("WHERE userID = ? ");
+	        query.append("SELECT p.findpostID, p.isAnonymous, p.title, p.prefer, p.userID, p.content, u.nickname ");
+	        query.append("FROM findboardpost p, userinfo u ");
+	        query.append("WHERE p.userID = u.userID and u.userID = ? ");
 	        
 	        ResultSet rs = jdbcUtil.executeQuery();
 	        ArrayList<FindDTO> finds = new ArrayList<FindDTO>();
+	        String nickname = null;
 	        
 			while (rs.next()) {
-				FindDTO dto = new FindDTO(rs.getInt("postID"), rs.getString("isAnonymous"), rs.getString("title"),
-						rs.getString("prefer"), rs.getString("content"), rs.getString("content"), rs.getString("userID"));
+				nickname = rs.getString("nickname");
+				FindDTO dto = new FindDTO(rs.getInt("findpostID"), rs.getString("isAnonymous"), rs.getString("title"),
+						rs.getString("prefer"), rs.getString("mycontent"), rs.getString("matecontent"), rs.getString("userID"));
 				finds.add(dto);
 			}
 			MatchDetailDTO detailDTO = new MatchDetailDTO(userID, nickname, finds);
@@ -90,4 +92,5 @@ public class MatchDAO {
 		}
 		return null;
 	}
+
 }
