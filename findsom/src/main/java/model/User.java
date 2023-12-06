@@ -17,14 +17,11 @@ public class User {
 	private String authentication;
 	private String isRecruite;
 	private String roomInfo;
-//	private List<LifePattern> lifePatterns;
 	
 	public User() { }		// 기본 생성자
 	
 	public User(String userId, String email, String password, String phone, String name, String nickname, 
-	        String authentication, String isRecruite, String roomInfo)
-//	        List<LifePattern> lifePatterns)
-	        {
+	        String authentication, String isRecruite, String roomInfo) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -34,11 +31,12 @@ public class User {
         this.authentication = authentication;
         this.isRecruite = isRecruite;
         this.roomInfo = roomInfo;
-//        this.lifePatterns = lifePatterns;
     }
 
-    public void updateUser(String userId, String email, String password, String phone, String name,
-            String nickname, String isRecruite, String roomInfo) { // update를 위한
+    public User(String userId, String email, String password, String phone, String name,
+            String nickname, String isRecruite
+//            , String roomInfo
+            ) { // update를 위한
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -46,7 +44,7 @@ public class User {
         this.name = name;
         this.nickname = nickname;
         this.isRecruite = isRecruite;
-        this.roomInfo = roomInfo;
+//        this.roomInfo = roomInfo;
     }
 
     public String getUserId() {
@@ -120,43 +118,6 @@ public class User {
     public void setRoomInfo(String roomInfo) {
         this.roomInfo = roomInfo;
     }
-
-//    public List<LifePattern> getLifePatterns() {
-//        return lifePatterns;
-//    }
-//
-//    public void setLifePatterns(List<LifePattern> lifePatterns) {
-//        this.lifePatterns = lifePatterns;
-//    }
-//    
-//    public String getLifePatternsAsString() {
-//        if (lifePatterns != null && !lifePatterns.isEmpty()) {
-//            List<String> patternStrings = new ArrayList<>();
-//            for (LifePattern pattern : lifePatterns) {
-//                patternStrings.add(pattern.toString()); // Assuming LifePattern has a meaningful toString() method
-//            }
-//            return String.join(", ", patternStrings);
-//        } else {
-//            return null;
-//        }
-//    }
-//
-//    public void setLifePatternsFromString(String lifePatterns) {
-//        if (lifePatterns != null && !lifePatterns.isEmpty()) {
-//            String[] patternStrings = lifePatterns.split(", ");
-//            List<LifePattern> patternList = new ArrayList<>();
-//
-//            for (String patternString : patternStrings) {
-//                // Create LifePattern objects based on the string representation
-//                LifePattern pattern = new LifePattern(patternString); // Adjust this line based on your LifePattern constructor
-//                patternList.add(pattern);
-//            }
-//
-//            this.lifePatterns = patternList;
-//        } else {
-//            this.lifePatterns = null;
-//        }
-//    }
 
     /* 비밀번호 검사 */
 	public boolean matchPassword(String password) {

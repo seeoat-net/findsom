@@ -3,6 +3,11 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import controller.user.RegisterUserController;
+import model.LifePattern;
 import model.User;
 import model.dao.UserDAO;
 
@@ -14,6 +19,7 @@ import model.dao.UserDAO;
  * 별도로 둘 수 있다.
  */
 public class UserManager {
+    private static final Logger log = LoggerFactory.getLogger(UserManager.class);
 	private static UserManager userMan = new UserManager();
 	private UserDAO userDAO;
 
@@ -35,28 +41,16 @@ public class UserManager {
 		}
 		return userDAO.create(user);
 	}
+	
+    public int createLifePattern(LifePattern lifePattern, User user) throws SQLException, ExistingUserException {
+        return userDAO.createLifePattern(lifePattern, user);
+    }
 
 	public int update(User user) throws SQLException, UserNotFoundException {
-//		int oldCommId = findUser(user.getUserId()).getCommId();
-//		if (user.getCommId() != oldCommId) { 	// 소속 커뮤티니가 변경됨
-//			Community comm = commDAO.findCommunity(oldCommId);  // 기존 소속 커뮤니티
-//			if (comm != null && user.getUserId().equals(comm.getChairId())) {
-//				// 사용자가 기존 소속 커뮤니티의 회장인 경우 -> 그 커뮤니티의 회장을 null로 변경 및 저장
-//				comm.setChairId(null);
-//				commDAO.updateChair(comm);
-//			}
-//		}
 		return userDAO.update(user);
 	}
 
 	public int remove(String userId) throws SQLException, UserNotFoundException {
-//		int commId = findUser(userId).getCommId();
-//		Community comm = commDAO.findCommunity(commId);  // 소속 커뮤니티
-//		if (comm != null && userId.equals(comm.getChairId())) {
-//			// 사용자가 소속 커뮤니티의 회장인 경우 -> 그 커뮤니티의 회장을 null로 변경 및 저장
-//			comm.setChairId(null);
-//			commDAO.updateChair(comm);
-//		}
 		return userDAO.remove(userId);
 	}
 	
@@ -68,11 +62,23 @@ public class UserManager {
                 throw new UserNotFoundException(userId + "는 존재하지 않는 아이디입니다.");
             }       
             return user;
-        }
+    }
+    
+    public LifePattern findLifePattern(String userId)
+            throws SQLException, UserNotFoundException {
+            LifePattern lifePattern = userDAO.findLifePattern(userId);
+            
+            if (lifePattern == null) {
+                throw new UserNotFoundException(userId + "의 생활패턴은 존재하지 않습니다.");
+            }
+            return lifePattern;
+    }
 
 	public boolean login(String userId, String password)
 		throws SQLException, UserNotFoundException, PasswordMismatchException {
 		User user = findUser(userId);
+		
+		log.debug(userId + " " + password);
 
 		if (!user.matchPassword(password)) {
 			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");

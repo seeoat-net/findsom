@@ -14,7 +14,7 @@ import model.service.UserManager;
 import model.LifePattern;
 import model.User;
 
-public class UpdateUserController implements Controller {
+public class UpdateFormController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
 
     @Override
@@ -39,9 +39,8 @@ public class UpdateUserController implements Controller {
                 request.getParameter("isRecruite"));
 //                request.getParameter("roomInfo"));
     	
-    	log.debug("UpdateController User : {}", updateUser);
-    	
-        manager.update(updateUser);    	
-    	return "/findsom/MypageMainView.jsp";
+    	log.debug("UpdateForm User : {}", updateUser);
+    	request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
+    	return "/findsom/MypageUpdateView.jsp";
     }
 }
