@@ -93,8 +93,8 @@ function userList(targetUri) {
 								<td width="130">샤워시간</td>
 								<td width="250" style="padding-left: 10">
 								<select style="width: 240" name="showerTime">
-										<option value="morningShower">아침</option>
-										<option value="nightShower">밤</option>
+										<option value="morning">아침</option>
+										<option value="night">밤</option>
 								</select>
 								</td>
 							</tr>
@@ -111,6 +111,7 @@ function userList(targetUri) {
 								<td width="130">잠버릇</td>
 								<td width="250" style="padding-left: 10">
 								<select multiple style="width: 240" name="sleepHabits">
+										<option value="none">없음</option>
 										<option value="teethGrinding">이갈이</option>
 										<option value="snoring">코골이</option>
 										<option value="ear">잠귀 밝음</option>
@@ -170,6 +171,12 @@ function userList(targetUri) {
 									placeholder="숫자로만 입력. 예) 21" required></td>
 							</tr>
 							<tr height="40">
+								<td width="130">우대사항</td>
+								<td width="250" style="padding-left: 10">
+								<input type="text" style="width: 240" name="preferences"
+									placeholder="없으면 '없음' 입력" required></td>
+							</tr>
+							<tr height="40">
 								<td width="130">침대 1층/2층 선호</td>
 								<td width="250" style="padding-left: 10">
 								<select style="width: 240" name="bedPreference">
@@ -182,8 +189,7 @@ function userList(targetUri) {
 						<table>
 							<tr>
 								<td><input type="button" id="btn" value="완료"
-									onClick="userList(
-								'<c:url value='/user/registerLifePattern'/>')"></td>
+									onClick="userList('<c:url value='/findsom/SignupCompleteView.jsp' />')"></td>
 							</tr>
 						</table>
 					</td>

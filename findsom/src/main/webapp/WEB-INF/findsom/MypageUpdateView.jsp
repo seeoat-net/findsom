@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MypageMainView</title>
+<title>MypageUpdateView</title>
 <link rel=stylesheet href="<c:url value='../css/mainView.css' />">
 <script>
 function userModify() {
@@ -94,61 +94,106 @@ function userList(targetUri) {
 							</c:if>
 							<table>
 								<tr>
-									<td colspan=3 style="text-align: center;"><h2>사용자 기본 정보</h2></td>
+									<td colspan=3 style="text-align: center;"><h2>사용자 기본 정보 수정</h2></td>
+								</tr>
+								<tr height="40">
+									<td colspan=3 style="font-size: 14px; text-align: center;">
+									사용자 ID는 수정할 수 없습니다.
+									</td>
 								</tr>
 								<tr height="40">
 									<td width="130">이메일</td>
-									<td width="250" style="padding-left: 10"><%=user.getEmail()%>
-									<input type="hidden" name="email" value="<%= user.getEmail() %>">
+									<td width="250" style="padding-left: 10"><input type="text"
+									style="width: 240" name="email" placeholder="변경할 이메일" required
+									<c:if test="${registerFailed}">value="${user.email}"</c:if>>
+								</td>
+									<td width="70"><input type="button" id="btn" value="중복확인"
+										onClick="userCreate(
+									'<c:url value='/user/register'/>')">
 									</td>
 								</tr>
 								<tr height="40">
 									<td width="130">사용자 ID</td>
-									<td width="250" style="padding-left: 10"><%=user.getUserId()%>
-									<input type="hidden" name="userId" value="<%= user.getUserId() %>">
-									</td>
+									<td width="250" style="padding-left: 10"><input type="text"
+										style="width: 240;" name="userId" value="${user.userId}"
+										placeholder="사용자 ID는 변경할 수 없습니다." disabled>
+									<input type="hidden" name="userId" value="<%= user.getUserId() %>"></td>
 								</tr>
 								<tr height="40">
 									<td width="130">비밀번호</td>
-									<td width="250" style="padding-left: 10"><%=user.getPassword()%>
-									<input type="hidden" name="password" value="<%= user.getPassword() %>">
-									</td>
+									<td width="250" style="padding-left: 10"><input
+									type="password" style="width: 240" name="password" value="${user.password}"
+									placeholder="4자 이상, 영문자와 숫자의 조합" required></td>
+								</tr>
+								<tr height="40">
+									<td width="130">비밀번호 확인</td>
+									<td width="250" style="padding-left: 10"><input
+									type="password" style="width: 240" name="password2" value="${user.password}"
+									placeholder="비밀번호를 다시 입력해주세요." required></td>
 								</tr>
 								<tr height="40">
 									<td width="130">전화번호</td>
-									<td width="250" style="padding-left: 10"><%=user.getPhone()%>
-									<input type="hidden" name="phone" value="<%= user.getPhone() %>">
+									<td width="250" style="padding-left: 10"><input type="text"
+										style="width: 240" name="phone" placeholder="전화번호를 입력해주세요."
+										<c:if test="${registerFailed}">value="${user.phone}"</c:if>>
+									</td>
+									<td width="70"><input type="button" id="btn" value="중복확인"
+										onClick="userCreate(
+										'<c:url value='/user/register'/>')">
 									</td>
 								</tr>
 								<tr height="40">
 									<td width="130">이름</td>
-									<td width="250" style="padding-left: 10"><%=user.getName()%>
-									<input type="hidden" name="name" value="<%= user.getName() %>">
+									<td width="250" style="padding-left: 10"><input type="text"
+										style="width: 240" name="name" placeholder="본명을 입력해주세요."
+										required
+										<c:if test="${registerFailed}">value="${user.name}"</c:if>>
 									</td>
 								</tr>
 								<tr height="40">
 									<td width="130">닉네임</td>
-									<td width="250" style="padding-left: 10"><%=user.getNickname()%>
-									<input type="hidden" name="nickname" value="<%= user.getNickname() %>">
+									<td width="250" style="padding-left: 10"><input type="text"
+										style="width: 240" name="nickname" placeholder="닉네임을 입력해주세요."
+										required
+										<c:if test="${registerFailed}">value="${user.nickname}"</c:if>>
+									</td>
+									<td width="70"><input type="button" id="btn" value="중복확인"
+										onClick="userCreate(
+										'<c:url value='/user/register'/>')">
 									</td>
 								</tr>
 								<tr height="40">
 									<td width="130">기숙사</td>
-									<td width="250" style="padding-left: 10"><%=user.isRecruite()%>
-									<input type="hidden" name="isRecruite" value="<%= user.isRecruite() %>">
+									<td width="250" style="padding-left: 10">
+									<select style="width: 240" name="isRecruite">
+										<option value="recruiting">모집중</option>
+										<option value="recruited">모집완료</option>
+									</select>
 									</td>
 								</tr>
 								<tr height="40">
 									<td width="130">기숙사 정보</td>
-									<td width="250" style="padding-left: 10"><%=user.getRoomInfo()%>
-									<input type="hidden" name="roomInfo" value="<%= user.getRoomInfo() %>">
+									<td width="250" style="padding-left: 10">
+									<select style="width: 240" name="roomInfo">
+										<option value="none">배정받지 않음</option>
+										<option value="1-101">1기숙사 101호</option>
+										<option value="1-102">1기숙사 102호</option>
+										<option value="1-103">1기숙사 103호</option>
+										<option value="1-104">1기숙사 104호</option>
+										<option value="1-105">1기숙사 105호</option>
+										<option value="2-201">2기숙사 201호</option>
+										<option value="2-202">2기숙사 202호</option>
+										<option value="2-203">2기숙사 203호</option>
+										<option value="2-204">2기숙사 204호</option>
+										<option value="2-205">2기숙사 205호</option>
+									</select>
 									</td>
 								</tr>
 							</table> <br>
 							<table>
 								<tr>
-									<td><input type="button" id="btn" value="수정하기"
-										onClick="userList('<c:url value='/findsom/MypageUpdateView.jsp' />')"></td>
+									<td><input type="button" id="btn" value="완료"
+										onClick="userList('<c:url value='/user/updateUser' />')"></td>
 								</tr>
 							</table>
 						</td>
