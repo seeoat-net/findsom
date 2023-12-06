@@ -34,21 +34,40 @@ public class MatchController implements Controller {
 				}
 
 				ArrayList<MatchDTO> matchingResult = matchMan.matching(lifePatterns);
+				
 				request.setAttribute("matchingResult", matchingResult);
 				
-				return "MatchingView.jsp";
+				return "/match/MatchView.jsp";
 			}
 		}
-		else if (request.getServletPath().equals("/match/matching/detail")) {
+		else if (request.getServletPath().equals("/match/detail")) {
 		    // 매칭 상세 기능 구현
 			String userID = request.getParameter("userID");
 						
 			MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID);
 			request.setAttribute("matchingDetailResult", matchingDetailResult );
 			
-			return "MatchingDetailView.jsp";
+			return "/match/MatchDetailView.jsp";
 		}
 		return null;
 	}
-	
+	// matching Test
+	/*
+	public static void main(String[] args) throws SQLException {
+		MatchManager matchMan = MatchManager.getInstance();;
+		
+		ArrayList<String> pattern = new ArrayList<String>();
+		pattern.add("morning");
+		pattern.add("smoker");
+		pattern.add("yesclean");
+		pattern.add("yesEatInRoom");
+		pattern.add("2");	
+		
+		ArrayList<MatchDTO> matchingResult = matchMan.matching(pattern);
+		
+		for (MatchDTO u : matchingResult) {
+			System.out.println(u.toString());
+		}
+	}
+	*/
 }

@@ -37,6 +37,11 @@ public class MatchManager {
 		}
 		Collections.sort(users);
 		
+		System.out.println("in manager, matching result!");
+		for (MatchDTO u : users) {
+			System.out.println(u.toString());
+		}
+		
 		return users;
 	}
 	
@@ -53,8 +58,20 @@ public class MatchManager {
 		//현재 룸메이트를 구인 중인 모든 유저의 MatchDTO
 		ArrayList<MatchDTO> users = matchDao.searchUsers();
 		for (MatchDTO u : users) {
-			System.out.print(u.toString());
-		}	
+			System.out.println(u.toString());
+		}
+		
+		ArrayList<String> pattern = new ArrayList<String>();
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");
+		pattern.add("morning");		
 		
 		//특정 유저의 MatchDetailDTO
 		System.out.print("userID : ");

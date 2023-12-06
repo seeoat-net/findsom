@@ -23,7 +23,7 @@ public class RequestMapping {
     	
     	// 매칭 게시판
     	mappings.put("/match/matching", new MatchController());
-    	mappings.put("/match/matching/detail", new MatchController());
+    	mappings.put("/match/detail", new MatchController());
    
 //        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
        
