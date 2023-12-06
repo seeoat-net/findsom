@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Free</title>
-<link rel=stylesheet href="<c:url value='../css/mainView.css' />">
+<link rel=stylesheet href="<c:url value='../css/main.css' />">
 <link rel=stylesheet href="<c:url value='../css/freemain.css' />">
 </head>
 <body>

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FindMain</title>
-<link rel=stylesheet href="<c:url value='../css/mainView.css' />">
+<link rel=stylesheet href="<c:url value='../css/main.css' />">
 <link rel=stylesheet href="<c:url value='../css/findmain.css' />">
 </head>
 <body>
