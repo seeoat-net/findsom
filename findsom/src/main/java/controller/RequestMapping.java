@@ -5,6 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.match.MatchController;
 import controller.noise.*;
 
 public class RequestMapping {
@@ -17,8 +18,13 @@ public class RequestMapping {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
     	
     	// 쉿!게시판 
-    	mappings.put("/noise/list", new ListNoiseController());
-    	mappings.put("/noise/report/form", new ReportNoiseController());
+    	// 쉿 게시판 접근 시, roominfo가 있는 사람만!
+    	mappings.put("/noise", new NoiseController());
+    	mappings.put("/noise", new NoiseController());
+    	
+    	// 매칭 게시판
+    	mappings.put("/match/matching", new MatchController());
+    	mappings.put("/match/detail", new MatchController());
    
 //        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
        
