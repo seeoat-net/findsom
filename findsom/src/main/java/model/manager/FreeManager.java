@@ -1,4 +1,4 @@
-package model.service;
+package model.manager;
 
 import java.sql.SQLException;
 import java.util.List;

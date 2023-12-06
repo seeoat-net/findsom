@@ -1,37 +1,27 @@
 package controller.find;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import controller.Controller;
+import model.FindDTO;
+import model.manager.FindManager;
 
 public class FindUpdateController implements Controller{
-    private static final Logger log = LoggerFactory.getLogger(UpdateCommunityController.class);
-
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
- 
-		int commId = Integer.parseInt(request.getParameter("commId"));
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		
-		if (request.getMethod().equals("GET")) {	
-    		// GET request: 커뮤니티 수정 form 요청	
-    		UserManager manager = UserManager.getInstance();
-			Community comm = manager.findCommunity(commId);	// 수정하려는 커뮤니티 정보 검색
-			request.setAttribute("community", comm);			
-			
-			List<User> members = manager.findCommunityMembers(commId); // 커뮤니티 회원 리스트 검색
-			request.setAttribute("members", members);		
-			return "/community/updateForm.jsp";   // 검색한 정보를 update form으로 전송     
-	    }	
-    	
-    	// POST request (커뮤니티 정보가 parameter로 전송됨)
-    	Community comm = new Community(
-    		commId,
-    		request.getParameter("name"),
-    		request.getParameter("desc"),
-    		null, request.getParameter("chairId"), null);
-
-    	log.debug("Update Community : {}", comm);
-
-		UserManager manager = UserManager.getInstance();
-		manager.updateCommunity(comm);			
-        return "redirect:/community/list";			
-    }
+		FindDTO post = new FindDTO(
+				Integer.parseInt(request.getParameter("findpostID")),
+				request.getParameter("isAnonymous"),
+				request.getParameter("title"),
+				request.getParameter("prefer"),
+				request.getParameter("mycontent"),
+				request.getParameter("matecontent"),
+				request.getParameter("userID"));
+		
+		FindManager manager = FindManager.getInstance();
+		manager.update(post);
+		
+		 return "find/FindCheckPostView.jsp";
+	 }
 }
