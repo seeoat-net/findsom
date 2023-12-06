@@ -3,7 +3,10 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.FreeDTO;
 
@@ -137,32 +140,66 @@ public class FreeDAO {
 		return null;
 	}
 	
-	/*** catogery별 게시글들 검색하여 List에 저장 및 반환	 */ //category: info/purchase/share/other
-	public List<FreeDTO> categoryClassification(String category) throws SQLException {
-        String sql = "SELECT * FROM FREEBOARDPOST "
-     				+ "WHERE category = ?";                         
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {category});	// JDBCUtil에 query문과 매개 변수 설정
-		
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-			List<FreeDTO> postList = new ArrayList<FreeDTO>();	// 게시들을의 리스트 생성
-			while (rs.next()) {
-				FreeDTO post = new FreeDTO(			// 객체를 생성하여 현재 행의 정보를 저장
-					rs.getInt("freepostID"),
-					rs.getString("title"),
-					rs.getString("userID"),
-					rs.getString("isAnonymous"),
-					rs.getString("content"),
-					rs.getString("category"));
-				postList.add(post);			// List에 객체 저장
-			}		
-			return postList;					
-				
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource 반환
-		}
-		return null;
+//	/*** catogery별 게시글들 검색하여 List에 저장 및 반환	 */ //category: info/purchase/share/other
+//	public List<FreeDTO> categoryClassification(String category) throws SQLException {
+//        String sql = "SELECT * FROM FREEBOARDPOST "
+//     				+ "WHERE category = ?";                         
+//		jdbcUtil.setSqlAndParameters(sql, new Object[] {category});	// JDBCUtil에 query문과 매개 변수 설정
+//		
+//		try {
+//			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+//			List<FreeDTO> postList = new ArrayList<FreeDTO>();	// 게시들을의 리스트 생성
+//			while (rs.next()) {
+//				FreeDTO post = new FreeDTO(			// 객체를 생성하여 현재 행의 정보를 저장
+//					rs.getInt("freepostID"),
+//					rs.getString("title"),
+//					rs.getString("userID"),
+//					rs.getString("isAnonymous"),
+//					rs.getString("content"),
+//					rs.getString("category"));
+//				postList.add(post);			// List에 객체 저장
+//			}		
+//			return postList;					
+//				
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			jdbcUtil.close();		// resource 반환
+//		}
+//		return null;
+//	}
+	//카테고리 4개 분류해서 각각 리스트에 저장
+	public Map<String, List<FreeDTO>> categoryClassification() throws SQLException {
+	    Map<String, List<FreeDTO>> categoryMap = new HashMap<>(); // 카테고리별 게시물을 저장할 맵 생성
+
+	    String[] categories = { "info", "purchase", "share", "other" }; // 카테고리 목록
+
+	    for (String category : categories) {
+	        String sql = "SELECT * FROM FREEBOARDPOST WHERE category = ?";
+	        jdbcUtil.setSqlAndParameters(sql, new Object[] { category }); // JDBCUtil에 query문과 매개 변수 설정
+
+	        try {
+	            ResultSet rs = jdbcUtil.executeQuery(); // query 실행
+	            List<FreeDTO> postList = new ArrayList<FreeDTO>(); // 카테고리별 게시물의 리스트 생성
+	            while (rs.next()) {
+	                FreeDTO post = new FreeDTO( // 객체를 생성하여 현재 행의 정보를 저장
+	                    rs.getInt("freepostID"),
+	                    rs.getString("title"),
+	                    rs.getString("userID"),
+	                    rs.getString("isAnonymous"),
+	                    rs.getString("content"),
+	                    rs.getString("category"));
+	                postList.add(post); // List에 객체 저장
+	            }
+	            categoryMap.put(category, postList); // 카테고리별 게시물 리스트를 맵에 저장
+
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	        } finally {
+	            jdbcUtil.close(); // resource 반환
+	        }
+	    }
+
+	    return categoryMap;
 	}
 }

@@ -21,6 +21,13 @@ public class FindDTO {
 		this.mycontent = mycontent;
 		this.matecontent = matecontent;
 		this.userID = userID;
+  }
+  
+	//내용 저장 리스트 보여줄 때 제목과 우대사항만 필요
+	public FindDTO(String title, String prefer) {
+		super();
+		this.title = title;
+		this.prefer = prefer;
 	}
 
 	public int getFindpostID() {
