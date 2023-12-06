@@ -2,7 +2,6 @@ package model;
 
 /***  FindBoardPost 테이블과 대응됨 */
 public class FindDTO {
-
 	private int findpostID;
 	private String isAnonymous;
 	private String title;
@@ -22,7 +21,8 @@ public class FindDTO {
 		this.mycontent = mycontent;
 		this.matecontent = matecontent;
 		this.userID = userID;
-	}
+  }
+  
 	//내용 저장 리스트 보여줄 때 제목과 우대사항만 필요
 	public FindDTO(String title, String prefer) {
 		super();
@@ -90,7 +90,6 @@ public class FindDTO {
 	public String toString() {
 		return "FindDTO [findpostID=" + findpostID + ", isAnonymous=" + isAnonymous + ", title=" + title + ", prefer="
 				+ prefer + ", mycontent=" + mycontent + ", matecontent=" + matecontent + ", userID=" + userID + "]";	
-
 	}
 	
 }

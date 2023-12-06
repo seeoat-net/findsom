@@ -19,6 +19,7 @@ public class FindDAO {
 	
 	/** 구인 게시판 글 작성. //내성향 DB에서 불러오기*/
 	public FindDTO create(FindDTO post)  throws SQLException { //postid sequence쓰는지 확인
+
 		//userid 같은 곳에 lifepatterns의 lifepattern가져오기
 		//userid는 session에 저장되어있음
 		
@@ -71,6 +72,7 @@ public class FindDAO {
 	/*** 구인게시판 글 삭제 */
 	public int remove(String postID) throws SQLException {
 		String sql = "DELETE FROM FINDBOARDPOST WHERE findpostID=?";		
+
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {postID});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
@@ -95,6 +97,7 @@ public class FindDAO {
 //        			+ "WHERE title LIKE '%?%' or mycontent LIKE '%?%' or matecontent LIKE'%?%' or prefer LIKE '%?%'";              
 //		jdbcUtil.setSqlAndParameters(sql, new Object[] {keyword, keyword, keyword, keyword});	// JDBCUtil에 query문과 매개 변수 설정
 
+
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
 			if (rs.next()) {						// 정보 발견
@@ -118,6 +121,7 @@ public class FindDAO {
 	
 	/*** 전체 구인 게시글 정보를 검색하여 List에 저장 및 반환	 */
 	public List<FindDTO> totalFindList() throws SQLException {
+
         String sql = "SELECT * "
         		   + "FROM FINDBOARDPOST "
         		   + "ORDER BY postID";        
@@ -173,5 +177,4 @@ public class FindDAO {
 		return null;
 	}
 
-	
 }

@@ -2,13 +2,13 @@
 DROP SEQUENCE Sequence_commentID;
 
 CREATE SEQUENCE Sequence_commentID
-	INCREMENT BY 1
+	INCREMENT BY 2
 	START WITH 1;
 
 DROP SEQUENCE Sequence_findPostID;
 
 CREATE SEQUENCE Sequence_findPostID
-	INCREMENT BY 2
+	INCREMENT BY 1
 	START WITH 1;
 
 DROP SEQUENCE Sequence_freePostID;
@@ -58,7 +58,7 @@ CREATE TABLE Comment
 	commentID            NUMBER(4)  NOT NULL ,
 	content              VARCHAR2(100)  NULL ,
 	commentDate          DATE  NULL ,
-	userID               VARCHAR2(100)  NOT NULL ,
+	userID               VARCHAR2(18)  NOT NULL ,
 	findpostID           NUMBER(4)  NULL ,
 	freepostID           NUMBER(4)  NULL 
 );
@@ -72,10 +72,10 @@ ALTER TABLE Comment
 CREATE TABLE FindBoardPost
 (
 	findpostID           NUMBER(4)  NOT NULL ,
-	isAnonymous          VARCHAR2(10)  NULL ,
+	isAnonymous          VARCHAR2(1)  NULL ,
 	title                VARCHAR2(20)  NULL ,
 	prefer               VARCHAR2(100)  NULL ,
-	userID               VARCHAR2(100)  NOT NULL ,
+	userID               VARCHAR2(18)  NOT NULL ,
 	mycontent            VARCHAR2(500)  NULL ,
 	matecontent          VARCHAR2(500)  NULL 
 );
@@ -90,8 +90,8 @@ CREATE TABLE FreeBoardPost
 (
 	freepostID           NUMBER(4)  NOT NULL ,
 	title                VARCHAR2(50)  NULL ,
-	userID               VARCHAR2(100)  NOT NULL ,
-	isAnonymous          VARCHAR(10)  NULL ,
+	userID               VARCHAR2(18)  NOT NULL ,
+	isAnonymous          VARCHAR(1)  NULL ,
 	content              VARCHAR2(500)  NULL ,
 	category             VARCHAR2(10)  NULL 
 );
@@ -108,8 +108,8 @@ CREATE TABLE MessageInfo
 	messageText          VARCHAR2(600)  NULL ,
 	createAt             DATE  NULL ,
 	recognizeID          VARCHAR2(18)  NULL ,
-	senderID             VARCHAR2(100)  NOT NULL ,
-	receiverID           VARCHAR2(100)  NOT NULL ,
+	senderID             VARCHAR2(18)  NOT NULL ,
+	receiverID           VARCHAR2(18)  NOT NULL ,
 	freepostID           NUMBER(4)  NULL ,
 	findpostID           NUMBER(4)  NULL 
 );
@@ -134,15 +134,15 @@ ALTER TABLE Room
 
 CREATE TABLE UserInfo
 (
-   userID               VARCHAR2(100)  NOT NULL ,
-   email                VARCHAR2(30)  NULL ,
-   password             VARCHAR2(20)  NULL ,
-   phone                CHAR(18)  NULL ,
-   name                 VARCHAR2(50)  NULL ,
-   nickname             VARCHAR2(10)  NULL ,
-   authentication       VARCHAR2(20)  DEFAULT 0  NULL ,
-   isRecruite           VARCHAR2(10)  NULL ,
-   roomInfo             VARCHAR2(18)  NULL 
+	userID               VARCHAR2(18)  NOT NULL ,
+	email                VARCHAR2(30)  NULL ,
+	password             VARCHAR2(20)  NULL ,
+	name                 VARCHAR2(10)  NULL ,
+	nickname             VARCHAR2(10)  NULL ,
+	authentication       VARCHAR2(1)  DEFAULT 0  NULL ,
+	roomInfo             VARCHAR2(18)  NULL ,
+	isRecruite           VARCHAR2(10)  NULL ,
+	phone                CHAR(18)  NULL 
 );
 
 CREATE UNIQUE INDEX XPKUserInfo ON UserInfo
@@ -154,7 +154,7 @@ ALTER TABLE UserInfo
 CREATE TABLE AuthenticationFile
 (
 	authenticationFile   BLOB  NULL ,
-	userID               VARCHAR2(100)  NOT NULL 
+	userID               VARCHAR2(18)  NOT NULL 
 );
 
 CREATE UNIQUE INDEX XPKAuthenticationFile ON AuthenticationFile
@@ -165,9 +165,15 @@ ALTER TABLE AuthenticationFile
 
 CREATE TABLE LifePatterns
 (
-   userID               VARCHAR2(100)  NOT NULL ,
-   lifePattern          VARCHAR2(20)  NULL 
+	lifePattern          VARCHAR2(20)  NULL ,
+	userID               VARCHAR2(18)  NOT NULL 
 );
+
+CREATE UNIQUE INDEX XPKLifePatterns ON LifePatterns
+(userID   ASC);
+
+ALTER TABLE LifePatterns
+	ADD CONSTRAINT  XPKLifePatterns PRIMARY KEY (userID);
 
 CREATE TABLE Notification
 (
@@ -178,8 +184,8 @@ CREATE TABLE Notification
 	commentID            NUMBER(4)  NULL ,
 	messageID            NUMBER(4)  NULL ,
 	postID               NUMBER(4)  NULL ,
-	receiverID           VARCHAR2(100)  NOT NULL ,
-	senderID             VARCHAR2(100)  NOT NULL 
+	receiverID           VARCHAR2(18)  NOT NULL ,
+	senderID             VARCHAR2(18)  NOT NULL 
 );
 
 CREATE UNIQUE INDEX XPKNotificationBox ON Notification

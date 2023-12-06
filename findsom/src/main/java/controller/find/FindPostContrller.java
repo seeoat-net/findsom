@@ -28,5 +28,3 @@ public class FindPostContrller implements Controller{
 		}
 		
 }
-
-        
