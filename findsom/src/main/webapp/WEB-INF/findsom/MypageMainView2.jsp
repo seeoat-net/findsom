@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="model.*" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	User user = (User)request.getAttribute("user");
-	LifePattern lifePattern = (LifePattern)request.getAttribute("lifePattern");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,61 +89,83 @@ function userList(targetUri) {
 							</c:if>
 							<table>
 								<tr>
-									<td colspan=3 style="text-align: center;"><h2>사용자 기본 정보</h2></td>
+									<td colspan=3 style="text-align: center;"><h2>생활패턴</h2></td>
 								</tr>
 								<tr height="40">
-									<td width="130">이메일</td>
-									<td width="250" style="padding-left: 10"><%=user.getEmail()%>
-									<input type="hidden" name="email" value="<%= user.getEmail() %>">
+									<td width="130">아침형/저녁형</td>
+									<td width="250" style="padding-left: 10">${lifepattern.isMorningPerson}
 									</td>
 								</tr>
 								<tr height="40">
-									<td width="130">사용자 ID</td>
-									<td width="250" style="padding-left: 10"><%=user.getUserId()%>
-									<input type="hidden" name="userId" value="<%= user.getUserId() %>">
+									<td width="130">흡연자/비흡연자</td>
+									<td width="250" style="padding-left: 10">${lifepattern.isSmoker}
 									</td>
 								</tr>
 								<tr height="40">
-									<td width="130">비밀번호</td>
-									<td width="250" style="padding-left: 10"><%=user.getPassword()%>
-									<input type="hidden" name="password" value="<%= user.getPassword() %>">
-									</td>
+									<td width="130">입사기간</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.employmentPeriod}</td>
 								</tr>
 								<tr height="40">
-									<td width="130">전화번호</td>
-									<td width="250" style="padding-left: 10"><%=user.getPhone()%>
-									<input type="hidden" name="phone" value="<%= user.getPhone() %>">
-									</td>
+									<td width="130">MBTI</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.mbti}</td>
 								</tr>
 								<tr height="40">
-									<td width="130">이름</td>
-									<td width="250" style="padding-left: 10"><%=user.getName()%>
-									<input type="hidden" name="name" value="<%= user.getName() %>">
-									</td>
+									<td width="130">샤워시간</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.showerTime}</td>
 								</tr>
 								<tr height="40">
-									<td width="130">닉네임</td>
-									<td width="250" style="padding-left: 10"><%=user.getNickname()%>
-									<input type="hidden" name="nickname" value="<%= user.getNickname() %>">
-									</td>
+									<td width="130">기상시간(알람)</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.wakeUpTime}</td>
 								</tr>
 								<tr height="40">
-									<td width="130">기숙사</td>
-									<td width="250" style="padding-left: 10"><%=user.isRecruite()%>
-									<input type="hidden" name="isRecruite" value="<%= user.isRecruite() %>">
-									</td>
+									<td width="130">잠버릇</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.sleepHabits}</td>
 								</tr>
 								<tr height="40">
-									<td width="130">기숙사 정보</td>
-									<td width="250" style="padding-left: 10"><%=user.getRoomInfo()%>
-									<input type="hidden" name="roomInfo" value="<%= user.getRoomInfo() %>">
-									</td>
+									<td width="130">친목</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.hasFriendship}</td>
+								</tr>
+								<tr height="40">
+									<td width="130">방에서 이어폰 착용</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.hasEarphones}</td>
+								</tr>
+								<tr height="40">
+									<td width="130">청결도</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.cleanliness}</td>
+								</tr>
+								<tr height="40">
+									<td width="130">방 안 취식</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.eatInRoom}</td>
+								</tr>
+								<tr height="40">
+									<td width="130">나이</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.age}</td>
+								</tr>
+								<tr height="40">
+									<td width="130">우대사항</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.preferences}</td>
+								</tr>
+								<tr height="40">
+									<td width="130">침대 1층/2층 선호</td>
+									<td width="250" style="padding-left: 10">
+									${lifepattern.bedPreference}</td>
 								</tr>
 							</table> <br>
 							<table>
 								<tr>
 									<td><input type="button" id="btn" value="수정하기"
-										onClick="userList('<c:url value='/findsom/MypageUpdateView.jsp' />')"></td>
+										onClick="userList('<c:url value='/findsom/Signup2View.jsp' />')"></td>
 								</tr>
 							</table>
 						</td>

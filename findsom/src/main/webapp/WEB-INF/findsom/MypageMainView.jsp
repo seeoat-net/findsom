@@ -148,7 +148,7 @@ function userList(targetUri) {
 							<table>
 								<tr>
 									<td><input type="button" id="btn" value="수정하기"
-										onClick="userList('<c:url value='/findsom/MypageUpdateView.jsp' />')"></td>
+										onClick="userList('<c:url value='/user/updateForm' />')"></td>
 								</tr>
 							</table>
 						</td>
