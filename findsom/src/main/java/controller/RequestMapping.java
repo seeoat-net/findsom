@@ -1,5 +1,6 @@
 package controller;
-import java.util.HashMap;
+
+/*import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,4 +35,4 @@ public class RequestMapping {
     	// 주어진 uri에 대응되는 controller 객체를 찾아 반환
         return mappings.get(uri);
     }
-}
+}*/

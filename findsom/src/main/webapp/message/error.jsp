@@ -5,6 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD:findsom/src/main/webapp/message/error.jsp
+<meta charset="EUC-KR">
+<title>error</title>
+</head>
+<body>
+<h2>ErrorMessage!</h2>
+=======
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel=stylesheet href="<c:url value='../css/Noise.css' />" >
@@ -71,5 +78,6 @@ function postNoise(targetUri) {
 	
 	</div>
 
+>>>>>>> origin/develop:findsom/src/main/webapp/noise/NoiseMainView.jsp
 </body>
 </html>
