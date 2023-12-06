@@ -18,10 +18,11 @@ public class NotificationDAO {
         jdbcUtil.close();
     }
 
- // 알람 DB에 추가
+    // 알람 DB에 추가
+    //쪽지도 조인해야 함
     public void pushNotificationDB(NotificationDTO notification) throws Exception {
         String query = "INSERT INTO notification(userID, writerID, postID, notiType, notiTypeID) VALUES (?, ?, ?, ?, ?)";
-        Object[] parameters = {notification.getUserID(), notification.getWriterID(), notification.getPostID(), notification.getNotiType(), notification.getNotiTypeID()};
+        Object[] parameters = {notification.getReceiverID(), notification.getSenderID(), notification.getPostID(), notification.getNotiType(), notification.getNotiTypeID()};
         jdbcUtil.setSqlAndParameters(query, parameters);
 
         try {
@@ -82,9 +83,9 @@ public class NotificationDAO {
 
     // 유저가 확인하지 않은 알람 개수 조회
     public int getNumberOfNotifications(NotificationDTO notification) throws SQLException {
-        String query = "SELECT COUNT(*) AS count FROM notification WHERE user_idx=? AND isChecked='1'";
+        String query = "SELECT COUNT(*) AS count FROM notification WHERE receiverID=? AND isChecked='1'";
         //COUNT(*) AS count: 확인하지 않은 알림의 개수를 셈, isChecked='1': 확인되지 않은 알림을 필터링하는 조건
-        Object[] parameters = {notification.getUserIdx()};
+        Object[] parameters = {notification.getReceiverID()};
         jdbcUtil.setSqlAndParameters(query, parameters);
 
         try {
@@ -103,7 +104,7 @@ public class NotificationDAO {
 
     // 유저가 알람 확인했을 때 isChecked를 0으로 변경
     public void markNotificationAsChecked(NotificationDTO notification) throws Exception {
-        String query = "UPDATE notification SET isChecked='0' WHERE user_idx=? AND idx=?";//알림이 속한 사용자의 인덱스가 주어진 매개변수 값과 일치하는 경우, 알림의 인덱스가 주어진 매개변수 값과 일치하는 경우
+        String query = "UPDATE notification SET isChecked='0' WHERE receiverID=? AND idx=?";//알림이 속한 사용자의 인덱스가 주어진 매개변수 값과 일치하는 경우, 알림의 인덱스가 주어진 매개변수 값과 일치하는 경우
         Object[] parameters = {notification.getUserIdx(), notification.getNotIdx()};
         jdbcUtil.setSqlAndParameters(query, parameters);
 

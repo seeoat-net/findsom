@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>error</title>
 </head>
 <body>
-
+<h2>ErrorMessage!</h2>
 </body>
 </html>
