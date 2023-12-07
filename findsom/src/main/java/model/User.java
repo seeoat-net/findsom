@@ -35,7 +35,7 @@ public class User {
 
     public User(String userId, String email, String password, String phone, String name,
             String nickname, String isRecruite
-//            , String roomInfo
+            , String roomInfo
             ) { // update를 위한
         this.userId = userId;
         this.email = email;
@@ -44,7 +44,7 @@ public class User {
         this.name = name;
         this.nickname = nickname;
         this.isRecruite = isRecruite;
-//        this.roomInfo = roomInfo;
+        this.roomInfo = roomInfo;
     }
 
     public String getUserId() {

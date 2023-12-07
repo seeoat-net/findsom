@@ -58,7 +58,7 @@ function userList(targetUri) {
 			<div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">마이페이지</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">구인 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">매칭 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/match/matching' />" >매칭 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">쉿! 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">자유 게시판</a>
 			</div>

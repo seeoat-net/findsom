@@ -36,9 +36,9 @@ public class UpdateUserController implements Controller {
                 request.getParameter("phone"),
                 request.getParameter("name"),
                 request.getParameter("nickname"),
-                request.getParameter("isRecruite"));
-//                request.getParameter("roomInfo"));
-    	
+                request.getParameter("isRecruite"),
+                request.getParameter("roomInfo")
+                );
     	log.debug("UpdateController User : {}", updateUser);
     	
         manager.update(updateUser);    	

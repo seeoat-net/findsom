@@ -19,8 +19,7 @@ public class MatchController implements Controller {
 		
 		if (request.getServletPath().equals("/match/matching")) {
 			if (request.getMethod().equals("GET")) {
-				return "MatchingView.jsp";
-			}
+				return "/match/MatchView.jsp"; 			}
 			else {
 				// 매칭 기능 구현
 				ArrayList<String> lifePatterns = new ArrayList<String>();

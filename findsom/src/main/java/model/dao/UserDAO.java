@@ -127,7 +127,7 @@ public class UserDAO {
      */
     public int update(User user) throws SQLException {
         String sql = "UPDATE USERINFO "
-                + "SET email=?, password=?, phone=?, name=?, nickname=?, isRecruite=? "
+                + "SET email=?, password=?, phone=?, name=?, nickname=?, isRecruite=?, roominfo=? "
                 + "WHERE userid=?";
         Object[] param = new Object[] { 
                 user.getEmail(), 
@@ -136,7 +136,7 @@ public class UserDAO {
                 user.getName(),
                 user.getNickname(),
                 user.isRecruite(),
-//                (!user.getRoomInfo().equals("배정받지 않음")) ? user.getRoomInfo() : null,
+                (!user.getRoomInfo().equals("배정받지 않음")) ? user.getRoomInfo() : null,
                 user.getUserId()
         };
         jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil에 update문과 매개 변수 설정
@@ -178,7 +178,7 @@ public class UserDAO {
      * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 User 도메인 클래스에 저장하여 반환.
      */
     public User findUser(String userId) throws SQLException {
-        String sql = "SELECT email, password, phone, name, nickname, authentication, isRecruite, roomInfo " 
+        String sql = "SELECT email, password, phone, name, nickname, authentication, isRecruite, roominfo " 
                 + "FROM USERINFO u "
                 + "WHERE userid=? ";
         jdbcUtil.setSqlAndParameters(sql, new Object[] { userId }); // JDBCUtil에 query문과 매개 변수 설정
