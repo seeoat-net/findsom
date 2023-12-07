@@ -36,8 +36,8 @@ public class UpdateFormController implements Controller {
                 request.getParameter("phone"),
                 request.getParameter("name"),
                 request.getParameter("nickname"),
-                request.getParameter("isRecruite"));
-//                request.getParameter("roomInfo"));
+                request.getParameter("isRecruite"),
+                request.getParameter("roomInfo"));
     	
     	log.debug("UpdateForm User : {}", updateUser);
     	request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
