@@ -28,19 +28,13 @@ public class UpdateFormController implements Controller {
         request.setAttribute("user", user);        
         LifePattern lifePattern = manager.findLifePattern(updateId);
         request.setAttribute("lifePattern", lifePattern);
-        
-    	User updateUser = new User(
-                request.getParameter("userId"),
-                request.getParameter("email"),
-                request.getParameter("password"),
-                request.getParameter("phone"),
-                request.getParameter("name"),
-                request.getParameter("nickname"),
-                request.getParameter("isRecruite"));
-//                request.getParameter("roomInfo"));
     	
-    	log.debug("UpdateForm User : {}", updateUser);
-    	request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
+    	log.debug("UpdateForm User : {}", user);
+//    	request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
+    	request.setAttribute("user", user); 
+    	// ↑ UpdateFormController에서는 사용자 및 LifePattern 속성을 요청 범위에 설정하고 있습니다.
+    	// 그러나 세션 범위에도 사용자 속성을 설정하고 있습니다. 세션에 설정하지 말고 요청 범위에만 설정하세요
+
     	return "/findsom/MypageUpdateView.jsp";
     }
 }

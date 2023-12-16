@@ -22,7 +22,8 @@ public class MypageController implements Controller {
 		    User user = manager.findUser(userId);
 		    LifePattern lifePattern = manager.findLifePattern(userId);
 		    
-		    System.out.println(user);
+		    System.out.println("MypageController에서 출력한 user : " + user);
+		    System.out.println("MypageController에서 출력한 lifePattern : " + lifePattern);
 		    
 		    request.setAttribute("user", user);
 		    request.setAttribute("lifePattern", lifePattern);

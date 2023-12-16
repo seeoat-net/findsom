@@ -18,7 +18,7 @@ public class UpdateUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {    	
+    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
     	String updateId = request.getParameter("userId");
     	
     	log.debug("Update Request : {}", updateId);
@@ -41,7 +41,7 @@ public class UpdateUserController implements Controller {
     	
     	log.debug("UpdateController User : {}", updateUser);
     	
-        manager.update(updateUser);    	
-    	return "/findsom/MypageMainView.jsp";
+        manager.update(updateUser);
+    	return "redirect:/user/mypageMain";
     }
 }

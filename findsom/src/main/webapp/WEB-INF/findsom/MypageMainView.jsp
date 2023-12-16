@@ -81,7 +81,7 @@ function userList(targetUri) {
                 </nav>
 
 			<!-- Page content-->
-		<div align="center" id="container">
+		<div align="center" id="container" style="width: 1465px;">
 			<h1 style="color: #8B2842;">마이페이지</h1>
 				<form name="form" method="POST"
 				action="<c:url value='/user/register' />">
