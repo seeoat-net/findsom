@@ -28,7 +28,7 @@ public class MypageController implements Controller {
 		    request.setAttribute("user", user);
 		    request.setAttribute("lifePattern", lifePattern);
             
-            return "/findsom/MypageMainView.jsp";			
+            return "/findsom/MypageMainView.jsp";
 		} catch (Exception e) {
 			request.setAttribute("exception", e);
             return "redirect:/findsom/RandingView.jsp";

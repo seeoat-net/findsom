@@ -81,17 +81,12 @@ function userList(targetUri) {
                 </nav>
 
 			<!-- Page content-->
-		<div align="center" id="container" style="width: 1465px;">
+		<div align="center" id="container" style="width: 1465px">
 			<h1 style="color: #8B2842;">마이페이지</h1>
-				<form name="form" method="POST"
-				action="<c:url value='/user/register' />">
+				<form name="form" method="POST">
 				<table style="width: 100%">
 					<tr>
 						<td>
-							<!-- 회원가입이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 --> <c:if
-								test="${registerFailed}">
-								<font color="red"><c:out value="${exception.getMessage()}" /></font>
-							</c:if>
 							<table>
 								<tr>
 									<td colspan=3 style="text-align: center;"><h2>사용자 기본 정보</h2></td>
@@ -144,11 +139,106 @@ function userList(targetUri) {
 									<input type="hidden" name="roomInfo" value="<%= user.getRoomInfo() %>">
 									</td>
 								</tr>
+								
+								<!-- 생활패턴 부분 
+								<tr height="40">
+									<td width="130">아침형/저녁형</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getIsMorningPerson()%>
+									<input type="hidden" name="isMorningPerson" value="<%= lifePattern.getIsMorningPerson() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">흡연자/비흡연자</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getIsSmoker()%>
+									<input type="hidden" name="isSmoker" value="<%= lifePattern.getIsSmoker() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">입사기간</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getEmploymentPeriod()%>
+									<input type="hidden" name="employmentPeriod" value="<%= lifePattern.getEmploymentPeriod() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">MBTI</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getMbti()%>
+									<input type="hidden" name="mbti" value="<%= lifePattern.getMbti() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">샤워시간</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getShowerTime()%>
+									<input type="hidden" name="showerTime" value="<%= lifePattern.getShowerTime() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">기상시간(알람)</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getWakeUpTime()%>
+									<input type="hidden" name="wakeUpTime" value="<%= lifePattern.getWakeUpTime() %>">
+									</td>
+								</tr>
+								
+								
+								<tr height="40">
+									<td width="130">잠버릇</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getTeethGrinding()%>
+									<input type="hidden" name="sleepHabits" value="<%= lifePattern.getTeethGrinding() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">잠버릇</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getSnoring()%>
+									<input type="hidden" name="sleepHabits" value="<%= lifePattern.getSnoring() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">잠버릇</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getEar()%>
+									<input type="hidden" name="sleepHabits" value="<%= lifePattern.getEar() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">친목</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getHasFriendship()%>
+									<input type="hidden" name="hasFriendship" value="<%= lifePattern.getHasFriendship() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">방에서 이어폰 착용</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getHasEarphones()%>
+									<input type="hidden" name="hasEarphones" value="<%= lifePattern.getHasEarphones() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">청결도</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getCleanliness()%>
+									<input type="hidden" name="cleanliness" value="<%= lifePattern.getCleanliness() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">방 안 취식</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getEatInRoom()%>
+									<input type="hidden" name="eatInRoom" value="<%= lifePattern.getEatInRoom() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">나이</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getAge()%>
+									<input type="hidden" name="age" value="<%= lifePattern.getAge() %>">
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">침대 1층/2층 선호</td>
+									<td width="250" style="padding-left: 10"><%=lifePattern.getBedPreference()%>
+									<input type="hidden" name="bedPreference" value="<%= lifePattern.getBedPreference() %>">
+									</td>
+								</tr>
+								-->
 							</table> <br>
 							<table>
 								<tr>
 									<td><input type="button" id="btn" value="수정하기"
-										onClick="userList('<c:url value='/findsom/MypageUpdateView.jsp' />')"></td>
+										onClick="userList('<c:url value='/user/updateForm' />')"></td>
 								</tr>
 							</table>
 						</td>

@@ -57,8 +57,8 @@ function userList(targetUri) {
 			<div class="col-12 sidebar-heading border-bottom bg-beige">사용자 이름 (모집상태)</div>
 			<div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">마이페이지</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">구인 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">매칭 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/find/findlist' />">구인 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/match/matching' />" >매칭 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">쉿! 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">자유 게시판</a>
 			</div>
@@ -81,17 +81,12 @@ function userList(targetUri) {
                 </nav>
 
 			<!-- Page content-->
-		<div align="center" id="container" style="width: 1465px;">
+		<div align="center" id="container" style="width: 1465px">
 			<h1 style="color: #8B2842;">마이페이지</h1>
-				<form name="form" method="POST"
-				action="<c:url value='/user/register' />">
+				<form name="form" method="POST">
 				<table style="width: 100%">
 					<tr>
 						<td>
-							<!-- 회원가입이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 --> <c:if
-								test="${registerFailed}">
-								<font color="red"><c:out value="${exception.getMessage()}" /></font>
-							</c:if>
 							<table>
 								<tr>
 									<td colspan=3 style="text-align: center;"><h2>사용자 기본 정보</h2></td>
@@ -148,7 +143,9 @@ function userList(targetUri) {
 							<table>
 								<tr>
 									<td><input type="button" id="btn" value="수정하기"
-										onClick="userList('<c:url value='/findsom/MypageUpdateView.jsp' />')"></td>
+										onClick="userList('<c:url value='/user/updateForm' />')"></td>
+									<td><input type="button" id="btn" value="탈퇴하기"
+										onClick="userList('<c:url value='delete' />')"></td>
 								</tr>
 							</table>
 						</td>

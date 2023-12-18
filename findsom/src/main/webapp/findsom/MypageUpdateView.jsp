@@ -3,8 +3,8 @@
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    User user = (User) request.getAttribute("user");
-    LifePattern lifePattern = (LifePattern) request.getAttribute("lifePattern");
+	User user = (User)request.getAttribute("user");
+	LifePattern lifePattern = (LifePattern)request.getAttribute("lifePattern");
 %>
 <!DOCTYPE html>
 <html>
@@ -81,17 +81,13 @@ function userList(targetUri) {
                 </nav>
 
 			<!-- Page content-->
-		<div align="center" id="container" style="width: 1465px;">
+		<div align="center" id="container" style="width: 1465px"=>
 			<h1 style="color: #8B2842;">마이페이지</h1>
 				<form name="form" method="POST"
 				action="<c:url value='/user/register' />">
 				<table style="width: 100%">
 					<tr>
 						<td>
-							<!-- 회원가입이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 --> <c:if
-								test="${registerFailed}">
-								<font color="red"><c:out value="${exception.getMessage()}" /></font>
-							</c:if>
 							<table>
 								<tr>
 									<td colspan=3 style="text-align: center;"><h2>사용자 기본 정보 수정</h2></td>
@@ -115,9 +111,8 @@ function userList(targetUri) {
 								<tr height="40">
 									<td width="130">사용자 ID</td>
 									<td width="250" style="padding-left: 10"><input type="text"
-										style="width: 240;" name="userId" value="${user.userId}"
-										placeholder="사용자 ID는 변경할 수 없습니다." disabled>
-									<input type="hidden" name="userId" value="<%= user.getUserId() %>"></td>
+										style="width: 240;" name="userId" value="<%= user.getUserId() %>"
+										placeholder="사용자 ID는 변경할 수 없습니다." disabled></td>
 								</tr>
 								<tr height="40">
 									<td width="130">비밀번호</td>
@@ -189,7 +184,7 @@ function userList(targetUri) {
 									</select>
 									</td>
 								</tr>
-							</table> <br>
+							</table><br>
 							<table>
 								<tr>
 									<td><input type="button" id="btn" value="완료"

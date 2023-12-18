@@ -42,7 +42,7 @@ function userCreate(targetUri) {
         <c:if test="${loginFailed}">
 	  	  <br><font color="red"><c:out value="${exception.getMessage()}" /></font><br>
 	    </c:if>
-	    <br>	  
+	    <br>
 	    <table>
 	  	  <tr>
 			<td>

@@ -3,8 +3,8 @@
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    User user = (User) request.getAttribute("user");
-    LifePattern lifePattern = (LifePattern) request.getAttribute("lifePattern");
+	User user = (User)request.getAttribute("user");
+	LifePattern lifePattern = (LifePattern)request.getAttribute("lifePattern");
 %>
 <!DOCTYPE html>
 <html>
@@ -58,7 +58,7 @@ function userList(targetUri) {
 			<div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">마이페이지</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">구인 게시판</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">매칭 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/match/matching' />" >매칭 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">쉿! 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">자유 게시판</a>
 			</div>
@@ -81,7 +81,7 @@ function userList(targetUri) {
                 </nav>
 
 			<!-- Page content-->
-		<div align="center" id="container" style="width: 1465px;">
+		<div align="center" id="container" style="width: 1465px">
 			<h1 style="color: #8B2842;">마이페이지</h1>
 				<form name="form" method="POST"
 				action="<c:url value='/user/register' />">
@@ -104,9 +104,7 @@ function userList(targetUri) {
 								<tr height="40">
 									<td width="130">이메일</td>
 									<td width="250" style="padding-left: 10"><input type="text"
-									style="width: 240" name="email" placeholder="변경할 이메일" required
-									<c:if test="${registerFailed}">value="${user.email}"</c:if>>
-								</td>
+									style="width: 240" name="email" value="<%= user.getEmail() %>"></td>
 									<td width="70"><input type="button" id="btn" value="중복확인"
 										onClick="userCreate(
 									'<c:url value='/user/register'/>')">
@@ -115,8 +113,9 @@ function userList(targetUri) {
 								<tr height="40">
 									<td width="130">사용자 ID</td>
 									<td width="250" style="padding-left: 10"><input type="text"
-										style="width: 240;" name="userId" value="<%= user.getUserId() %>"
-										placeholder="사용자 ID는 변경할 수 없습니다." disabled></td>
+										style="width: 240;" name="userId" value="<%= user.getUserId() %>" disabled>
+										<input type="hidden" name="userId" value="<%= user.getUserId() %>">
+										</td>
 								</tr>
 								<tr height="40">
 									<td width="130">비밀번호</td>
@@ -133,9 +132,7 @@ function userList(targetUri) {
 								<tr height="40">
 									<td width="130">전화번호</td>
 									<td width="250" style="padding-left: 10"><input type="text"
-										style="width: 240" name="phone" placeholder="전화번호를 입력해주세요."
-										<c:if test="${registerFailed}">value="${user.phone}"</c:if>>
-									</td>
+										style="width: 240" name="phone" value="<%= user.getPhone() %>"></td>
 									<td width="70"><input type="button" id="btn" value="중복확인"
 										onClick="userCreate(
 										'<c:url value='/user/register'/>')">
@@ -144,18 +141,12 @@ function userList(targetUri) {
 								<tr height="40">
 									<td width="130">이름</td>
 									<td width="250" style="padding-left: 10"><input type="text"
-										style="width: 240" name="name" placeholder="본명을 입력해주세요."
-										required
-										<c:if test="${registerFailed}">value="${user.name}"</c:if>>
-									</td>
+										style="width: 240" name="name" value="<%= user.getName() %>"></td>
 								</tr>
 								<tr height="40">
 									<td width="130">닉네임</td>
 									<td width="250" style="padding-left: 10"><input type="text"
-										style="width: 240" name="nickname" placeholder="닉네임을 입력해주세요."
-										required
-										<c:if test="${registerFailed}">value="${user.nickname}"</c:if>>
-									</td>
+										style="width: 240" name="nickname" value="<%= user.getNickname() %>"></td>
 									<td width="70"><input type="button" id="btn" value="중복확인"
 										onClick="userCreate(
 										'<c:url value='/user/register'/>')">
