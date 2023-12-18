@@ -21,7 +21,7 @@ public class NotificationDAO {
     // 알람 DB에 추가
     //쪽지도 조인해야 함
     public void pushNotificationDB(NotificationDTO notification) throws Exception {
-        String query = "INSERT INTO notification(userID, writerID, postID, notiType, notiTypeID) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO notificationInfo(userID, writerID, postID, notiType, notiTypeID) VALUES (?, ?, ?, ?, ?)";
         Object[] parameters = {notification.getReceiverID(), notification.getSenderID(), notification.getPostID(), notification.getNotiType(), notification.getNotiTypeID()};
         jdbcUtil.setSqlAndParameters(query, parameters);
 

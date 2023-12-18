@@ -1,13 +1,17 @@
 package model.dao;
+
+import model.dto.MessageDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.dto.MessageDTO;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MessageDAO {
     private JDBCUtil jdbcUtil;
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     public MessageDAO() {
         jdbcUtil = new JDBCUtil();
@@ -16,35 +20,53 @@ public class MessageDAO {
     public void close() {
         jdbcUtil.close();
     }
-
-    // 쪽지 작성
     public MessageDTO writeMessage(MessageDTO message) throws SQLException {
-        String query = "INSERT INTO MessageInfo(messageID, messageText, createAt, recognizeID, senderID, receiverID) VALUES (?, ?, ?, ?, ?, ?)";
-        Object[] parameters = {message.getMessageID(), message.getMessageText(),
-                                message.getCreateAt(), message.getRecognizeID(), 
-                                message.getSenderID(), message.getReceiverID(), 
-                                };
-        jdbcUtil.setSqlAndParameters(query, parameters);
-        String key[] = {"messageID"};	// PK 컬럼의 이름
+        // 시퀀스를 사용하여 messageID를 자동으로 생성하는 INSERT 쿼리문
+        String insertQuery = "INSERT INTO MessageInfo (MESSAGEID, MESSAGETEXT, CREATEAT, SENDERID, RECEIVERID, FREEPOSTID, FINDPOSTID) " +
+                             "VALUES (Sequence_messageID.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+
+        // LocalDateTime을 java.sql.Timestamp로 변환
+        java.sql.Timestamp sqlTimestamp = java.sql.Timestamp.valueOf(message.getCreateAt());
+
+        // 파라미터 설정
+        Object[] parameters = new Object[6];
+        parameters[0] = message.getMessageText();
+        parameters[1] = sqlTimestamp;
+        parameters[2] = message.getSenderID();
+        parameters[3] = message.getReceiverID();
+        parameters[4] = (message.getFreepostID() != null && message.getFreepostID() % 2 == 0) ? message.getFreepostID() : null;
+        // findpostID가 null이 아니고 홀수인 경우, findpostID를 사용
+        parameters[5] = (message.getFindpostID() != null && message.getFindpostID() % 2 != 0) ? message.getFindpostID() : null;
+
+        // JDBCUtil에 insert문과 parameter 배열 설정
+        jdbcUtil.setSqlAndParameters(insertQuery, parameters);
+
+        // INSERT 쿼리를 실행하고 생성된 키(여기서는 messageID)를 반환 받습니다.
         try {
-            jdbcUtil.executeUpdate(key);
-            ResultSet rs = jdbcUtil.getGeneratedKeys();
-		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt(1);   // 생성된 PK 값
-		   		message.setMessageID(generatedKey); 	// id필드에 저장  
-		   	}
-		   	return message;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		} finally {		
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
-		}
-		return null;		
+            int affectedRows = jdbcUtil.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating message failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = jdbcUtil.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    message.setMessageID(generatedKeys.getInt(1)); // 생성된 messageID를 가져와서 설정합니다.
+                } else {
+                    throw new SQLException("Creating message failed, no ID obtained.");
+                }
+            }
+            jdbcUtil.commit(); // 정상적으로 완료되면 커밋합니다.
+            return message;
+        } catch (Exception ex) {
+            jdbcUtil.rollback(); // 예외 발생 시 롤백합니다.
+            ex.printStackTrace();
+            return null;
+        } finally {
+            jdbcUtil.close(); // 리소스를 반환합니다.
+        }
     }
-    
-    //쪽지 받음
+
+    // 수신된 쪽지 가져오기 기능 구현
     public List<MessageDTO> getMessagesForReceiver(String receiverID) throws SQLException {
         String query = "SELECT * FROM MessageInfo WHERE receiverID=?";
         Object[] parameters = {receiverID};
@@ -58,29 +80,24 @@ public class MessageDAO {
                 MessageDTO message = new MessageDTO(
                         rs.getInt("messageID"),
                         rs.getString("messageText"),
-                        rs.getDate("createAt"),
-                        rs.getString("recognizeID"),
+                        LocalDateTime.parse(rs.getString("createAt"), formatter), // 문자열을 LocalDateTime으로 파싱
                         rs.getString("senderID"),
-                        rs.getString("receiverID")
+                        rs.getString("receiverID"),
+                        rs.getInt("freepostID"),
+                        rs.getInt("findpostID")
                 );
-
                 messages.add(message);
             }
-
             return messages;
-        } catch (SQLException e) {
-            throw e;
         } finally {
-            jdbcUtil.commit();
-            jdbcUtil.close();
+            jdbcUtil.close(); // 리소스 반환
         }
     }
-
- // 쪽지 삭제
+    
+    // 쪽지 삭제
     public int deleteMessage(int messageID) throws SQLException {
         String query = "DELETE FROM MessageInfo WHERE messageID=?";
-        jdbcUtil.setSqlAndParameters(query, new Object[] {messageID});
-        //Object[] parameters = {messageID};
+        jdbcUtil.setSqlAndParameters(query, new Object[]{messageID});
 
         try {
             int result = jdbcUtil.executeUpdate();
@@ -89,13 +106,13 @@ public class MessageDAO {
             jdbcUtil.rollback();
             e.printStackTrace();
         } finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
-		}		
-		return 0;
-	}
+            jdbcUtil.commit();
+            jdbcUtil.close();    // resource 반환
+        }
+        return 0;
+    }
 
-    // 특정 콘텐츠(게시글)에 대한 쪽지 조회
+ // 특정 콘텐츠(게시글)에 대한 쪽지 조회
     public List<MessageDTO> getMessagesForContent(int messageID) throws SQLException {
         String query = "SELECT * FROM MessageInfo WHERE messageID=?";
         Object[] parameters = {messageID};
@@ -107,113 +124,19 @@ public class MessageDAO {
 
             while (rs.next()) {
                 MessageDTO message = new MessageDTO(
-                    rs.getInt("messageID"),
-                    rs.getString("messageText"),
-                    rs.getDate("createAt"),  
-                    rs.getString("recognizeID"),
-                    rs.getString("senderID"),
-                    rs.getString("receiverID")
+                        rs.getInt("messageID"),
+                        rs.getString("messageText"),
+                        rs.getTimestamp("createAt").toLocalDateTime(), // Timestamp를 LocalDateTime으로 변환
+                        rs.getString("senderID"),
+                        rs.getString("receiverID"),
+                        rs.getObject("freepostID") != null ? rs.getInt("freepostID") : null, // null 가능성 처리
+                        rs.getObject("findpostID") != null ? rs.getInt("findpostID") : null
                 );
-
                 messages.add(message);
             }
-
             return messages;
-        } catch (SQLException e) {
-            throw e;
         } finally {
-            jdbcUtil.commit();
-            jdbcUtil.close();
+            jdbcUtil.close(); // 리소스 반환
         }
     }
 }
-
-/*import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import model.dto.MessageDTO;
-
-public class MessageDAO {
-	
-    private JDBCUtil jdbcUtil;
-
-    public MessageDAO() {
-        jdbcUtil = new JDBCUtil();
-    }
-
-    public void close() {
-        jdbcUtil.close();
-    }
-    
-    // 데이터베이스 연결을 위한 메서드
-    private Connection getConnection() throws SQLException {
-        return ((Statement) jdbcUtil).getConnection();
-    }
-
-
-    // 쪽지 전송을 위한 메서드
-    public void sendMessage(MessageDTO message) {
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO MessageInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-
-            pstmt.setInt(1, message.getMessageID());
-            pstmt.setString(2, message.getMessageText());
-            pstmt.setDate(3, new java.sql.Date(message.getCreateAt().getTime()));
-            pstmt.setString(4, message.getRecognizeID());
-            pstmt.setString(5, message.getSenderID());
-            pstmt.setString(6, message.getReceiverID());
-            pstmt.setString(7, message.getPostID());
-            pstmt.setInt(8, message.getFreepostID());
-            pstmt.setInt(9, message.getFindpostID());
-
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // 예외 처리 추가
-        }
-    }
-
-    // 쪽지 수신을 위한 메서드
-    public List<MessageDTO> receiveMessages(String userID) {
-        List<MessageDTO> messages = new ArrayList<>();
-
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MessageInfo WHERE receiverID = ?")) {
-
-            pstmt.setString(1, userID);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    int messageID = rs.getInt("messageID");
-                    String messageText = rs.getString("messageText");
-                    Date createAt = rs.getDate("createAt");
-                    String recognizeID = rs.getString("recognizeID");
-                    String senderID = rs.getString("senderID");
-                    String receiverID = rs.getString("receiverID");
-                    String postID = rs.getString("postID");
-                    int freepostID = rs.getInt("freepostID");
-                    int findpostID = rs.getInt("findpostID");
-
-                    MessageDTO message = new MessageDTO(messageID, messageText, createAt, recognizeID, senderID, receiverID, postID);
-                    message.setFreepostID(freepostID);
-                    message.setFindpostID(findpostID);
-
-                    messages.add(message);
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // 예외 처리 추가
-        }
-
-        return messages;
-    }
-}*/
-

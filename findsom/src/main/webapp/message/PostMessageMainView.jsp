@@ -22,26 +22,26 @@
     <table border="1">
         <thead>
             <tr>
-                <th>ID</th>
+            	<th>쪽지번호</th>
+                <th>받은사람</th>
                 <th>내용</th>
-                <th>작성일</th>
-                <th>보낸 사람</th>
-                <!-- 필요에 따라 더 많은 열을 추가할 수 있습니다. -->
+                <th>보낸시간</th>
+                <th>보낸사람</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="message" items="${messages}">
                 <tr>
                     <td>${message.messageID}</td>
+                    <td>${message.receiverID}</td>
                     <td>${message.messageText}</td>
                     <td>${formattedDate(message.createAt)}</td>
                     <td>${message.senderID}</td>
-                    <!-- 필요에 따라 더 많은 열을 추가할 수 있습니다. -->
                 </tr>
             </c:forEach>
         </tbody>
     </table>
 
-    <!-- 필요에 따라 추가적인 내용을 표시할 수 있습니다. -->
+    <!-- 추가적인 내용 -->
 </body>
 </html>

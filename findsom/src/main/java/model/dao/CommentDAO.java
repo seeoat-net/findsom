@@ -20,7 +20,7 @@ public class CommentDAO {
 
     // 댓글 작성
     public void writeComment(CommentDTO comment) throws SQLException {
-        String query = "INSERT INTO Comment(commentID, content, commentDate, userID, postID) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO CommentInfo(commentID, content, commentDate, userID, postID) VALUES (?, ?, ?, ?, ?)";
         Object[] parameters = {comment.getCommentID(), comment.getContent(), comment.getCommentDate(), comment.getUserID(), comment.getPostID()};
         jdbcUtil.setSqlAndParameters(query, parameters);
 
