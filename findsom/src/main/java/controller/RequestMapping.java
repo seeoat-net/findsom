@@ -15,18 +15,31 @@ public class RequestMapping {
 
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
-    	
-    	// 쉿!게시판 
-    	// 쉿 게시판 접근 시, roominfo가 있는 사람만!
-    	mappings.put("/noise", new NoiseController());
-    	mappings.put("/noise", new NoiseController());
-    	
-    	// 매칭 게시판
-    	mappings.put("/match/matching", new MatchController());
-    	mappings.put("/match/detail", new MatchController());
-   
-//        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
-       
+        // <시은>─────────────────────────────────────────────────────────────────
+    	mappings.put("/", new ForwardController("/findsom/RandingView.jsp"));
+        mappings.put("/user/login", new LoginController());
+        mappings.put("/user/logout", new LogoutController());
+        
+        mappings.put("/user/mypageMain", new MypageController());
+
+        mappings.put("/user/registerUser", new RegisterUserController());
+        mappings.put("/user/registerLifePattern", new RegisterLifePatternController());
+  
+        mappings.put("/user/updateForm", new UpdateFormController());
+        mappings.put("/user/updateUser", new UpdateUserController());
+        
+        mappings.put("/user/delete", new DeleteUserController());
+
+        // <다솔>─────────────────────────────────────────────────────────────────
+		
+        // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
+        mappings.put("/noise", new NoiseController()); 
+        mappings.put("/noise", new NoiseController()); 
+
+		 // 매칭 게시판 // 
+        mappings.put("/match/matching", new MatchController()); 
+        mappings.put("/match/matching/detail", new MatchController()); 
+
         logger.info("Initialized Request Mapping!");
     }
 
