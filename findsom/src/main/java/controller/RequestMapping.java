@@ -1,10 +1,14 @@
 package controller;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.match.MatchController;
+import controller.noise.NoiseController;
+import controller.user.*;
+import controller.match.*;
 import controller.noise.*;
 
 public class RequestMapping {
@@ -31,12 +35,11 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
 
         // <다솔>─────────────────────────────────────────────────────────────────
-		
         // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
         mappings.put("/noise", new NoiseController()); 
         mappings.put("/noise", new NoiseController()); 
 
-		 // 매칭 게시판 // 
+		    // 매칭 게시판 // 
         mappings.put("/match/matching", new MatchController()); 
         mappings.put("/match/matching/detail", new MatchController()); 
 

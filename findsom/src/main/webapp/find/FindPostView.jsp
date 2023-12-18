@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FindPost</title>
-<link rel=stylesheet href="<c:url value='../css/mainView.css' />">
+<link rel=stylesheet href="<c:url value='../css/main.css' />">
 <link rel=stylesheet href="<c:url value='../css/findpost.css' />">
 <script>
 <%

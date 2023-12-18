@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FindMain</title>
+<link rel=stylesheet href="<c:url value='../css/main.css' />">
 <link rel=stylesheet href="<c:url value='../css/findlist.css' />">
 </head>
 <body>
