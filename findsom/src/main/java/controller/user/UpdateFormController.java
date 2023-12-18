@@ -24,18 +24,18 @@ public class UpdateFormController implements Controller {
     	log.debug("Update Request : {}", userId);
     	
     	UserManager manager = UserManager.getInstance();
-      User user = manager.findUser(userId); // 수정하려는 사용자 정보 검색
-      request.setAttribute("user", user);
-      LifePattern lifePattern = manager.findLifePattern(userId);
-      request.setAttribute("lifePattern", lifePattern);
+        User user = manager.findUser(userId); // 수정하려는 사용자 정보 검색
+        request.setAttribute("user", user);
+        LifePattern lifePattern = manager.findLifePattern(userId);
+        request.setAttribute("lifePattern", lifePattern);
     	
     	log.debug("UpdateForm User : {}", user);
     	log.debug("UpdateForm LifePattern : {}", lifePattern);
     	request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
     	request.setAttribute("user", user);
     	request.getSession().setAttribute("lifePattern", lifePattern); // User 객체를 세션에 저장
-      request.setAttribute("lifePattern", lifePattern);
-      
+        request.setAttribute("lifePattern", lifePattern);
+
     	return "/findsom/MypageUpdateView.jsp";
     }
 }

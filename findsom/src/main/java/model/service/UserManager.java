@@ -46,12 +46,17 @@ public class UserManager {
         return userDAO.createLifePattern(lifePattern, user);
     }
 
-	public int update(User user) throws SQLException, UserNotFoundException {
-		return userDAO.update(user);
+	public int updateUser(User user) throws SQLException, UserNotFoundException {
+		return userDAO.updateUser(user);
+	}
+	
+	public int updateLifePattern(String userId, LifePattern lifePattern, User user) throws SQLException {
+	    userDAO.removeLifePattern(userId);
+	    return userDAO.createLifePattern(lifePattern, user);
 	}
 
-	public int remove(String userId) throws SQLException, UserNotFoundException {
-		return userDAO.remove(userId);
+	public int removeUser(String userId) throws SQLException, UserNotFoundException {
+		return userDAO.removeUser(userId);
 	}
 	
     public User findUser(String userId)
