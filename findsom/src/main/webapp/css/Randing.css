@@ -1,0 +1,61 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/randingBG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vh;
+    font-family: 'NotoSansKR-ExtraLight', sans-serif;
+}
+
+form.fixed {
+	position: fixed;
+	left: 875px;
+	top: 430px;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-ExtraLight';
+    src: url('../fonts/NotoSansKR-ExtraLight.ttf') format('truetype');
+}
+
+#input {
+	width: 280px;
+	height: 30px;
+	border:none;
+	font-size: 20px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
+}
+
+#btn1 {
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	margin-left: 50px;
+	margin-right: 4px;
+	
+	border: none;
+	background-color: white;
+	color: #8B2842;
+	padding: 7px;
+	font-size: 18px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
+}
+
+#btn2 {
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	
+	border: none;
+	background-color: #8B2842;
+	color: white;
+	padding: 7px;
+	font-size: 18px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
+}
