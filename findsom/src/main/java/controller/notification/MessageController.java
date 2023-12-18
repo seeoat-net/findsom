@@ -1,6 +1,5 @@
 package controller.notification;
 
-import controller.Controller;
 import model.dto.MessageDTO;
 import model.manager.MessageManager;
 
@@ -8,14 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+<<<<<<< Updated upstream
 import java.sql.SQLException;
 import java.sql.Date;
+=======
+import controller.Controller;
+
+import java.time.LocalDateTime;
+>>>>>>> Stashed changes
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class MessageController implements Controller {
+<<<<<<< Updated upstream
     private static final Logger log = LoggerFactory.getLogger(MessageController.class);
 
     @Override
@@ -147,20 +150,59 @@ public class MessageController implements Controller {
 	 * log.error("Error deleting message: {}", e.getMessage()); return
 	 * "message/error.jsp"; } }
 	 */
+=======
 
-    private String getMessagesForContent(HttpServletRequest request) {
-        try {
-            int messageID = Integer.parseInt(request.getParameter("messageID"));
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        MessageManager messageManager = MessageManager.getInstance();
 
-            List<MessageDTO> messages = MessageManager.getMessagesForContent(messageID);
-
-            request.setAttribute("messages", messages);
-            log.debug("Retrieved messages for content: {}", messageID);
-
-            return "message/PostMessageMainView.jsp";
-        } catch (SQLException e) {
-            log.error("Error retrieving messages: {}", e.getMessage());
-            return "message/error.jsp";
+        String path = request.getServletPath();
+        
+        if ("/message/write".equals(path)) {
+            if ("POST".equalsIgnoreCase(request.getMethod())) {
+                return handleWriteMessage(request, messageManager);
+            }
+        } else if ("/message/view".equals(path)) {
+            if ("GET".equalsIgnoreCase(request.getMethod())) {
+                return handleViewMessages(request, messageManager);
+            }
         }
+        
+        // 기본적으로 오류 페이지나 적절한 메시지 페이지로 리디렉션
+        return "error.jsp";
+    }
+
+    private String handleWriteMessage(HttpServletRequest request, MessageManager messageManager) {
+        // 쪽지 작성 로직
+        String senderID = request.getParameter("senderID");
+        String receiverID = request.getParameter("receiverID");
+        String messageText = request.getParameter("messageText");
+        int freepostID = Integer.parseInt(request.getParameter("freepostID")); // 예시 파라미터
+        int findpostID = Integer.parseInt(request.getParameter("findpostID")); // 예시 파라미터
+
+        MessageDTO messageDTO = new MessageDTO(
+            0, messageText, LocalDateTime.now(), senderID, receiverID
+        );
+
+        MessageDTO result = messageManager.writeMessage(messageDTO);
+
+        if (result != null) {
+            request.setAttribute("message", "쪽지가 성공적으로 전송되었습니다.");
+            return "message_success.jsp"; // 쪽지 전송 성공 페이지
+        } else {
+            request.setAttribute("error", "쪽지 전송에 실패했습니다.");
+            return "message_error.jsp"; // 쪽지 전송 실패 페이지
+        }
+    }
+
+    private String handleViewMessages(HttpServletRequest request, MessageManager messageManager) {
+        // 쪽지 조회 로직
+        String receiverID = request.getParameter("receiverID");
+>>>>>>> Stashed changes
+
+        //List<MessageDTO> messages = messageManager.getMessagesForReceiver(receiverID);
+       // request.setAttribute("messages", messages);
+
+        return "message_list.jsp"; // 쪽지 목록 페이지
     }
 }

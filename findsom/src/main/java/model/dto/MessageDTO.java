@@ -20,6 +20,7 @@ public class MessageDTO {
     // 쪽지를 받은 사용자의 식별자
     private String receiverID;
 
+<<<<<<< Updated upstream
     private Integer freepostID; // 짝수
     private Integer findpostID; // 홀수, 매칭은 null
 
@@ -45,7 +46,21 @@ public class MessageDTO {
 	 * this.senderID = senderID; this.receiverID = receiverID; this.findpostID =
 	 * findpostID; }
 	 */
+=======
+    private int freepostID; // 짝수
+    private int findpostID; // 홀수, 매칭은 null
+>>>>>>> Stashed changes
 
+    public MessageDTO(int messageID, String messageText, LocalDateTime createAt, String senderID, String receiverID, int freepostID, int findpostID) {
+        this.messageID = messageID;
+        this.messageText = messageText;
+        this.createAt = createAt;
+        this.senderID = senderID;
+        this.receiverID = receiverID;
+        this.freepostID = freepostID;
+        this.findpostID = findpostID;
+    }
+   
 	public int getMessageID() {
 		return messageID;
 	}
@@ -68,16 +83,26 @@ public class MessageDTO {
         this.messageText = messageText;
     }
 
+<<<<<<< Updated upstream
     public Integer getFreepostID() { return freepostID; }
     public void setFreepostID(Integer freepostID) {
+=======
+    public int getFreepostID() { return freepostID; }
+    public void setFreepostID(int freepostID) {
+>>>>>>> Stashed changes
         if (freepostID % 2 == 0) {
             throw new IllegalArgumentException("FreepostID must be even");
         }
         this.freepostID = freepostID;
     }
 
+<<<<<<< Updated upstream
 	public Integer getFindpostID() { return findpostID; }
     public void setFindpostID(Integer findpostID) {
+=======
+	public int getFindpostID() { return findpostID; }
+    public void setFindpostID(int findpostID) {
+>>>>>>> Stashed changes
         if (findpostID % 2 != 0) {
             throw new IllegalArgumentException("FindpostID must be odd");
         }
@@ -131,4 +156,8 @@ public class MessageDTO {
                 ", receiverID='" + receiverID + '\'' +
                 '}';
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
