@@ -234,21 +234,26 @@ function userList(targetUri) {
 										</td>
 									</tr>
 									<tr height="40">
-										<td width="130">잠버릇</td>
-										<td width="180" style="padding-left: 10">
-											<%
+									    <td width="130">잠버릇</td>
+									    <td width="180" style="padding-left: 10">
+									        <input type="hidden" name="teethGrinding" value="<%= lifePattern.getTeethGrinding() != null && lifePattern.getTeethGrinding().equals("teethGrinding") ? "teethGrinding" : "" %>">
+									        <input type="hidden" name="snoring" value="<%= lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring") ? "snoring" : "" %>">
+									        <input type="hidden" name="ear" value="<%= lifePattern.getEar() != null && lifePattern.getEar().equals("ear") ? "ear" : "" %>">
+									        <%
 											if (lifePattern.getTeethGrinding() != null && lifePattern.getTeethGrinding().equals("teethGrinding")) {
 											%> 이갈이 <%
-											} else if (lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring")) {
+											}
+											if (lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring")) {
 											%> 코골이 <%
-											} else if (lifePattern.getEar() != null && lifePattern.getEar().equals("ear")) {
+											}
+											if (lifePattern.getEar() != null && lifePattern.getEar().equals("ear")) {
 											%> 잠귀 밝음 <%
-											} else {
+											}
+											if (lifePattern.getTeethGrinding() == null && lifePattern.getSnoring() == null && lifePattern.getEar() == null) {
 											%> 해당 없음 <%
 											}
-											%> <input type="hidden" name="sleepHabits"
-											value="<%=lifePattern.getWakeUpTime()%> <%=lifePattern.getSnoring()%> <%=lifePattern.getEar()%> ">
-										</td>
+											%>
+									    </td>
 									</tr>
 									<tr height="40">
 										<td width="130">친목</td>
