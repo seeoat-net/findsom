@@ -304,8 +304,7 @@ svg {
 }
 
 table {
-  caption-side: bottom;
-  border-collapse: collapse;
+	margin: auto;
 }
 
 caption {
@@ -343,20 +342,44 @@ button:focus:not(:focus-visible) {
   outline: 0;
 }
 
-input,
-button,
-select,
-optgroup,
-textarea {
-  margin: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+#input_txt {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border-width: 0 0 1px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
 }
 
-button,
-select {
-  text-transform: none;
+input {
+	padding: 10px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border-width: 0 0 1px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
+}
+
+select, option {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border-width: 0 0 1px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
+}
+
+#btn {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	margin-left: 4px;
+	margin-right: 4px;
+	border: 1px solid #8B2842;
+	background-color: #FEF5F0;
+	color: #8B2842;
+	padding: 3px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
 }
 
 [role=button] {

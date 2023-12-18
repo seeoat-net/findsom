@@ -19,18 +19,26 @@ public class JDBCUtil {
 	public JDBCUtil() {
 	}
 
-	/*
-	 * // 매개변수 없는 query를 전달받아 query를 설정하는 생성자 public JDBCUtil(String sql) {
-	 * this.setSql(sql); }
-	 * 
-	 * // 매개변수의 배열과 함께 query를 전달받아 각각을 설정하는 생성자 public JDBCUtil(String sql, Object[]
-	 * parameters) { this.setSql(sql); this.setParameters(parameters); }
-	 * 
-	 * // sql 변수 setter public void setSql(String sql) { this.sql = sql; }
-	 * 
-	 * // Object[] 변수 setter public void setParameters(Object[] parameters) {
-	 * this.parameters = parameters; }
-	 */
+	
+	// 매개변수 없는 query를 전달받아 query를 설정하는 생성자 
+	public JDBCUtil(String sql) {
+		this.setSql(sql); 
+	}
+
+	// 매개변수의 배열과 함께 query를 전달받아 각각을 설정하는 생성자 
+	public JDBCUtil(String sql, Object[] parameters) { 
+		this.setSql(sql);
+		this.setParameters(parameters);
+	}
+ 
+	// sql 변수 setter 
+	public void setSql(String sql) { this.sql = sql; }
+	 
+	// Object[] 변수 setter 
+	public void setParameters(Object[] parameters) {
+		this.parameters = parameters; 
+	}
+
 
 	// sql 변수 getter
 	public String getSql() {

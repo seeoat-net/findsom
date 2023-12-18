@@ -1,0 +1,37 @@
+.sidebarWrap {
+	float: left;
+	display: flex !important;
+	flex-direction: column;
+	height: 900px;
+	width: 250px;
+	background-color: #FEF5F0;
+	border-right: 1.5px solid #8B2842;
+}
+
+.userItem {
+	flex-basis: 150px;
+	border-bottom: 1.5px solid #8B2842;
+}
+
+.userImg {
+	display: block;
+	margin-left: 20px;
+}
+
+.sidebarItem {
+	flex-basis: 30px;
+	text-align: center;
+	font-size: 25px;
+	color: black;
+	text-decoration-line: none;
+	padding-top: 20px;
+	padding-bottom: 15px;
+}
+
+.sidebarLine {
+	width: 180px;
+	border: 1.3px solid  black;
+}
+
+
+
