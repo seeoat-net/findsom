@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import controller.match.MatchController;
+import controller.noise.NoiseController;
+import controller.find.*;
+import controller.free.*;
 import controller.user.*;
 
 public class RequestMapping {
@@ -30,17 +33,25 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
         
         // <다솔>─────────────────────────────────────────────────────────────────
-        // 쉿!게시판 
-        // 쉿 게시판 접근 시, roominfo가 있는 사람만!
-        mappings.put("/noise", new NoiseController());
-        mappings.put("/noise", new NoiseController());
-        
-        // 매칭 게시판
-        mappings.put("/match/matching", new MatchController());
-        mappings.put("/match/matching/detail", new MatchController());
-    
-//         mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
+        // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
+        mappings.put("/noise", new NoiseController()); 
+        mappings.put("/noise", new NoiseController()); 
 
+          // 매칭 게시판 // 
+        mappings.put("/match/matching", new MatchController()); 
+        mappings.put("/match/matching/detail", new MatchController());
+        
+        
+        // <예림>─────────────────────────────────────────────────────────────────
+        mappings.put("/find/findlist", new FindListController());
+        mappings.put("/find/findpost", new FindPostController());
+        mappings.put("/find/findsearch", new FindSearchContoller());
+        mappings.put("/find/findupdate", new FindUpdateController());
+        
+        mappings.put("/free/freelist", new FreeListController());
+        mappings.put("/free/freepost", new FreePostController());
+        mappings.put("/free/freeSearch", new FreeSearchController());
+        mappings.put("/free/freeUpdate", new FreeUpdateController());        
 
         logger.info("Initialized Request Mapping!");
     }

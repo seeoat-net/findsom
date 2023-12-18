@@ -254,12 +254,9 @@ function userList(targetUri) {
 								<tr height="40">
 								    <td width="130">잠버릇</td>
 								    <td width="250" style="padding-left: 10">
-								        <label><input type="checkbox" name="sleepHabits" value="teethGrinding" 
-								        <%= lifePattern.getTeethGrinding() != null && lifePattern.getTeethGrinding().equals("teethGrinding") ? "checked" : "" %>> 이갈이</label>
-								        <label><input type="checkbox" name="sleepHabits" value="snoring" 
-								        <%= lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring") ? "checked" : "" %>> 코골이</label>
-								        <label><input type="checkbox" name="sleepHabits" value="ear" 
-								        <%= lifePattern.getEar() != null && lifePattern.getEar().equals("ear") ? "checked" : "" %>> 잠귀 밝음</label>
+								        <label><input type="checkbox" name="teethGrinding" value="teethGrinding" <%= lifePattern.getTeethGrinding() != null && lifePattern.getTeethGrinding().equals("teethGrinding") ? "checked" : "" %>> 이갈이</label>
+								        <label><input type="checkbox" name="snoring" value="snoring" <%= lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring") ? "checked" : "" %>> 코골이</label>
+								        <label><input type="checkbox" name="ear" value="ear" <%= lifePattern.getEar() != null && lifePattern.getEar().equals("ear") ? "checked" : "" %>> 잠귀 밝음</label>
 								    </td>
 								</tr>
 								<tr height="40">

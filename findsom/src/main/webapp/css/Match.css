@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	width : 700px;
+	flex-wrap: wrap; 
+	border: solid;
+	justify-content: space-around;
+}
+
+.item {
+	/* border: solid; */
+	width : 150px;
+}
+
+.mbti {
+	/* border: solid; */
+	width : 250px;
+}
+
+/* result */
+.resultArea {
+	display: flex;
+	flex-wrap: wrap; 
+	border: solid;
+	justify-content: space-around;
+}
+.resultBox {
+	width : 300px; 
+	border: solid;
+}
