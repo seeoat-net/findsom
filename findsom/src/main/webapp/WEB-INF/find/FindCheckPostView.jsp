@@ -17,29 +17,10 @@ function postList(targetUri) {
 <head>
 <meta charset="UTF-8">
 <title>FindPost</title>
-<link rel=stylesheet href="<c:url value='../css/main.css' />">
-<link rel=stylesheet href="<c:url value='../css/findcheck.css' />">
 </head>
 <body>
-	<div class="leftline"></div>
-	<div class="rightline"></div>
-	<div class="somsom"></div>
-	<span  class="title">찾아주겠솜🏠</span>
-	<div class="bell"></div>
-	<div class="line"></div>
-	<span  class="mypage">마이페이지</span>
-	<div class="line1"></div>
-	<span  class="find">
-  		<a href="<c:url value='/find/findlist' />">구인 게시판</a>
-  	</span>
-  	<div class="line2"></div>
-  	<span  class="match">매칭 게시판</span>
-  	<div class="line3"></div>
-  	<span  class="shit">쉿! 게시판</span>
-  	<div class="line4"></div>
-  	<span  class="free">
-  		<a href="<c:url value='/free/freelist' />">자유 게시판</a>
-	</span> 
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %>
 	<div class="main">
 		<!-- <button class="cancle" onclick="postList('<c:url value='find/findpost' />')">수정</button> -->
 	  	<button class="cancle"><a href="<c:url value='find/findpost' />">수정</a></button> <!-- 수정누르면 postview로 이동 -->

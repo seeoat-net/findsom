@@ -6,8 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>FindPost</title>
-<link rel=stylesheet href="<c:url value='../css/main.css' />">
-<link rel=stylesheet href="<c:url value='../css/findpost.css' />">
 <script>
 <%
 //JSP 페이지에서 세션에서 userID 가져오기
@@ -20,27 +18,9 @@ function postList(targetUri) {
 </script>
 </head>
 <body>
-	<div class="leftline"></div>
-	<div class="rightline"></div>
-	<div class="somsom"></div>
-	<span  class="title">찾아주겠솜🏠</span>
-	<div class="bell"></div>
-	<div class="line"></div>
-	<span  class="mypage">마이페이지</span>
-	<div class="line1"></div>
-	<span  class="find">
-  		<a href="<c:url value='/find/findlist' />">구인 게시판</a>
-  	</span>
-  	<div class="line2"></div>
-  	<span  class="match">매칭 게시판</span>
-  	<div class="line3"></div>
-  	<span  class="shit">쉿! 게시판</span>
-  	<div class="line4"></div>
-  	<span  class="free">
-  		<a href="<c:url value='/free/freelist' />">자유 게시판</a>
-	</span> 
-	<div class="main">
-	  	
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %> 
+	<div>
 		<form class="mainpost" method="post" name="createpost" action="<c:url value='/find/findpost'/>" id="postform">
 			<input type="hidden" name="userID" value="<%= userID %>">
 	  		<table>
