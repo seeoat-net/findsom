@@ -20,7 +20,7 @@ table {
 	src: url('../fonts/NotoSansKR-ExtraLight.ttf') format('truetype');
 }
 
-input {
+#input_txt {
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 10px;
@@ -51,4 +51,3 @@ select, option {
 	padding: 3px;
 	font-family: 'NotoSansKR-ExtraLight', sans-serif;
 }
-

@@ -12,11 +12,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Signup2View</title>
-<link rel=stylesheet href="<c:url value='../css/Signup.css' />">
+<link rel=stylesheet href="<c:url value='../css/Signup2.css' />">
 <script>
 function userList(targetUri) {
-	form.action = targetUri;
-	form.submit();
+    form.action = targetUri;
+    form.submit();
 }
 </script>
 </head>
@@ -40,150 +40,102 @@ function userList(targetUri) {
 								</td>
 							</tr>
 							<tr height="40">
-								<td width="130">아침형/저녁형</td>
-								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="isMorningPerson">
-										<option value="morning">아침형</option>
-										<option value="night">저녁형</option>
-								</select>
-								</td>
+							    <td width="130">아침형/저녁형</td>
+							    <td width="250" style="padding-left: 10">
+							        <label><input type="checkbox" name="isMorningPerson" value="morning"> 아침형</label>
+							        <label><input type="checkbox" name="isMorningPerson" value="night"> 저녁형</label>
+							    </td>
 							</tr>
 							<tr height="40">
 								<td width="130">흡연자/비흡연자</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="isSmoker">
-										<option value="smoker">흡연자</option>
-										<option value="nonSmoker">비흡연자</option>
-								</select>
+									<label><input type="checkbox" name="isSmoker" value="smoker"> 흡연자</label>
+							        <label><input type="checkbox" name="isSmoker" value="nonSmoker"> 비흡연자</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">입사기간</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="employmentPeriod">
-										<option value="semester">학기중</option>
-										<option value="vacation">방학까지</option>
-								</select>
+									<label><input type="checkbox" name="employmentPeriod" value="semester"> 학기중</label>
+							        <label><input type="checkbox" name="employmentPeriod" value="vacation"> 방학까지</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">MBTI</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="mbti">
-										<option value="istj">ISTJ</option>
-										<option value="isfj">ISFJ</option>
-										<option value="infj">INFJ</option>
-										<option value="intj">INTJ</option>
-										<option value="istp">ISTP</option>
-										<option value="isfp">ISFP</option>
-										<option value="infp">INFP</option>
-										<option value="intp">INTP</option>
-										<option value="estp">ESTP</option>
-										<option value="esfp">ESFP</option>
-										<option value="enfp">ENFP</option>
-										<option value="entp">ENTP</option>
-										<option value="estj">ESTJ</option>
-										<option value="esfj">ESFJ</option>
-										<option value="enfj">ENFJ</option>
-										<option value="entj">ENTJ</option>
-								</select>
+									<input id="input_txt" style="width: 240" name="mbti" 
+										placeholder="[필수] 소문자로 입력. ex) istj" required>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">샤워시간</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="showerTime">
-										<option value="morningShower">아침</option>
-										<option value="nightShower">밤</option>
-								</select>
+									<label><input type="checkbox" name="showerTime" value="morningShower"> 아침</label>
+							        <label><input type="checkbox" name="showerTime" value="nightShower"> 밤</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">기상시간(알람)</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="wakeUpTime">
-										<option value="one">알람 한개</option>
-										<option value="many">알람 여러개</option>
-								</select>
+									<label><input type="checkbox" name="wakeUpTime" value="one"> 알람 한개</label>
+							        <label><input type="checkbox" name="wakeUpTime" value="many"> 알람 여러개</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">잠버릇</td>
 								<td width="250" style="padding-left: 10">
-								<select multiple style="width: 240" name="sleepHabits">
-										<option value="teethGrinding">이갈이</option>
-										<option value="snoring">코골이</option>
-										<option value="ear">잠귀 밝음</option>
-								</select>
+									<label><input type="checkbox" name="sleepHabits" value="teethGrinding"> 이갈이</label>
+							        <label><input type="checkbox" name="sleepHabits" value="snoring"> 코골이</label>
+							        <label><input type="checkbox" name="sleepHabits" value="ear"> 잠귀 밝음</label>
 								</td>
 							</tr>
-							<!-- 
-							<tr height="40">
-								<td width="130">잠버릇</td>
-								<td width="250" style="padding-left: 10">
-								<input type="checkbox" name="sleepHabits" value="teethGrinding">이갈이
-								<input type="checkbox" name="sleepHabits" value="snoring">코골이
-								<input type="checkbox" name="sleepHabits" value="ear">잠귀 밝음
-								</td>
-							</tr>
-							 -->
 							<tr height="40">
 								<td width="130">친목</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="hasFriendship">
-										<option value="yesFriendship">친목O</option>
-										<option value="noFriendship">친목X</option>
-								</select>
+									<label><input type="checkbox" name="hasFriendship" value="yesFriendship"> 친목O</label>
+							        <label><input type="checkbox" name="hasFriendship" value="noFriendship"> 친목X</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">방에서 이어폰 착용</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="hasEarphones">
-										<option value="yesEarphones">이어폰O</option>
-										<option value="noEarphones">이어폰X</option>
-								</select>
+									<label><input type="checkbox" name="hasEarphones" value="yesEarphones"> 이어폰O</label>
+							        <label><input type="checkbox" name="hasEarphones" value="noEarphones"> 이어폰X</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">청결도</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="cleanliness">
-										<option value="yesclean">청결유지</option>
-										<option value="noclean">더러워도됨</option>
-								</select>
+									<label><input type="checkbox" name="cleanliness" value="yesclean"> 청결유지</label>
+							        <label><input type="checkbox" name="cleanliness" value="noclean"> 더러워도됨</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">방 안 취식</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="eatInRoom">
-										<option value="yesEatInRoom">방 안 취식O</option>
-										<option value="noEatInRoom">방 안 취식X</option>
-								</select>
+									<label><input type="checkbox" name="eatInRoom" value="yesEatInRoom"> 방 안 취식O</label>
+							        <label><input type="checkbox" name="eatInRoom" value="noEatInRoom"> 방 안 취식X</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">나이</td>
 								<td width="250" style="padding-left: 10">
-								<input type="text" style="width: 240" name="age"
-									placeholder="숫자로만 입력. 예) 21" required></td>
+									<input id="input_txt" type="text" style="width: 240" name="age" 
+										placeholder="[필수] 숫자로만 입력. 예) 21" required>
+								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">침대 1층/2층 선호</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="bedPreference">
-										<option value="1">1층</option>
-										<option value="2">2층</option>
-								</select>
+									<label><input type="checkbox" name="bedPreference" value="1"> 1층</label>
+							        <label><input type="checkbox" name="bedPreference" value="2"> 2층</label>
 								</td>
 							</tr>
 						</table> <br>
 						<table>
 							<tr>
-								<td><input type="button" id="btn" value="완료"
-									onClick="userList(
-								'<c:url value='/user/registerLifePattern'/>')"></td>
+								<td><input type="button" id="btn" value="완료" 
+								onClick="userList('<c:url value='/user/registerLifePattern'/>')"></td>
 							</tr>
 						</table>
 					</td>

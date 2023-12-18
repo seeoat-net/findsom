@@ -342,8 +342,16 @@ button:focus:not(:focus-visible) {
   outline: 0;
 }
 
-input {
+#input_txt {
 	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border-width: 0 0 1px;
+	font-family: 'NotoSansKR-ExtraLight', sans-serif;
+}
+
+input {
 	padding: 10px;
 	margin-bottom: 10px;
 	box-sizing: border-box;

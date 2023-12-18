@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import controller.match.MatchController;
 import controller.noise.NoiseController;
+import controller.find.*;
+import controller.free.*;
 import controller.user.*;
-import controller.match.*;
-import controller.noise.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -20,7 +19,6 @@ public class RequestMapping {
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         // <시은>─────────────────────────────────────────────────────────────────
-    	mappings.put("/", new ForwardController("/findsom/RandingView.jsp"));
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         
@@ -33,15 +31,27 @@ public class RequestMapping {
         mappings.put("/user/updateUser", new UpdateUserController());
         
         mappings.put("/user/delete", new DeleteUserController());
-
+        
         // <다솔>─────────────────────────────────────────────────────────────────
         // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
         mappings.put("/noise", new NoiseController()); 
         mappings.put("/noise", new NoiseController()); 
 
-		    // 매칭 게시판 // 
+          // 매칭 게시판 // 
         mappings.put("/match/matching", new MatchController()); 
-        mappings.put("/match/matching/detail", new MatchController()); 
+        mappings.put("/match/matching/detail", new MatchController());
+        
+        
+        // <예림>─────────────────────────────────────────────────────────────────
+        mappings.put("/find/findlist", new FindListController());
+        mappings.put("/find/findpost", new FindPostController());
+        mappings.put("/find/findsearch", new FindSearchContoller());
+        mappings.put("/find/findupdate", new FindUpdateController());
+        
+        mappings.put("/free/freelist", new FreeListController());
+        mappings.put("/free/freepost", new FreePostController());
+        mappings.put("/free/freeSearch", new FreeSearchController());
+        mappings.put("/free/freeUpdate", new FreeUpdateController());        
 
         logger.info("Initialized Request Mapping!");
     }
