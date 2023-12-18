@@ -39,18 +39,17 @@ public class FindManager {
 	}
 	
 	//검색()#searchPost() = search()
-	public FindDTO search(String keyword) throws SQLException {
-		return findDAO.search(keyword);
-	}
+//	public List<FindDTO> search(String keyword) throws SQLException {
+//		return findDAO.search(keyword);
+//	}
 	
 	public List<FindDTO> findPostList() throws SQLException {
-		return findDAO.totalFindList();
+		return findDAO.showFindList();
 	}
 	
 	public FindDAO getFindDAO() {
 		return this.findDAO;
 	}
-	
 	 
 }
 
