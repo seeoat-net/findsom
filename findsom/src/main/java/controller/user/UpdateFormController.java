@@ -30,8 +30,11 @@ public class UpdateFormController implements Controller {
         request.setAttribute("lifePattern", lifePattern);
     	
     	log.debug("UpdateForm User : {}", user);
+    	log.debug("UpdateForm LifePattern : {}", lifePattern);
     	request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
     	request.setAttribute("user", user);
+    	request.getSession().setAttribute("lifePattern", lifePattern); // User 객체를 세션에 저장
+        request.setAttribute("lifePattern", lifePattern);
 
     	return "/findsom/MypageUpdateView.jsp";
     }

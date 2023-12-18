@@ -39,9 +39,29 @@ public class UpdateUserController implements Controller {
                 request.getParameter("isRecruite"));
 //                request.getParameter("roomInfo"));
         
-        log.debug("UpdateController User : {}", updateUser);
+        LifePattern updateLifePattern = new LifePattern(
+                request.getParameter("isMorningPerson"),
+                request.getParameter("isSmoker"),
+                request.getParameter("employmentPeriod"),
+                request.getParameter("mbti"),
+                request.getParameter("showerTime"),
+                request.getParameter("wakeUpTime"),
+                request.getParameter("teethGrinding"),
+                request.getParameter("snoring"),
+                request.getParameter("ear"),
+                request.getParameter("hasFriendship"),
+                request.getParameter("hasEarphones"),
+                request.getParameter("cleanliness"),
+                request.getParameter("eatInRoom"),
+                request.getParameter("age"),
+                request.getParameter("bedPreference"));
         
-        manager.update(updateUser);     
+        log.debug("UpdateController User : {}", updateUser);
+        log.debug("UpdateController LifePattern : {}", updateLifePattern);
+        
+        manager.updateUser(updateUser);
+        manager.updateLifePattern(updateId, updateLifePattern, updateUser);
+        
         return "redirect:/user/mypageMain";
     }
 }

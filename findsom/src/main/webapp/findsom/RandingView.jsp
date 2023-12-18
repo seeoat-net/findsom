@@ -65,9 +65,9 @@ function userCreate(targetUri) {
 								'<c:url value='/findsom/SignupView.jsp'/>')">
 			</td>						
 		  </tr>
-		  <tr height="40"><td>(관리자 로그인: admin/admin)</td></tr>
+		  <!-- <tr height="40"><td>(관리자 로그인: admin/admin)</td></tr> -->
 	    </table>
-	  </td>	  
+	  </td>
 	</tr>
   </table>  
 </form>
