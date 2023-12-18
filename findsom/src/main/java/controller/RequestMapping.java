@@ -35,15 +35,15 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
 
         // <다솔>─────────────────────────────────────────────────────────────────
-		
-		 // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
-         mappings.put("/noise", new NoiseController()); 
-         mappings.put("/noise", new NoiseController()); 
-		 // 매칭 게시판 // 
-		 mappings.put("/match/matching", new MatchController()); 
-		 mappings.put("/match/matching/detail", new MatchController()); 
+        // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
+        mappings.put("/noise", new NoiseController()); 
+        mappings.put("/noise", new NoiseController()); 
 
-		 logger.info("Initialized Request Mapping!");
+		    // 매칭 게시판 // 
+        mappings.put("/match/matching", new MatchController()); 
+        mappings.put("/match/matching/detail", new MatchController()); 
+
+        logger.info("Initialized Request Mapping!");
     }
 
     public Controller findController(String uri) {	
