@@ -12,42 +12,39 @@ function postList(targetUri) {
 <head>
 <meta charset="UTF-8">
 <title>FreeMain</title>
-<link rel=stylesheet href="<c:url value='../css/main.css' />">
-<link rel=stylesheet href="<c:url value='../css/freemain.css' />">
 </head>
 <body>
-	<div class="leftline"></div>
-	  <div class="rightline"></div>
-		<div class="somsom"></div>
-		<span  class="title">찾아주겠솜🏠</span>
-		<div class="bell"></div>
-	  	<div class="line"></div>
-	  	<span  class="mypage">마이페이지</span>
-	  	<div class="line1"></div>
-	  	<span  class="find">
-	  		<a href="<c:url value='/find/findlist' />">구인 게시판</a>
-	  	</span>
-	  	<div class="line2"></div>
-	  	<span  class="match">매칭 게시판</span>
-	  	<div class="line3"></div>
-	  	<span  class="shit">쉿! 게시판</span>
-	  	<div class="line4"></div>
-	  	<span  class="free">
-	  		<a href="<c:url value='/free/freelist' />">자유 게시판</a>
-		</span> 
-	  	<div class="main">
-			<div class="search">	 	
-	  			<input style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="searchText" maxlength="100">
-				<input type="submit" value="검색" style="background-color:#8B2842; color:white; border-color:white">
-			</div>
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %>
+	<span>
+		<div>	 	
+	  		<input style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="searchText" maxlength="100">
+			<input type="submit" value="검색" style="background-color:#8B2842; color:white; border-color:white">
 			<span class="create"><a href="<c:url value='/free/freepost' />">✏️</a></span>
-			<div class="category">
-				<span class="info"><b>이용정보</span>
-				<span class="purchase"><b>공동구매</span>
-				<span class="share"><b>나눔</span>
-				<span class="other"><b>기타</span>
-			</div>
 		</div>
-  	<div class="bell"></div>
+		<p>
+		<div class="category">
+			<span class="info"><b>이용정보</span> &nbsp;
+			<span class="purchase"><b>공동구매</span>&nbsp;
+			<span class="share"><b>나눔</span>&nbsp;
+			<span class="other"><b>기타</span>
+		</div>
+		<div>
+			<table>
+			 <c:forEach var="free" items="${freeList}">
+		    	<tr>
+		    		<td>                    
+		    		    <a href="<c:url value='/free/freeupdate'>
+						<c:param name='freepostID' value="${free.freepostID}"/>
+						</c:url>" style="color: #8B2842; text-decoration: none;">
+				  		<h4>${free.title}</h4></a>
+		            	<h5>${free.content}</h5>
+		            	<hr style="width: 100%;">
+		    		</td>
+		    	</tr>
+		    </c:forEach>
+			</table>
+		</div>
+	</span>
 </body>
 </html>

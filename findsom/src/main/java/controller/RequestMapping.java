@@ -43,15 +43,15 @@ public class RequestMapping {
         
         
         // <예림>─────────────────────────────────────────────────────────────────
-        mappings.put("/find/findlist", new FindListController());
-        mappings.put("/find/findpost", new FindPostController());
+        mappings.put("/find/findlist", new FindListController()); //글 목록 
+        mappings.put("/find/findpost", new FindPostController()); //글 작성
         mappings.put("/find/findsearch", new FindSearchContoller());
         mappings.put("/find/findupdate", new FindUpdateController());
         
         mappings.put("/free/freelist", new FreeListController());
         mappings.put("/free/freepost", new FreePostController());
-        mappings.put("/free/freeSearch", new FreeSearchController());
-        mappings.put("/free/freeUpdate", new FreeUpdateController());        
+        mappings.put("/free/freesearch", new FreeSearchController());
+        mappings.put("/free/freeupdate", new FreeUpdateController());        
 
         logger.info("Initialized Request Mapping!");
     }

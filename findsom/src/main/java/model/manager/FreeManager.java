@@ -35,6 +35,11 @@ public class FreeManager {
 	public FreeDTO create(FreeDTO post) throws SQLException{
 		return freeDAO.create(post);
 	}
+	
+	public FreeDTO freeCheckPost(int findpostID) throws SQLException{
+		return freeDAO.freeCheckPost(findpostID);
+	}
+	
 	//수정#postUpdateFindPost = update() //제목, 내용 수정
 	public int update(FreeDTO post) throws SQLException{
 		return freeDAO.update(post);
