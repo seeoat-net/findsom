@@ -47,7 +47,7 @@ public class FreeDAO {
 	public int update(FreeDTO post) throws SQLException {
 		String sql = "UPDATE FREEBOARDPOST "
 					+ "SET title=?, contents=? "
-					+ "WHERE postID=?";
+					+ "WHERE freepostID=?";
 		Object[] param = new Object[] {post.getTitle(), post.getContent(), post.getFreepostID()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
@@ -67,7 +67,7 @@ public class FreeDAO {
 
 	/*** 자유 게시판 글 삭제	 */
 	public int remove(String postID) throws SQLException {
-		String sql = "DELETE FROM FREEBOARDPOST WHERE postID=?";		
+		String sql = "DELETE FROM FREEBOARDPOST WHERE freepostID=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {postID});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
