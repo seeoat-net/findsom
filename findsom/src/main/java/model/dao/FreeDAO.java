@@ -8,9 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import model.FindDTO;
 import model.FreeDTO;
 
 public class FreeDAO {
+	private static final Logger log = LoggerFactory.getLogger(FindDAO.class);
 	private JDBCUtil jdbcUtil = null;
 		
 	public FreeDAO() {			
@@ -19,14 +24,16 @@ public class FreeDAO {
 	//search
 	/** 자유 게시판 글 작성.*/ //Sequence_freePostID
 	public FreeDTO create(FreeDTO post) throws SQLException {
-		String sql = "INSERT INTO FREEBOARDPOST VALUES (Sequence_freePostID, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO FREEBOARDPOST VALUES (Sequence_freePostID.nextval, ?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] { post.getTitle(), post.getUserID(),
 										post.getIsAnonymous(), post.getContent(), post.getCategory()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
-						
+		log.debug("dao- create() 실행, object param 넣기 완료");
+		
 		String key[] = {"freepostID"};	// PK 컬럼의 이름   
 		try {				
 			jdbcUtil.executeUpdate(key);  // insert 문 실행
+			log.debug("executeUpdate 완료");
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
 		   		int generatedKey = rs.getInt(1);   // 생성된 PK 값
@@ -42,6 +49,35 @@ public class FreeDAO {
 		}		
 		return null;			
 	}
+	
+	/*** 확인할 게시글 하나 찾아 반환 */
+	public FreeDTO freeCheckPost(int freepostID) throws SQLException {
+        String sql = "SELECT * "
+        			+ "FROM FREEBOARDPOST "
+        			+ "WHERE freepostID=?";              
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {freepostID});	// JDBCUtil에 query문과 매개 변수 설정
+		FreeDTO post = null;
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+			log.debug("query 실행 완료");
+			if (rs.next()) {						//  정보 발견
+				post = new FreeDTO(		// 객체를 생성하여 커뮤니티 정보를 저장
+					freepostID,
+					rs.getString("title"),
+					rs.getString("userID"),
+					rs.getString("isAnonymous"),
+					rs.getString("content"),
+					rs.getString("category"));
+			}
+			log.debug("DTO 생성 완료");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return post;
+	}
+	
 
 	/*** 자유 게시판 글 수정	-제목, 내용(title,content)*/
 	public int update(FreeDTO post) throws SQLException {
@@ -115,7 +151,7 @@ public class FreeDAO {
 	public List<FreeDTO> searchFreeList() throws SQLException {
         String sql = "SELECT * "
         		   + "FROM FREEBOARDPOST "
-        		   + "ORDER BY postId";        
+        		   + "ORDER BY freepostID";        
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 	try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			

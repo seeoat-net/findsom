@@ -21,22 +21,22 @@ function postList(targetUri) {
 	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %> 
 	<div>
-		<form class="mainpost" method="post" name="createpost" action="<c:url value='/find/findpost'/>" id="postform">
-			<input type="hidden" name="userID" value="<%= userID %>">
+		<form class="mainpost" method="post" name="createpost" action="<c:url value='/find/findupdate'/>" id="postform">
+			<input type="hidden" name="userID" value="${findpost.userID}">
 	  		<table>
 	  			<tr>
 	  				<td>
-	  				<label class="anonymous"><input type="checkbox" name="isAnonymous" value="true"><b>익명</b></label> <!-- value값은 선택되었을 때 서버로 전송되는 값 -->
+	  				익명여부: ${findpost.isAnonymous}
 	  				</td>
 	  			</tr>
 	  			<tr>
 	  				<td>
-	  				제목:<input type="text" name="title" >
+	  				제목:<input type="text" name="title" value='${findpost.title}'>
 	  				</td>
 	  			</tr>
 	  			<tr>
 	  				<td>
-	  				우대사항:<input type="text" name="prefer" >
+	  				우대사항:<input type="text" name="prefer" value="${findpost.prefer}">
 	  				</td>
 	  			</tr>
 	  			<tr>
@@ -46,12 +46,12 @@ function postList(targetUri) {
 	  			</tr>
 	  			<tr>
 	  				<td>
-	  				<textarea cols="150" rows="15" placeholder="내용을 입력하세요	" name="matecontent"></textarea>
+	  				<textarea cols="150" rows="15"  name="matecontent" value="${findpost.matecontent}"></textarea>
 	  				</td>
 	  			</tr>
-	  		</table>		
+	  		</table>			
 	  		<button class="cancle" ><a href="<c:url value='/find/findlist' />">취소</a></button>
-			<button class="register" type="submit" id="btn" value="등록">등록</button>
+			<button class="register" type="submit" id="btn" value="완료">완료</button>
 		</form>
 	</div>
 </body>

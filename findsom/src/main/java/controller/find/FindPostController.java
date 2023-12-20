@@ -3,6 +3,7 @@ package controller.find;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +41,7 @@ public class FindPostController implements Controller{
 	        String isAnonymous = request.getParameter("isAnonymous");
 	        String title = request.getParameter("title");
 	        String prefer = request.getParameter("prefer");
-	        List<String> mycontent = (List<String>) request.getAttribute("lifepattern");
+	        String mycontent = lifepattern.stream().collect(Collectors.joining(","));
 	        String matecontent = request.getParameter("matecontent");
 	        // FindDTO 객체 생성
 			FindDTO post = new FindDTO(1,
@@ -58,7 +59,8 @@ public class FindPostController implements Controller{
 	
 	        request.setAttribute("findpost", post);
 	        // 저장이 완료된 후 다음 화면으로 이동
-	        return "/find/FindCheckPostView.jsp";
+//	        return "/find/FindCheckPostView.jsp";
+	        return "redirect:/find/findlist";
 		}
     }
 }

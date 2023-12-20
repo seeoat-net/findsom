@@ -10,7 +10,6 @@ String userID = (String) session.getAttribute("userID");
 %>
 function postList(targetUri) {
 	form.action = targetUri;
-	//form.method()="POST";
 	form.submit();
 }
 </script>
@@ -22,15 +21,15 @@ function postList(targetUri) {
 	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %>
 	<div class="main">
-		<!-- <button class="cancle" onclick="postList('<c:url value='find/findpost' />')">수정</button> -->
-	  	<button class="cancle"><a href="<c:url value='find/findpost' />">수정</a></button> <!-- 수정누르면 postview로 이동 -->
-	  	&nbsp;
-	   	<button class="register" type="submit" form="postform" onclick="postList('<c:url value='find/findlist' />')">완료</button> 
+			<!--<button class="cancle"> <a href="<c:url value='/find/findupdate' />">수정</a></button>&nbsp;
+	    <input type="button" name="update" value="수정" >수정</a><!-- 수정페이지로 이동 --> 
+	   	<a href="<c:url value='/find/findlist' />"><input type="button" value="완료"></a>
 	  	<div>작성글 확인<p>
 	  		<table>
 	  			<tr>
-		  		 <td>(삭제해야할 부분)게시글번호:${findpost.findpostID} 익명:${findpost.isAnonymous}</td>
+		  		 <td>작성자:${findpost.userID} 익명:${findpost.isAnonymous}</td>
 		  		</tr>
+		  		<tr><td></td></tr>
 		  		<tr>
 		  		 <td>제목:${findpost.title}</td>
 		  		</tr>
@@ -38,7 +37,7 @@ function postList(targetUri) {
 		  		 <td>우대사항:${findpost.prefer}</td>
 		  		</tr>
 		  		<tr>
-		  			<td>내성향 ${lifepattern}</td>
+		  			<td>내성향: ${findpost.mycontent}</td>
 		  		</tr>
 		  		<tr>
 		  			<td>내가 작성한 글: ${findpost.matecontent} </td>

@@ -8,13 +8,13 @@ public class FindDTO {
 	private String isAnonymous;
 	private String title;
 	private String prefer;
-	private List<String> mycontent;
+	private String mycontent;
 	private String matecontent;
 	private String userID;
 	
 	public FindDTO() {}
 	
-	public FindDTO(int findpostID, String isAnonymous, String title, String prefer, List<String> mycontent, String matecontent, String userID) {
+	public FindDTO(int findpostID, String isAnonymous, String title, String prefer, String mycontent, String matecontent, String userID) {
 		super();
 		this.findpostID = findpostID;
 		this.isAnonymous = isAnonymous;
@@ -24,15 +24,13 @@ public class FindDTO {
 		this.matecontent = matecontent;
 		this.userID = userID;
   }
-	public FindDTO(int findpostID, String isAnonymous, String title, String prefer, String matecontent) {
+	public FindDTO(int findpostID, String title, String prefer, String matecontent) {
 		super();
 		this.findpostID = findpostID;
-		this.isAnonymous = isAnonymous;
 		this.title = title;
 		this.prefer = prefer;
 		this.matecontent = matecontent;
   }
-  
 	//내용 저장 리스트 보여줄 때 제목과 우대사항만 필요
 	public FindDTO(String title, String prefer) {
 		super();
@@ -72,11 +70,11 @@ public class FindDTO {
 		this.prefer = prefer;
 	}
 
-	public List<String> getMycontent() {
+	public String getMycontent() {
 		return mycontent;
 	}
 
-	public void setMycontent(List<String> mycontent) {
+	public void setMycontent(String mycontent) {
 		this.mycontent = mycontent;
 	}
 

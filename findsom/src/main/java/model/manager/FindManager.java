@@ -28,6 +28,11 @@ public class FindManager {
 		return findDAO.create(post);
 	}
 	
+	public FindDTO findCheckPost(int findpostID) throws SQLException{
+		return findDAO.findCheckPost(findpostID);
+	}
+	
+	
 	//수정#postUpdateFindPost = update()
 	public int update(FindDTO post) throws SQLException{
 		return findDAO.update(post);
@@ -44,7 +49,7 @@ public class FindManager {
 //	}
 	
 	public List<FindDTO> findPostList() throws SQLException {
-		return findDAO.showFindList();
+		return findDAO.totalFindList();
 	}
 	
 	public FindDAO getFindDAO() {

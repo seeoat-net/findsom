@@ -3,44 +3,32 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<script>
+<%
+//JSP 페이지에서 세션에서 userID 가져오기
+String userID = (String) session.getAttribute("userID");
+%>
+function postList(targetUri) {
+	form.action = targetUri;
+	form.submit();
+}
+</script>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>FreeCheckPost</title>
-<link rel=stylesheet href="<c:url value='../css/main.css' />">
-<link rel=stylesheet href="<c:url value='../css/freecheck.css' />">
 </head>
 <body>
-<div class="leftline"></div>
-	<div class="rightline"></div>
-	<div class="somsom"></div>
-	<span  class="title">찾아주겠솜🏠</span>
-	<div class="bell"></div>
-	<div class="line"></div>
-	<span  class="mypage">마이페이지</span>
-	<div class="line1"></div>
-	<span  class="find">
-  		<a href="<c:url value='/find/findlist' />">구인 게시판</a>
-  	</span>
-  	<div class="line2"></div>
-  	<span  class="match">매칭 게시판</span>
-  	<div class="line3"></div>
-  	<span  class="shit">쉿! 게시판</span>
-  	<div class="line4"></div>
-  	<span  class="free">
-  		<a href="<c:url value='/free/freelist' />">자유 게시판</a>
-	</span> 
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %>
 	<div class="main">
-		<!-- <button class="cancle" onclick="postList('<c:url value='find/findpost' />')">수정</button>
-	  	<button class="cancle"><a href="<c:url value='find/findpost' />">수정</a></button> <!-- 수정누르면 postview로 이동 
-	  	&nbsp;
-	   	<button class="register" type="submit" form="postform" onclick="postList('<c:url value='find/findlist' />')">완료</button> -->
+		<a href="<c:url value='/free/freelist' />"><input type="button" value="완료"></a>
 	  	<div>작성글 확인<p>
 	  		<table>
-		  		<tr>
-		  		 <td>제목:${freepost.title}</td>
+	  			<tr>
+		  		 <td>작성자:${freepost.userID} 익명:${freepost.isAnonymous}</td>
 		  		</tr>
 		  		<tr>
-		  		 <td>익명:${freepost.isAnonymous}</td>
+		  		 <td>제목:${freepost.title}</td>
 		  		</tr>
 		  		<tr>
 		  		 <td>카테고리:${freepost.category}</td>
@@ -57,12 +45,6 @@
 		  		<tr>
 		  			<td>
 		  			<textarea cols="150" rows="5" placeholder="댓글을 입력하세요	" name="comment"></textarea>
-		  			</td>
-		  		</tr>
-		  		<tr>
-		  			<td>
-		  				<input type="button" value="수정"> &nbsp;
-		  			  	<input type="submit" value="완료" >
 		  			</td>
 		  		</tr>
 	  		</table>
