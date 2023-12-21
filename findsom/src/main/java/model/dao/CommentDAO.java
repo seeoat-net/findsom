@@ -103,7 +103,6 @@ public class CommentDAO {
         return comments;
     }
   
-    
     // 댓글 삭제 기능
     public boolean deleteComment(int commentID) throws Exception {
         String sql = "DELETE FROM CommentInfo WHERE commentID=?";
