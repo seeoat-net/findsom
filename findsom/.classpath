@@ -9,7 +9,10 @@
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+<<<<<<< HEAD
+=======
 			<attribute name="optional" value="true"/>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
@@ -30,6 +33,8 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
+=======
 	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -37,5 +42,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

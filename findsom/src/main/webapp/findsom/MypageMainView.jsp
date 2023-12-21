@@ -69,18 +69,29 @@ function userList(targetUri) {
 	form.action = targetUri;
 	form.submit();
 }
+<<<<<<< HEAD
+=======
 
 function toNoti() {
 	//form.action = targetUri; noti uri
 	form.method = "GET";
 	form.submit();
 }
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 </script>
 </head>
 <body onload="displayFormattedRoomInfo();">
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end bg-white" id="sidebar-wrapper">
+<<<<<<< HEAD
+			<div class="col-12 sidebar-heading border-bottom bg-beige">사용자
+				이름 (모집상태)</div>
+			<div class="list-group list-group-flush">
+				<a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="#!">마이페이지</a> <a
+=======
 			<div class="col-12 sidebar-heading border-bottom bg-beige" style="flex-basis: 150px; border-bottom: 1.5px solid #8B2842;">
 				<!-- <img style="display: block; margin-left: 20px;" alt="./../images/somsom.png" src="./../images/somsom.png" /> -->
 				${user.getNickname()} | ${user.isRecruite()}</div>
@@ -88,14 +99,21 @@ function toNoti() {
 				<a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="<c:url value='/user/mypageMain' />">마이페이지</a> <a
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="<c:url value='/find/findlist' />">구인 게시판</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="<c:url value='/match/matching' />">매칭 게시판</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
+<<<<<<< HEAD
+					href="#!">쉿! 게시판</a> <a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="#!">자유 게시판</a>
+=======
 					href="<c:url value='/noise' />">쉿! 게시판</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="<c:url value='/free/freelist' />">자유 게시판</a>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 			</div>
 		</div>
 		<!-- Page content wrapper-->
@@ -127,8 +145,11 @@ function toNoti() {
 						<tr>
 							<td><input type="button" id="btn" value="수정하기"
 								onClick="userList('<c:url value='/user/updateForm' />')"></td>
+<<<<<<< HEAD
+=======
 							<td><input type="button" id="btn" value="로그아웃"
 								onClick="userList('<c:url value='/user/logout' />')"></td>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 							<td><input type="button" id="btn" value="탈퇴하기"
 								onClick="userList('<c:url value='/user/delete' />')"></td>
 						</tr>

@@ -5,21 +5,33 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
+import controller.Controller;
+=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import controller.free.FreeListController;
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 import model.FindDTO;
 import model.manager.FindManager;
 import model.manager.FreeManager;
 
 public class FindListController implements Controller{
+<<<<<<< HEAD
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
+		FindManager manager = FindManager.getInstance();
+		List<FindDTO> findList = manager.findPostList();
+		
+		request.setAttribute("findList", findList);
+=======
 	private static final Logger log = LoggerFactory.getLogger(FindListController.class);
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equals("GET")) {
 			FindManager manager = FindManager.getInstance();
 			List<FindDTO> findList = manager.findPostList();
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 			
 			request.setAttribute("findList", findList);
 				
