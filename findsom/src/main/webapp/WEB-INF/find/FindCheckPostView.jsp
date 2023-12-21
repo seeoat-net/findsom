@@ -10,11 +10,6 @@ String userID = (String) session.getAttribute("userID");
 %>
 function postList(targetUri) {
 	form.action = targetUri;
-<<<<<<< HEAD
-	//form.method()="POST";
-	form.submit();
-}
-=======
 	form.submit();
 }
 function postRemove() {
@@ -36,7 +31,6 @@ function postRemove() {
     form.submit();
     return false; // 이벤트 전파 방지
 }
->>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 </script>
 <head>
 <meta charset="UTF-8">
@@ -46,17 +40,6 @@ function postRemove() {
 	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %>
 	<div class="main">
-<<<<<<< HEAD
-		<!-- <button class="cancle" onclick="postList('<c:url value='find/findpost' />')">수정</button> -->
-	  	<button class="cancle"><a href="<c:url value='find/findpost' />">수정</a></button> <!-- 수정누르면 postview로 이동 -->
-	  	&nbsp;
-	   	<button class="register" type="submit" form="postform" onclick="postList('<c:url value='find/findlist' />')">완료</button> 
-	  	<div>작성글 확인<p>
-	  		<table>
-	  			<tr>
-		  		 <td>(삭제해야할 부분)게시글번호:${findpost.findpostID} 익명:${findpost.isAnonymous}</td>
-		  		</tr>
-=======
 	   	<a href="<c:url value='/find/findlist' />"><input type="button" value="완료"></a>
 	   	<a href="#" onclick="postRemove();"><input type="button" value="삭제"></a>
 	<!-- 	<a href="<c:url value='/community/delete'>
@@ -77,7 +60,6 @@ function postRemove() {
 					</td>
 				</tr>
 		  		<tr><td></td></tr>
->>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		  		<tr>
 		  		 <td>제목:${findpost.title}</td>
 		  		</tr>
@@ -85,11 +67,7 @@ function postRemove() {
 		  		 <td>우대사항:${findpost.prefer}</td>
 		  		</tr>
 		  		<tr>
-<<<<<<< HEAD
-		  			<td>내성향 ${lifepattern}</td>
-=======
 		  			<td>내성향: ${findpost.mycontent}</td>
->>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		  		</tr>
 		  		<tr>
 		  			<td>내가 작성한 글: ${findpost.matecontent} </td>
@@ -98,15 +76,6 @@ function postRemove() {
 	  		<p>
 	  		<table>
 		  		<tr>
-<<<<<<< HEAD
-		  		 	<td>댓글 작성</td>
-		  		</tr>
-		  		<tr>
-		  			<td>
-		  			<textarea cols="150" rows="5" placeholder="댓글을 입력하세요	" name="comment"></textarea>
-		  			</td>
-		  		</tr>
-=======
 		  			<td>
 		  			<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="comment" maxlength="500">
 					<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
@@ -125,7 +94,6 @@ function postRemove() {
 		    		</td>
 		    	</tr>
 		    	</c:forEach>-->
->>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	  		</table>
 	  	</div>
 	</div>
