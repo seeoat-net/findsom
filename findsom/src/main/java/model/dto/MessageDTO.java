@@ -23,12 +23,6 @@ public class MessageDTO {
     private int freepostID; // 짝수
     private int findpostID; // 홀수, 매칭은 null
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    private Integer freepostID; // 짝수
-    private Integer findpostID; // 홀수, 매칭은 null
-=======
->>>>>>> Stashed changes
 
     public MessageDTO(int messageID, String messageText, LocalDateTime createAt, String senderID, String receiverID, Integer freepostID, Integer findpostID) {
         this.messageID = messageID;
@@ -39,48 +33,18 @@ public class MessageDTO {
         this.freepostID = freepostID;
         this.findpostID = findpostID;
     }
-<<<<<<< Updated upstream
-    
-	/*
-	 * //freepostID가 있는 DTO public void MessageFreeDTO(int messageID, String
-	 * messageText, LocalDateTime createAt, String senderID, String receiverID, int
-	 * freepostID) { this.messageID = messageID; this.messageText = messageText;
-	 * this.createAt = createAt; this.senderID = senderID; this.receiverID =
-	 * receiverID; this.freepostID = freepostID; } //findpostID가 있는 DTO public void
-	 * MessageFindDTO(int messageID, String messageText, LocalDateTime createAt,
-	 * String senderID, String receiverID, int findpostID) { this.messageID =
-	 * messageID; this.messageText = messageText; this.createAt = createAt;
-	 * this.senderID = senderID; this.receiverID = receiverID; this.findpostID =
-	 * findpostID; }
-	 */
-=======
-    private int freepostID; // 짝수
-    private int findpostID; // 홀수, 매칭은 null
->>>>>>> Stashed changes
-
-    public MessageDTO(int messageID, String messageText, LocalDateTime createAt, String senderID, String receiverID, int freepostID, int findpostID) {
-        this.messageID = messageID;
-        this.messageText = messageText;
-        this.createAt = createAt;
-        this.senderID = senderID;
-        this.receiverID = receiverID;
-        this.freepostID = freepostID;
-        this.findpostID = findpostID;
-    }
-=======
->>>>>>> Stashed changes
    
-	public int getMessageID() {
-		return messageID;
-	}
+   public int getMessageID() {
+      return messageID;
+   }
 
-	public void setMessageID(int messageID) {
-		this.messageID = messageID;
-	}
+   public void setMessageID(int messageID) {
+      this.messageID = messageID;
+   }
 
-	public String getMessageText() {
-		return messageText;
-	}
+   public String getMessageText() {
+      return messageText;
+   }
 
     public void setMessageText(String messageText) {
         if (messageText == null || messageText.trim().isEmpty()) {
@@ -92,42 +56,20 @@ public class MessageDTO {
         this.messageText = messageText;
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public Integer getFreepostID() { return freepostID; }
-    public void setFreepostID(Integer freepostID) {
-=======
-    public int getFreepostID() { return freepostID; }
-    public void setFreepostID(int freepostID) {
->>>>>>> Stashed changes
-        if (freepostID % 2 == 0) {
-=======
 
     public int getFreepostID() { return freepostID; }
     public void setFreepostID(int freepostID) {
 
-    	if (freepostID % 2 != 0) {
->>>>>>> Stashed changes
+       if (freepostID % 2 != 0) {
             throw new IllegalArgumentException("FreepostID must be even");
         }
         this.freepostID = freepostID;
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	public Integer getFindpostID() { return findpostID; }
-    public void setFindpostID(Integer findpostID) {
-=======
-	public int getFindpostID() { return findpostID; }
-    public void setFindpostID(int findpostID) {
->>>>>>> Stashed changes
-        if (findpostID % 2 != 0) {
-=======
-	public int getFindpostID() { return findpostID; }
+   public int getFindpostID() { return findpostID; }
     public void setFindpostID(int findpostID) {
 
         if (findpostID % 2 == 0) {
->>>>>>> Stashed changes
             throw new IllegalArgumentException("FindpostID must be odd");
         }
         this.findpostID = findpostID;
@@ -153,23 +95,23 @@ public class MessageDTO {
         this.createAt = LocalDateTime.parse(createAtStr, formatter);
     }
     
-	public String getSenderID() {
-		return senderID;
-	}
+   public String getSenderID() {
+      return senderID;
+   }
 
-	public void setSenderID(String senderID) {
-		this.senderID = senderID;
-	}
+   public void setSenderID(String senderID) {
+      this.senderID = senderID;
+   }
 
-	public String getReceiverID() {
-		return receiverID;
-	}
+   public String getReceiverID() {
+      return receiverID;
+   }
 
-	public void setReceiverID(String receiverID) {
-		this.receiverID = receiverID;
-	}
-	
-	// toString 메서드
+   public void setReceiverID(String receiverID) {
+      this.receiverID = receiverID;
+   }
+   
+   // toString 메서드
     @Override
     public String toString() {
         return "MessageDTO{" +
@@ -180,14 +122,5 @@ public class MessageDTO {
                 ", receiverID='" + receiverID + '\'' +
                 '}';
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-}
-=======
-}
->>>>>>> Stashed changes
-=======
 
 }
-
->>>>>>> Stashed changes
