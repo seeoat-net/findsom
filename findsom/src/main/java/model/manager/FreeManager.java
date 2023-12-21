@@ -45,8 +45,9 @@ public class FreeManager {
 		return freeDAO.update(post);
 	}	
 	//삭제 -> freepostID로 삭제
-	public int remove(int freepostID) throws SQLException{
-		return freeDAO.remove(freepostID);
+	public int remove(int postID) throws SQLException{
+		return freeDAO.remove(postID);
+
 	}
 	//검색()#searchPost() = search()
 	public List<FreeDTO> search(String keyword) throws SQLException {
