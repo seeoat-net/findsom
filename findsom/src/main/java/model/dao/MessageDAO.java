@@ -16,6 +16,7 @@ public class MessageDAO {
     public void close() {
         jdbcUtil.close();
     }
+<<<<<<< Updated upstream
 
     // 쪽지 작성
     public MessageDTO writeMessage(MessageDTO message) throws SQLException {
@@ -42,6 +43,68 @@ public class MessageDAO {
 			jdbcUtil.close();	// resource 반환
 		}
 		return null;		
+=======
+   /*
+    * public MessageDTO writeMessage(MessageDTO message) throws SQLException { //
+    * 시퀀스를 사용하여 messageID를 자동으로 생성하는 INSERT 쿼리문 String insertQuery =
+    * "INSERT INTO MessageInfo (MESSAGEID, MESSAGETEXT, CREATEAT, SENDERID, RECEIVERID, FREEPOSTID, FINDPOSTID) "
+    * + "VALUES (Sequence_messageID.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+    * 
+    * // LocalDateTime을 java.sql.Timestamp로 변환 java.sql.Timestamp sqlTimestamp =
+    * java.sql.Timestamp.valueOf(message.getCreateAt());
+    * 
+    * // 파라미터 설정 Object[] parameters = new Object[6]; parameters[0] =
+    * message.getMessageText(); parameters[1] = sqlTimestamp; parameters[2] =
+    * message.getSenderID(); parameters[3] = message.getReceiverID(); parameters[4]
+    * = (message.getFreepostID() != null && message.getFreepostID() % 2 == 0) ?
+    * message.getFreepostID() : null; // findpostID가 null이 아니고 홀수인 경우, findpostID를
+    * 사용 parameters[5] = (message.getFindpostID() != null &&
+    * message.getFindpostID() % 2 != 0) ? message.getFindpostID() : null;
+    */
+
+
+    public MessageDTO writeMessage(MessageDTO message) throws SQLException {
+       String insertQuery = "INSERT INTO MessageInfo (messageID, messageText, createAt, senderID, receiverID, freepostID, findpostID) " +
+                "VALUES (Sequence_messageID.NEXTVAL, ?, ?, ?, ?, ?, ?)";//findpostID값에 null 넣기
+
+        // LocalDateTime을 java.sql.Timestamp로 변환
+        java.sql.Timestamp sqlTimestamp = java.sql.Timestamp.valueOf(message.getCreateAt());
+        
+        Object[] parameters = {
+            message.getMessageText(),
+            sqlTimestamp, // java.sql.Timestamp 타입으로 변환된 날짜/시간
+            message.getSenderID(),
+            message.getReceiverID(),
+            message.getFreepostID() % 2 == 0 ? message.getFreepostID() : null, // 짝수인 경우만 설정
+            message.getFindpostID() % 2 != 0 ? message.getFindpostID() : null // 홀수인 경우만 설정
+            //message.getFreepostID(),
+            //message.getFindpostID()
+        };
+
+
+        // JDBCUtil에 insert문과 parameter 배열 설정
+        jdbcUtil.setSqlAndParameters(insertQuery, parameters);
+
+        String key[] = {"messageID"}; // PK 컬럼의 이름 배열
+
+        try {
+            jdbcUtil.executeUpdate(key); // insert 문 실행
+            ResultSet rs = jdbcUtil.getGeneratedKeys(); // 생성된 PK 값을 포함한 ResultSet 객체 반환
+
+            if (rs.next()) {
+                int generatedKey = rs.getInt(1); // 생성된 PK 컬럼 값 읽음
+                message.setMessageID(generatedKey); // PK 값을 MessageDTO 객체에 설정
+            }
+            return message;
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+            return null;
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close();
+        }
+>>>>>>> Stashed changes
     }
     
     //쪽지 받음
@@ -107,12 +170,23 @@ public class MessageDAO {
 
             while (rs.next()) {
                 MessageDTO message = new MessageDTO(
+<<<<<<< Updated upstream
                     rs.getInt("messageID"),
                     rs.getString("messageText"),
                     rs.getDate("createAt"),  
                     rs.getString("recognizeID"),
                     rs.getString("senderID"),
                     rs.getString("receiverID")
+=======
+                        rs.getInt("messageID"),
+                        rs.getString("messageText"),
+
+                        rs.getTimestamp("createAt").toLocalDateTime(), // Timestamp를 LocalDateTime으로 변환
+                        rs.getString("senderID"),
+                        rs.getString("receiverID"),
+                        rs.getInt("freepostID"),
+                        rs.getInt("findpostID")
+>>>>>>> Stashed changes
                 );
 
                 messages.add(message);
@@ -126,6 +200,7 @@ public class MessageDAO {
             jdbcUtil.close();
         }
     }
+<<<<<<< Updated upstream
 }
 
 /*import java.sql.Connection;
@@ -217,3 +292,7 @@ public class MessageDAO {
     }
 }*/
 
+=======
+
+}
+>>>>>>> Stashed changes

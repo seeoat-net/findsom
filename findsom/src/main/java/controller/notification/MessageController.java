@@ -6,16 +6,25 @@ import model.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< Updated upstream
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+=======
+import javax.servlet.http.HttpSession;
+import controller.Controller;
+>>>>>>> Stashed changes
 import java.sql.SQLException;
 import java.util.List;
 
+<<<<<<< Updated upstream
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+=======
+public class MessageController implements Controller {
+>>>>>>> Stashed changes
 
 public class MessageController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(MessageController.class);
@@ -85,6 +94,7 @@ public class MessageController implements Controller {
 
         
 
+<<<<<<< Updated upstream
     // 사용자 입력이나 다른 동적인 조건에 따라 RecognizeID 값을 결정하는 메서드를 추가
     private String determineRecognizeID(HttpServletRequest request) {
         // 예시로 간단하게 사용자 입력을 받아 RecognizeID 값을 설정하는 방식을 사용
@@ -160,4 +170,13 @@ public class MessageController implements Controller {
             return "message/error.jsp";
         }
     }
+=======
+        if (result > 0) {
+            request.setAttribute("message", "쪽지 삭제 성공");
+            return "/message/PostMessageMainView.jsp";
+        } else {
+            return "/error.jsp";
+        }
+    }
+>>>>>>> Stashed changes
 }
