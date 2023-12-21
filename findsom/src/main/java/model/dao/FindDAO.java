@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import model.FindDTO;
+import model.LifePattern;
 import model.dto.MatchDTO;
 
 public class FindDAO {
@@ -24,13 +25,88 @@ public class FindDAO {
 	public List<String> getLifePatternsByUserID(String userID) throws SQLException {
 	    List<String> lifePatterns = new ArrayList<>();
 	    String sql = "SELECT lifePattern FROM LIFEPATTERNS WHERE userID = ?";
+//	    LifePattern lifePattern = new LifePattern();  // 객체 생성
 	    jdbcUtil.setSqlAndParameters(sql, new Object[]{userID});
 
 	    try {
 	        ResultSet rs = jdbcUtil.executeQuery();
 	        while (rs.next()) {
 	            String lifePattern = rs.getString("lifePattern");
-	            lifePatterns.add(lifePattern);
+	            switch (lifePattern) {
+                case "morning": 
+                	lifePatterns.add("아침형");
+                	break;
+                case "night":
+                    lifePatterns.add("저녁형");
+                    break;
+                case "smoker": 
+                	lifePatterns.add("흡연자");
+    	            break;
+                case "nonSmoker":
+                	lifePatterns.add("비흡연자");
+    	            break;
+                case "semester": 
+                	lifePatterns.add("학기중");
+    	            break;
+                case "vacation":
+                	lifePatterns.add("방학까지");
+    	            break;
+                case "morningShower": 
+                	lifePatterns.add("아침사워");
+    	            break;
+                case "nightShower":
+                	lifePatterns.add("밤샤워");
+    	            break;
+                case "one": 
+                	lifePatterns.add("알람 한개");
+    	            break;
+                case "many":
+                	lifePatterns.add("알람 여러개");
+    	            break;
+                case "teethGrinding":
+                	lifePatterns.add("이갈이");
+    	            break;
+                case "snoring":
+                	lifePatterns.add("코골이");
+    	            break;
+                case "ear":
+                	lifePatterns.add("잠귀 밝음");
+    	            break;
+                case "yesFriendship": 
+                	lifePatterns.add("친목O");
+    	            break;
+                case "noFriendship":
+                	lifePatterns.add("친목X");
+    	            break;
+                case "yesEarphones": 
+                	lifePatterns.add("이어폰O");
+    	            break;
+                case "noEarphones":
+                	lifePatterns.add("이어폰X");
+    	            break;
+                case "yesclean": 
+                	lifePatterns.add("청결유지");
+    	            break;
+                case "noclean":
+                	lifePatterns.add("더러워도 됨");
+    	            break;
+                case "yesEatInRoom": 
+                	lifePatterns.add("방 안 취식O");
+    	            break;
+                case "noEatInRoom":
+                	lifePatterns.add("방 안 취식X");
+    	            break;
+                case "1": 
+                	lifePatterns.add("1층 침대");
+    	            break;
+                case "2":
+                	lifePatterns.add("2층 침대");
+    	            break;
+                default:
+                	lifePatterns.add(lifePattern);
+                    break;
+	            }
+
 	        }
 	    } catch (Exception ex) {
 	        ex.printStackTrace();

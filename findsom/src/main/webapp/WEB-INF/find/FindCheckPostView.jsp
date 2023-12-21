@@ -54,7 +54,7 @@ function postRemove() {
 					      익명
 					    </c:when>
 					    <c:otherwise>
-					      ${findpost.userID}
+					      작성자:${findpost.userID}
 					    </c:otherwise>
 					  </c:choose>
 					</td>

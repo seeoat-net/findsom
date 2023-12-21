@@ -41,7 +41,7 @@ public class FindPostController implements Controller{
 	        String isAnonymous = request.getParameter("isAnonymous");
 	        String title = request.getParameter("title");
 	        String prefer = request.getParameter("prefer");
-	        String mycontent = lifepattern.stream().collect(Collectors.joining(","));
+	        String mycontent = lifepattern.stream().collect(Collectors.joining(", "));
 	        String matecontent = request.getParameter("matecontent");
 	        // FindDTO 객체 생성
 			FindDTO post = new FindDTO(1,
