@@ -1,7 +1,9 @@
+
 .sidebarWrap {
 	float: left;
 	display: flex !important;
 	flex-direction: column;
+	text-align: center;
 	height: 900px;
 	width: 250px;
 	background-color: #FEF5F0;
@@ -28,10 +30,17 @@
 	padding-bottom: 15px;
 }
 
+.sidebarItemFree {
+	flex-basis: 30px;
+	width: 150px;
+	text-align: left;
+	font-size: 17px;
+	color: black;
+	text-decoration-line: none;
+	margin-left: 60px;
+}
+
 .sidebarLine {
 	width: 180px;
 	border: 1.3px solid  black;
 }
-
-
-

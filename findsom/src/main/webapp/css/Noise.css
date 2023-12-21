@@ -1,22 +1,28 @@
-@charset "EUC-KR";
-.container {
+
+.container {	
 	display: flex;
+	width : 75%;
 	flex-wrap: wrap; 
-	border: solid;
 	justify-content: space-around;
+	border: 1px solid black;
 }
 
 .item {
-	border: solid;
-	width : 700px;	
+	border: 1px solid red;	
 }
 
+.itemTitle {
+	border: 1px solid orange;
+}
+
+.itemText {
+	border: 1px solid yellow;
+}
 
 .rankArea {
-	border: solid;
-	width : 300px;
+	border: 1px solid green;
 }
+
 .rankBox {
-	border: solid;
-	width : 700px;
+	border: 1px solid blue;
 }
