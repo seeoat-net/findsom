@@ -22,7 +22,6 @@ public class FreePostController implements Controller{
 		}
 		else {
 			FreeDTO post = new FreeDTO(
-//					Integer.parseInt(request.getParameter("freepostID")),
 					2,
 					request.getParameter("title"),
 					request.getParameter("userID"),
@@ -35,7 +34,6 @@ public class FreePostController implements Controller{
 			
 			request.setAttribute("freepost", post);
 			
-//			 return "/free/FreeCheckPostView.jsp";
 			return "redirect:/free/freelist";
 		}
 	 }

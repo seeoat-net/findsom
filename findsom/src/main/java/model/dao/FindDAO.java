@@ -96,83 +96,6 @@ public class FindDAO {
 		return post;
 	}
 	
-	/*** 구인 게시판 글 수정	-제목, 우대사항, 상대성향(title,matecontent,prefer 부분 */
-	public int update(FindDTO post) throws SQLException {
-		String sql = "UPDATE FINDBOARDPOST "
-					+ "SET title=?, matecontent=?, prefer=? " 
-					+ "WHERE findpostID=?";
-		Object[] param = new Object[] {post.getTitle(), post.getMatecontent(), post.getPrefer(), post.getFindpostID()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
-			
-		try {				
-			int result = jdbcUtil.executeUpdate();	// update 문 실행
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
-		finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
-		}		
-		return 0;
-	}
-
-	/*** 구인게시판 글 삭제 */
-	public int remove(String postID) throws SQLException {
-		String sql = "DELETE FROM FINDBOARDPOST WHERE findpostID=?";		
-
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {postID});	// JDBCUtil에 delete문과 매개 변수 설정
-
-		try {				
-			int result = jdbcUtil.executeUpdate();	// delete 문 실행
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
-		finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
-		}		
-		return 0;
-	}
-
-	/***keywork에 해당하는 구인 게시판 글 검색 */
-	public List<FindDTO> search(String keyword) throws SQLException {
-	    String sql = "SELECT * FROM FINDBOARDPOST WHERE title LIKE ? OR prefer LIKE ? OR mycontent LIKE ? OR matecontent LIKE ?";
-	    String searchTerm = "%" + keyword + "%";
-
-	    jdbcUtil.setSqlAndParameters(sql, new Object[] { searchTerm, searchTerm, searchTerm, searchTerm });
-
-	    try {
-	        ResultSet rs = jdbcUtil.executeQuery();
-	        List<FindDTO> searchResults = new ArrayList<>();
-
-	        while (rs.next()) {
-	            FindDTO post = new FindDTO(
-	                rs.getInt("findpostID"),
-	                rs.getString("isAnonymous"),
-	                rs.getString("title"),
-	                rs.getString("prefer"),
-	                rs.getString("mycontent"),
-	                rs.getString("matecontent"),
-	                rs.getString("userID")
-	            );
-
-	            searchResults.add(post);
-	        }
-
-	        return searchResults;
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	    } finally {
-	        jdbcUtil.close();
-	    }
-
-	    return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트를 반환
-	}
-	
 	/*** 전체 구인 게시글 정보를 검색하여 List에 저장 및 반환	 */
 	public List<FindDTO> totalFindList() throws SQLException {
 
@@ -206,30 +129,82 @@ public class FindDAO {
 		return null;
 	}
 	
-	 //리스트 조회에서 보여줄 제목,우대사항 리스트
-//	public List<FindDTO> showFindList() throws SQLException {
-//        String sql = "SELECT * "
-//        		   + "FROM FINDBOARDPOST "
-//        		   + "ORDER BY findpostID";        
-//		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
-//					
-//		try {
-//			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
-//			List<FindDTO> findList = new ArrayList<FindDTO>();	// 리스트 생성
-//			while (rs.next()) {
-//				FindDTO find = new FindDTO(	
-//						rs.getString("title"),
-//						rs.getString("prefer"));
-//				findList.add(find);				// List에 객체 저장
-//			}		
-//			return findList;					
-//			
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			jdbcUtil.close();		// resource 반환
-//		}
-//		return null;
-//	}
+	/*** 구인 게시판 글 수정	-제목, 우대사항, 상대성향(title,matecontent,prefer 부분 */
+	public int update(FindDTO post) throws SQLException {
+		String sql = "UPDATE FINDBOARDPOST "
+					+ "SET title=?, matecontent=?, prefer=? " 
+					+ "WHERE findpostID=?";
+		Object[] param = new Object[] {post.getTitle(), post.getMatecontent(), post.getPrefer(), post.getFindpostID()};				
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
+			
+		try {				
+			int result = jdbcUtil.executeUpdate();	// update 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
+	}
+
+	/*** 구인게시판 글 삭제 */
+	public int remove(int postID) throws SQLException {
+		String sql = "DELETE FROM FINDBOARDPOST WHERE findpostID=?";		
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {postID});	// JDBCUtil에 delete문과 매개 변수 설정
+
+		try {				
+			int result = jdbcUtil.executeUpdate();	// delete 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
+	}
+
+	/***keywork에 해당하는 구인 게시판 글 검색 */
+	public List<FindDTO> search(String keyword) throws SQLException {
+	    String sql = "SELECT * FROM FINDBOARDPOST WHERE title LIKE ? OR prefer LIKE ? OR mycontent LIKE ? OR matecontent LIKE ?";
+	    String searchTerm = "%" + keyword + "%";
+
+	    jdbcUtil.setSqlAndParameters(sql, new Object[] { searchTerm, searchTerm, searchTerm, searchTerm });
+	    log.debug("serch query 실행 완료");
+	    try {
+	        ResultSet rs = jdbcUtil.executeQuery();
+	        List<FindDTO> searchResults = new ArrayList<>();
+
+	        while (rs.next()) {
+	            FindDTO post = new FindDTO(
+	                rs.getInt("findpostID"),
+	                rs.getString("isAnonymous"),
+	                rs.getString("title"),
+	                rs.getString("prefer"),
+	                rs.getString("mycontent"),
+	                rs.getString("matecontent"),
+	                rs.getString("userID")
+	            );
+
+	            searchResults.add(post);
+	        }
+	        log.debug("serchresult 실행 완료");
+	        return searchResults;
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        jdbcUtil.close();
+	    }
+
+	    return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트를 반환
+	}
+	
 
 }
