@@ -139,7 +139,7 @@ function userList(targetUri) {
 								<td width="130">기숙사 정보</td>
 								<td width="250" style="padding-left: 10">
 								<select style="width: 240" name="roomInfo">
-										<option value="null">배정받지 않음</option>
+										<option value="yet">배정받지 않음</option>
 										<option value="10101">1기숙사 101호</option>
 										<option value="10102">1기숙사 102호</option>
 										<option value="10103">1기숙사 103호</option>

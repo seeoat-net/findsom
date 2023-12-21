@@ -69,26 +69,33 @@ function userList(targetUri) {
 	form.action = targetUri;
 	form.submit();
 }
+
+function toNoti() {
+	//form.action = targetUri; noti uri
+	form.method = "GET";
+	form.submit();
+}
 </script>
 </head>
 <body onload="displayFormattedRoomInfo();">
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end bg-white" id="sidebar-wrapper">
-			<div class="col-12 sidebar-heading border-bottom bg-beige">사용자
-				이름 (모집상태)</div>
+			<div class="col-12 sidebar-heading border-bottom bg-beige" style="flex-basis: 150px; border-bottom: 1.5px solid #8B2842;">
+				<!-- <img style="display: block; margin-left: 20px;" alt="./../images/somsom.png" src="./../images/somsom.png" /> -->
+				${user.getNickname()} | ${user.isRecruite()}</div>
 			<div class="list-group list-group-flush">
 				<a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">마이페이지</a> <a
+					href="<c:url value='/user/mypageMain' />">마이페이지</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="<c:url value='/find/findlist' />">구인 게시판</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="<c:url value='/match/matching' />">매칭 게시판</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">쉿! 게시판</a> <a
+					href="<c:url value='/noise' />">쉿! 게시판</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">자유 게시판</a>
+					href="<c:url value='/free/freelist' />">자유 게시판</a>
 			</div>
 		</div>
 		<!-- Page content wrapper-->
@@ -120,6 +127,8 @@ function userList(targetUri) {
 						<tr>
 							<td><input type="button" id="btn" value="수정하기"
 								onClick="userList('<c:url value='/user/updateForm' />')"></td>
+							<td><input type="button" id="btn" value="로그아웃"
+								onClick="userList('<c:url value='/user/logout' />')"></td>
 							<td><input type="button" id="btn" value="탈퇴하기"
 								onClick="userList('<c:url value='/user/delete' />')"></td>
 						</tr>
@@ -234,21 +243,26 @@ function userList(targetUri) {
 										</td>
 									</tr>
 									<tr height="40">
-										<td width="130">잠버릇</td>
-										<td width="180" style="padding-left: 10">
-											<%
+									    <td width="130">잠버릇</td>
+									    <td width="180" style="padding-left: 10">
+									        <input type="hidden" name="teethGrinding" value="<%= lifePattern.getTeethGrinding() != null && lifePattern.getTeethGrinding().equals("teethGrinding") ? "teethGrinding" : "" %>">
+									        <input type="hidden" name="snoring" value="<%= lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring") ? "snoring" : "" %>">
+									        <input type="hidden" name="ear" value="<%= lifePattern.getEar() != null && lifePattern.getEar().equals("ear") ? "ear" : "" %>">
+									        <%
 											if (lifePattern.getTeethGrinding() != null && lifePattern.getTeethGrinding().equals("teethGrinding")) {
 											%> 이갈이 <%
-											} else if (lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring")) {
+											}
+											if (lifePattern.getSnoring() != null && lifePattern.getSnoring().equals("snoring")) {
 											%> 코골이 <%
-											} else if (lifePattern.getEar() != null && lifePattern.getEar().equals("ear")) {
+											}
+											if (lifePattern.getEar() != null && lifePattern.getEar().equals("ear")) {
 											%> 잠귀 밝음 <%
-											} else {
+											}
+											if (lifePattern.getTeethGrinding() == null && lifePattern.getSnoring() == null && lifePattern.getEar() == null) {
 											%> 해당 없음 <%
 											}
-											%> <input type="hidden" name="sleepHabits"
-											value="<%=lifePattern.getWakeUpTime()%> <%=lifePattern.getSnoring()%> <%=lifePattern.getEar()%> ">
-										</td>
+											%>
+									    </td>
 									</tr>
 									<tr height="40">
 										<td width="130">친목</td>
