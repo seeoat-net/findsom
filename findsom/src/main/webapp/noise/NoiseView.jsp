@@ -1,39 +1,31 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD:findsom/src/main/webapp/message/error.jsp
-<meta charset="EUC-KR">
-<title>error</title>
-</head>
-<body>
-<h2>ErrorMessage!</h2>
-=======
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NoiseView</title>
 <link rel=stylesheet href="<c:url value='../css/Noise.css' />" >
 <script>
-function postCheck(targetUri) {
-	if (confirm("이 방이 소음에 관련한 장소인지 확신하십니까?")) {
-		form.submit();
+	function postCheck(targetUri) {
+		if (confirm("이 방이 소음에 관련한 장소인지 확신하십니까?")) {
+			form.submit();
+		}
 	}
-}
-
-function postNoise(targetUri) {
-	form.action = targetUri;
-	form.submit();
-}
 </script>
 </head>
 <body>
-	<h1>쉿! 게시판</h1>
-	<h3>내가 받은 민원 : ${myNoiseCount} </h3>
+<div>
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %>
+	
 	<div class="container">
+		<div class="itemTitle"> 쉿! 게시판</div>
 		<div class="item">
-			<form name="form" method="POST" action="<c:url value='/noise/report/form'/>">
+			<div class="itemMyNoise"> 내가 받은 민원 : ${myNoiseCount} </div>	
+			<div class="itemText">신고자의 익명은 보장되며, <br/>신고는 한달의 1번만 가능합니다.<br/>소음 민원을 제출하기 전에, <br/>이 호수가 소음 이슈와 관련이 있는지 확인하세요.<br/></div>
+			<form name="form" method="POST" action="<c:url value='/noise'/>">
 				<select name="residence" id="residence">
 				    <option value="1">1기숙사</option>
 				    <option value="2">2기숙사</option>
@@ -65,19 +57,21 @@ function postNoise(targetUri) {
 				<input type="button" value="신고" onClick="postCheck()">
 			</form>
 		</div>
-		
 		<div class="rankArea">
-			<h3>소음 랭킹</h3>
+			<div>소음 랭킹</div>
+			<div class="rankBox">1기숙사 101호</div>
+			<div class="rankBox">1기숙사 101호</div>
+			<div class="rankBox">1기숙사 101호</div>
+			<div class="rankBox">1기숙사 101호</div>
+			<div class="rankBox">1기숙사 101호</div>
+			<div class="rankBox">1기숙사 101호</div>
+			<!-- 
 			<c:forEach var="ranking" items="${noiseRanking}">
-				<div class="rankBox">
-					<h1>${ranking.roomInfo} ( ${ranking.count} )</h1>
-				</div>
-			</c:forEach>
-			
+				<div class="rankBox">${ranking.roomInfo} ( ${ranking.count} )</div>
+			</c:forEach> 
+			 -->
 		</div>
-	
 	</div>
-
->>>>>>> origin/develop:findsom/src/main/webapp/noise/NoiseMainView.jsp
+</div>
 </body>
-</html> --%>
+</html>

@@ -42,7 +42,7 @@ public class MatchController implements Controller {
 		}
 		else if (request.getServletPath().equals("/match/detail")) {
 		    // 매칭 상세 기능 구현
-			String userID = request.getParameter("userID");
+			String userID = request.getParameter("matchingUserID");
 						
 			MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID);
 			request.setAttribute("matchingDetailResult", matchingDetailResult );

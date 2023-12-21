@@ -54,6 +54,15 @@ function userList(targetUri) {
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end bg-white" id="sidebar-wrapper">
+<<<<<<< HEAD
+			<div class="col-12 sidebar-heading border-bottom bg-beige">사용자 이름 (모집상태)</div>
+			<div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">마이페이지</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">구인 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/match/matching' />" >매칭 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">쉿! 게시판</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">자유 게시판</a>
+=======
 			<div class="col-12 sidebar-heading border-bottom bg-beige" style="flex-basis: 150px; border-bottom: 1.5px solid #8B2842;">
 				<!-- <img style="display: block; margin-left: 20px;" alt="./../images/somsom.png" src="./../images/somsom.png" /> -->
 				${user.getNickname()} | ${user.isRecruite()}</div>
@@ -69,6 +78,7 @@ function userList(targetUri) {
 					href="<c:url value='/noise' />">쉿! 게시판</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="<c:url value='/free/freelist' />">자유 게시판</a>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 			</div>
 		</div>
 		<!-- Page content wrapper-->
@@ -171,6 +181,35 @@ function userList(targetUri) {
 										'<c:url value='/user/register'/>')">
 									</td>
 								</tr>
+<<<<<<< HEAD
+								<tr height="40">
+									<td width="130">기숙사</td>
+									<td width="250" style="padding-left: 10">
+									<label><input type="checkbox" name="isRecruite" value="recruiting" 
+									        <%= user.isRecruite() != null && user.isRecruite().equals("recruiting") ? "checked" : "" %>> 모집중</label>
+									<label><input type="checkbox" name="isRecruite" value="recruited" 
+									        <%= user.isRecruite() != null && user.isRecruite().equals("recruited") ? "checked" : "" %>> 모집완료</label>
+									</td>
+								</tr>
+								<tr height="40">
+									<td width="130">기숙사 정보</td>
+									<td width="250" style="padding-left: 10">
+									<select style="width: 240" name="roomInfo">
+										<option value="null">배정받지 않음</option>
+										<option value="10101">1기숙사 101호</option>
+										<option value="10102">1기숙사 102호</option>
+										<option value="10103">1기숙사 103호</option>
+										<option value="10104">1기숙사 104호</option>
+										<option value="10105">1기숙사 105호</option>
+										<option value="20201">2기숙사 201호</option>
+										<option value="20202">2기숙사 202호</option>
+										<option value="20203">2기숙사 203호</option>
+										<option value="20204">2기숙사 204호</option>
+										<option value="20205">2기숙사 205호</option>
+									</select>
+									</td>
+								</tr>
+=======
 								<!-- 기숙사 정보 -->
 								<tr height="40">
 								    <td width="130">기숙사</td>
@@ -218,6 +257,7 @@ function userList(targetUri) {
 								<%
 								}
 								%>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 								</table>
 							</td>
 

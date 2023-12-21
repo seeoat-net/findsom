@@ -28,24 +28,29 @@ public class FindManager {
 		return findDAO.create(post);
 	}
 	
+	public FindDTO findCheckPost(int findpostID) throws SQLException{
+		return findDAO.findCheckPost(findpostID);
+	}
+	
+	public List<FindDTO> findPostList() throws SQLException {
+		return findDAO.totalFindList();
+	}
+	
 	//수정#postUpdateFindPost = update()
 	public int update(FindDTO post) throws SQLException{
 		return findDAO.update(post);
 	}	
 	 
 	//삭제 findpostID로 삭제
-	public int remove(String postId) throws SQLException {
+	public int remove(int postId) throws SQLException {
 		return findDAO.remove(postId);
 	}
 	
 	//검색()#searchPost() = search()
-//	public List<FindDTO> search(String keyword) throws SQLException {
-//		return findDAO.search(keyword);
-//	}
-	
-	public List<FindDTO> findPostList() throws SQLException {
-		return findDAO.showFindList();
+	public List<FindDTO> search(String keyword) throws SQLException {
+		return findDAO.search(keyword);
 	}
+	
 	
 	public FindDAO getFindDAO() {
 		return this.findDAO;

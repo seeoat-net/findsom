@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.naviText {
+	padding-left: 300px;
+	border: 1px solid black;
+}
+
+.box {
+	text-align: center;
+}
+
+.container {
+	display: flex;
+	width : 800px;
+	flex-wrap: wrap; 
+	justify-content: center;
+	border: 1px solid black;
+}
+.btns {
+	
+}
+.notiBtn {
+	width: 25%;
+	height: 30px;
+}

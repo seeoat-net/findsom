@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.match.MatchController;
 import controller.noise.NoiseController;
+import controller.notification.CommentController;
+import controller.notification.MessageController;
 import controller.find.*;
 import controller.free.*;
 import controller.user.*;
@@ -43,15 +45,23 @@ public class RequestMapping {
         
         
         // <예림>─────────────────────────────────────────────────────────────────
-        mappings.put("/find/findlist", new FindListController());
-        mappings.put("/find/findpost", new FindPostController());
-        mappings.put("/find/findsearch", new FindSearchContoller());
+        mappings.put("/find/findlist", new FindListController()); //글 목록 
+        mappings.put("/find/findpost", new FindPostController()); //글 작성
+        mappings.put("/find/findsearch", new FindSearchController());
         mappings.put("/find/findupdate", new FindUpdateController());
+        mappings.put("/find/findcheck", new FindCheckPostController());
         
         mappings.put("/free/freelist", new FreeListController());
         mappings.put("/free/freepost", new FreePostController());
-        mappings.put("/free/freeSearch", new FreeSearchController());
-        mappings.put("/free/freeUpdate", new FreeUpdateController());        
+        mappings.put("/free/freesearch", new FreeSearchController());
+        mappings.put("/free/freeupdate", new FreeUpdateController());  
+        mappings.put("/free/freecheck", new FreeCheckPostController());
+        
+        // <소망>─────────────────────────────────────────────────────────────────
+        mappings.put("/notification/message/write", new MessageController());
+        mappings.put("/notification/message/view", new MessageController());
+        mappings.put("/free/comment", new CommentController());
+        mappings.put("/find/comment", new CommentController());
 
         logger.info("Initialized Request Mapping!");
     }
