@@ -8,13 +8,13 @@ public class FindDTO {
 	private String isAnonymous;
 	private String title;
 	private String prefer;
-	private String mycontent;
+	private List<String> mycontent;
 	private String matecontent;
 	private String userID;
 	
 	public FindDTO() {}
 	
-	public FindDTO(int findpostID, String isAnonymous, String title, String prefer, String mycontent, String matecontent, String userID) {
+	public FindDTO(int findpostID, String isAnonymous, String title, String prefer, List<String> mycontent, String matecontent, String userID) {
 		super();
 		this.findpostID = findpostID;
 		this.isAnonymous = isAnonymous;
@@ -24,13 +24,24 @@ public class FindDTO {
 		this.matecontent = matecontent;
 		this.userID = userID;
   }
+<<<<<<< HEAD
+	public FindDTO(int findpostID, String isAnonymous, String title, String prefer, String matecontent) {
+		super();
+		this.findpostID = findpostID;
+		this.isAnonymous = isAnonymous;
+=======
 	public FindDTO(int findpostID, String title, String prefer, String matecontent) {
 		super();
 		this.findpostID = findpostID;
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		this.title = title;
 		this.prefer = prefer;
 		this.matecontent = matecontent;
   }
+<<<<<<< HEAD
+  
+=======
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	//내용 저장 리스트 보여줄 때 제목과 우대사항만 필요
 	public FindDTO(String title, String prefer) {
 		super();
@@ -70,11 +81,11 @@ public class FindDTO {
 		this.prefer = prefer;
 	}
 
-	public String getMycontent() {
+	public List<String> getMycontent() {
 		return mycontent;
 	}
 
-	public void setMycontent(String mycontent) {
+	public void setMycontent(List<String> mycontent) {
 		this.mycontent = mycontent;
 	}
 

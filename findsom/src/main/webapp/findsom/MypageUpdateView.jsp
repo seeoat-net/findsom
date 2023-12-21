@@ -54,6 +54,7 @@ function userList(targetUri) {
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end bg-white" id="sidebar-wrapper">
+<<<<<<< HEAD
 			<div class="col-12 sidebar-heading border-bottom bg-beige">사용자 이름 (모집상태)</div>
 			<div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">마이페이지</a>
@@ -61,6 +62,23 @@ function userList(targetUri) {
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/match/matching' />" >매칭 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">쉿! 게시판</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">자유 게시판</a>
+=======
+			<div class="col-12 sidebar-heading border-bottom bg-beige" style="flex-basis: 150px; border-bottom: 1.5px solid #8B2842;">
+				<!-- <img style="display: block; margin-left: 20px;" alt="./../images/somsom.png" src="./../images/somsom.png" /> -->
+				${user.getNickname()} | ${user.isRecruite()}</div>
+			<div class="list-group list-group-flush">
+				<a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="<c:url value='/user/mypageMain' />">마이페이지</a> <a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="<c:url value='/find/findlist' />">구인 게시판</a> <a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="<c:url value='/match/matching' />">매칭 게시판</a> <a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="<c:url value='/noise' />">쉿! 게시판</a> <a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="<c:url value='/free/freelist' />">자유 게시판</a>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 			</div>
 		</div>
 		<!-- Page content wrapper-->
@@ -163,6 +181,7 @@ function userList(targetUri) {
 										'<c:url value='/user/register'/>')">
 									</td>
 								</tr>
+<<<<<<< HEAD
 								<tr height="40">
 									<td width="130">기숙사</td>
 									<td width="250" style="padding-left: 10">
@@ -190,6 +209,55 @@ function userList(targetUri) {
 									</select>
 									</td>
 								</tr>
+=======
+								<!-- 기숙사 정보 -->
+								<tr height="40">
+								    <td width="130">기숙사</td>
+								    <td width="250" style="padding-left: 10">
+								        <label><input type="radio" name="isRecruite" value="recruiting" 
+								            <%= user.isRecruite() != null && user.isRecruite().equals("recruiting") ? "checked" : "" %>> 모집중</label>
+								        <label><input type="radio" name="isRecruite" value="recruited" 
+								            <%= user.isRecruite() != null && user.isRecruite().equals("recruited") ? "checked" : "" %>> 모집완료</label>
+								    </td>
+								</tr>
+								<%
+								// Check if the user is recruited before rendering the dormitory information section
+								if (user.isRecruite() != null && user.isRecruite().equals("recruited")) {
+								%>
+								<tr height="40">
+								    <td width="130">기숙사 정보</td>
+								    <td width="250" style="padding-left: 10">
+								        <select style="width: 240" name="roomInfo">
+								            <option value="10101" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("10101") ? "selected" : "" %>>1기숙사 101호</option>
+								            <option value="10102" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("10102") ? "selected" : "" %>>1기숙사 102호</option>
+								            <option value="10103" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("10103") ? "selected" : "" %>>1기숙사 102호</option>
+								            <option value="10104" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("10104") ? "selected" : "" %>>1기숙사 102호</option>
+								            <option value="10105" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("10105") ? "selected" : "" %>>1기숙사 102호</option>
+								            <option value="20101" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("20101") ? "selected" : "" %>>2기숙사 101호</option>
+								            <option value="20102" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("20102") ? "selected" : "" %>>2기숙사 102호</option>
+								            <option value="20103" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("20103") ? "selected" : "" %>>2기숙사 102호</option>
+								            <option value="20104" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("20104") ? "selected" : "" %>>2기숙사 102호</option>
+								            <option value="20105" <%= user.getRoomInfo() != null && user.getRoomInfo().equals("20105") ? "selected" : "" %>>2기숙사 102호</option>
+								            <!-- 다른 기숙사 정보도 동일하게 추가 -->
+								        </select>
+								    </td>
+								</tr>
+								<%
+								} else {
+								    // If not recruited, disable the select dropdown
+								%>
+								<tr height="40">
+								    <td width="130">기숙사 정보</td>
+								    <td width="250" style="padding-left: 10">
+								        <select style="width: 240" name="roomInfo" disabled>
+								            <option value="XXXXX" selected>배정받지 않음</option>
+								        </select>
+								    </td>
+								</tr>
+								<%
+								}
+								%>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 								</table>
 							</td>
 

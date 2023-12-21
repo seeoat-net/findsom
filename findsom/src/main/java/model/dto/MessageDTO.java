@@ -1,59 +1,28 @@
+
 package model.dto;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MessageDTO {
-	// 쪽지 식별자
-	private int messageID;
+    // 쪽지 식별자
+    private int messageID;
 
-	// 쪽지 내용
-	private String messageText;
+    // 쪽지 내용
+    private String messageText;
 
-	// 쪽지 작성일
-	private Date createAt;
+    // 쪽지 작성일
+    private LocalDateTime createAt;
 
-	// 쪽지를 인식하는 식별자
-	private String recognizeID;
+    // 쪽지를 보낸 사용자의 식별자
+    private String senderID;
 
-	// 쪽지를 보낸 사용자의 식별자
-	private String senderID;
+    // 쪽지를 받은 사용자의 식별자
+    private String receiverID;
+    
+    private int freepostID; // 짝수
+    private int findpostID; // 홀수, 매칭은 null
 
-<<<<<<< Updated upstream
-	// 쪽지를 받은 사용자의 식별자
-	private String receiverID;
-
-	private int freepostID;// 짝수
-
-	private int findpostID;// 홀수
-	/*
-	 * private String createAtFormatted; // 이거를 꼭 추가해야하나 고민
-	 * 
-	 * public String getCreateAtFormatted() { 
-	 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); return sdf.format(createAt); }
-	 * 
-	 * public void setCreateAtFormatted(String createAtFormatted) {
-	 * this.createAtFormatted = createAtFormatted; }
-	 */
-	// 생성자
-	public MessageDTO(int messageID, String messageText, Date createAt, String recognizeID, String senderID,
-			String receiverID) {
-		this.messageID = messageID;
-		this.messageText = messageText;
-		this.createAt = createAt;
-		this.recognizeID = recognizeID;
-		this.senderID = senderID;
-		this.receiverID = receiverID;
-		//this.freepostID = freepostID;
-		//this.findpostID = findpostID;
-		
-
-	}
-
-	public int getMessageID() {
-		return messageID;
-	}
-=======
 
     public MessageDTO(int messageID, String messageText, LocalDateTime createAt, String senderID, String receiverID, Integer freepostID, Integer findpostID) {
         this.messageID = messageID;
@@ -68,7 +37,6 @@ public class MessageDTO {
    public int getMessageID() {
       return messageID;
    }
->>>>>>> Stashed changes
 
    public void setMessageID(int messageID) {
       this.messageID = messageID;
@@ -78,40 +46,20 @@ public class MessageDTO {
       return messageText;
    }
 
-	public void setMessageText(String messageText) {
-		this.messageText = messageText;
-	}
-
-	public String getCreateAtFormatted() {
-        // SimpleDateFormat을 사용하여 날짜를 원하는 형식으로 포맷팅
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(createAt);
+    public void setMessageText(String messageText) {
+        if (messageText == null || messageText.trim().isEmpty()) {
+            throw new IllegalArgumentException("empty");
+        }
+        if (messageText.length() > 600) { // 데이터베이스 제약조건에 따라 길이 제한
+            throw new IllegalArgumentException("Message text is too long");
+        }
+        this.messageText = messageText;
     }
-	
-	public Date getCreateAt() {
-		return createAt;
-	}
 
-<<<<<<< Updated upstream
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-=======
->>>>>>> Stashed changes
 
-	public String getRecognizeID() {
-		return recognizeID;
-	}
+    public int getFreepostID() { return freepostID; }
+    public void setFreepostID(int freepostID) {
 
-<<<<<<< Updated upstream
-	public void setRecognizeID(String recognizeID) {
-		this.recognizeID = recognizeID;
-	}
-
-	public String getSenderID() {
-		return senderID;
-	}
-=======
        if (freepostID % 2 != 0) {
             throw new IllegalArgumentException("FreepostID must be even");
         }
@@ -150,7 +98,6 @@ public class MessageDTO {
    public String getSenderID() {
       return senderID;
    }
->>>>>>> Stashed changes
 
    public void setSenderID(String senderID) {
       this.senderID = senderID;
@@ -160,44 +107,20 @@ public class MessageDTO {
       return receiverID;
    }
 
-<<<<<<< Updated upstream
-	public void setReceiverID(String receiverID) {
-		this.receiverID = receiverID;
-	}
-
-	/*
-	 * public int getFreepostID() { return freepostID; }
-	 * 
-	 * public void setFreepostID(int freepostID) { this.freepostID = freepostID; }
-	 * 
-	 * public int getFindpostID() { return findpostID; }
-	 * 
-	 * public void setFindpostID(int findpostID) { this.findpostID = findpostID; }
-	 */
-	
-	// toString 메서드
-=======
    public void setReceiverID(String receiverID) {
       this.receiverID = receiverID;
    }
    
    // toString 메서드
->>>>>>> Stashed changes
     @Override
     public String toString() {
         return "MessageDTO{" +
                 "messageID='" + messageID + '\'' +
                 ", messageText='" + messageText + '\'' +
                 ", createAt=" + getCreateAtFormatted() +  
-                ", recognizeID='" + recognizeID + '\'' +
                 ", senderID='" + senderID + '\'' +
                 ", receiverID='" + receiverID + '\'' +
                 '}';
     }
-<<<<<<< Updated upstream
-	 
-}
-=======
 
 }
->>>>>>> Stashed changes

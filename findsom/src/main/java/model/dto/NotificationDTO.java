@@ -6,7 +6,7 @@ public class NotificationDTO {
     private String senderID; //알람을 발생시킨 유저
     private int commentID; //댓글 idx
     private int messageID;//쪽지 idx
-    private int postID; //게시글의 idx
+    private int postID; //게시글의 idx 짝수면 free, 홀수면 find
     private String notiType; //알람 종류
     private String notiTypeID; //알람을 발생시킨 댓글, 대댓글의 idx
     private String isChecked;//유저가 알람 확인 여부 ( '0' or '1')

@@ -6,11 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.match.MatchController;
 import controller.noise.NoiseController;
-<<<<<<< Updated upstream
-=======
 import controller.notification.CommentController;
 import controller.notification.MessageController;
->>>>>>> Stashed changes
 import controller.find.*;
 import controller.free.*;
 import controller.user.*;
@@ -63,13 +60,9 @@ public class RequestMapping {
         // <소망>─────────────────────────────────────────────────────────────────
         mappings.put("/notification/message/write", new MessageController());
         mappings.put("/notification/message/view", new MessageController());
-
-<<<<<<< Updated upstream
-=======
         mappings.put("/free/comment", new CommentController());
         mappings.put("/find/comment", new CommentController());
-        
->>>>>>> Stashed changes
+
         logger.info("Initialized Request Mapping!");
     }
 

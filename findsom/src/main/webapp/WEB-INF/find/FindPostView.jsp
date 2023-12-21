@@ -49,7 +49,11 @@ function postList(targetUri) {
 	  				<textarea cols="150" rows="15" placeholder="내용을 입력하세요	" name="matecontent"></textarea>
 	  				</td>
 	  			</tr>
+<<<<<<< HEAD
+	  		</table>			<!-- onclick="<c:url value='/find/findlist'/>" -->
+=======
 	  		</table>		
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	  		<button class="cancle" ><a href="<c:url value='/find/findlist' />">취소</a></button>
 			<button class="register" type="submit" id="btn" value="등록">등록</button>
 		</form>

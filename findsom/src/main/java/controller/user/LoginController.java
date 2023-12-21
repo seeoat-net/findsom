@@ -23,20 +23,20 @@ public class LoginController implements Controller {
 	
 			// 세션에 사용자 이이디 저장
 			HttpSession session = request.getSession();
-      session.setAttribute(UserSessionUtils.USER_SESSION_KEY, userId);
+            session.setAttribute(UserSessionUtils.USER_SESSION_KEY, userId);
             
-      User user = manager.findUser(userId); // 수정하려는 사용자 정보 검색
-      request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
-      request.setAttribute("user", user);
+            User user = manager.findUser(userId); // 수정하려는 사용자 정보 검색
+            request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
+            request.setAttribute("user", user);
             
-      return "redirect:/user/mypageMain";			
+            return "redirect:/user/mypageMain";			
 		} catch (Exception e) {
-        /* UserNotFoundException이나 PasswordMismatchException 발생 시
-         * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력
-         */
-        request.setAttribute("loginFailed", true);
-        request.setAttribute("exception", e);
-        return "redirect:/findsom/RandingView.jsp";			
-		   }
+			/* UserNotFoundException이나 PasswordMismatchException 발생 시
+			 * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력
+			 */
+            request.setAttribute("loginFailed", true);
+			request.setAttribute("exception", e);
+            return "redirect:/findsom/RandingView.jsp";			
+		}
     }
 }

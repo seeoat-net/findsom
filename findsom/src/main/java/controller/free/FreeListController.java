@@ -5,6 +5,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
+import controller.Controller;
+import model.FreeDTO;
+import model.manager.FreeManager;
+
+public class FreeListController implements Controller{
+		public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
+			FreeManager manager = FreeManager.getInstance();
+			List<FreeDTO> freeList = manager.freePostList();
+			
+			request.setAttribute("freeList", freeList);
+				
+			return "/free/FreeMainView.jsp";
+	}
+=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,4 +67,5 @@ public class FreeListController implements Controller{
 			
 	}
 
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 }
