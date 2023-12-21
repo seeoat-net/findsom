@@ -100,15 +100,10 @@ public class FreeDAO {
 	}
 
 	/*** 자유 게시판 글 삭제	 */
-<<<<<<< HEAD
-	public int remove(String postID) throws SQLException {
-		String sql = "DELETE FROM FREEBOARDPOST WHERE freepostID=?";		
-=======
 	public int remove(int postID) throws SQLException {
 		String sql = "DELETE "
      			+ "FROM FREEBOARDPOST "
      			+ "WHERE freepostID=?";              
->>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {postID});	// JDBCUtil에 delete문과 매개 변수 설정
 		
 		try {				
