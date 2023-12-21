@@ -1,25 +1,38 @@
 @charset "UTF-8";
-
-.naviText {
-	padding-left: 300px;
-	border: 1px solid black;
-}
-
-.box {
-	text-align: center;
-}
-
 .container {
 	display: flex;
-	width : 800px;
+	width : 70%;
 	flex-wrap: wrap; 
 	justify-content: center;
-	border: 1px solid black;
+	padding-left: 50px;
+	padding-right: 50px;
 }
-.btns {
-	
+
+.naviText {
+	flex-basis: 100%;
+	padding-bottom: 30px;
 }
+
 .notiBtn {
-	width: 25%;
-	height: 30px;
+	width: 20%;
+	height: 40px;
+	font-size: 25px;
+
+}
+
+.itemBox {
+	height: 400px;
+	width: 80%;
+	overflow-y: scroll;
+	border: 1px solid #8B2842;
+}
+.item {
+	width: 95%; 
+	padding: 10px 5px 10px 20px;
+	border-bottom: 1px solid #8B2842;
+}
+.itemTitle {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 3px;
 }
