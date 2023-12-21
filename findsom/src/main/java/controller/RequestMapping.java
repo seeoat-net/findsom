@@ -6,8 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.match.MatchController;
 import controller.noise.NoiseController;
+<<<<<<< HEAD
 import controller.notification.CommentController;
 import controller.notification.MessageController;
+=======
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 import controller.find.*;
 import controller.free.*;
 import controller.user.*;
@@ -45,6 +48,7 @@ public class RequestMapping {
         
         
         // <예림>─────────────────────────────────────────────────────────────────
+<<<<<<< HEAD
         mappings.put("/find/findlist", new FindListController());
         mappings.put("/find/findpost", new FindPostController());
         mappings.put("/find/findsearch", new FindSearchContoller());
@@ -63,6 +67,20 @@ public class RequestMapping {
         mappings.put("/find/comment", new CommentController());
         
         
+=======
+        mappings.put("/find/findlist", new FindListController()); //글 목록 
+        mappings.put("/find/findpost", new FindPostController()); //글 작성
+        mappings.put("/find/findsearch", new FindSearchController());
+        mappings.put("/find/findupdate", new FindUpdateController());
+        mappings.put("/find/findcheck", new FindCheckPostController());
+        
+        mappings.put("/free/freelist", new FreeListController());
+        mappings.put("/free/freepost", new FreePostController());
+        mappings.put("/free/freesearch", new FreeSearchController());
+        mappings.put("/free/freeupdate", new FreeUpdateController());  
+        mappings.put("/free/freecheck", new FreeCheckPostController());
+
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
         logger.info("Initialized Request Mapping!");
     }
 

@@ -24,15 +24,24 @@ public class FindDTO {
 		this.matecontent = matecontent;
 		this.userID = userID;
   }
+<<<<<<< HEAD
 	public FindDTO(int findpostID, String isAnonymous, String title, String prefer, String matecontent) {
 		super();
 		this.findpostID = findpostID;
 		this.isAnonymous = isAnonymous;
+=======
+	public FindDTO(int findpostID, String title, String prefer, String matecontent) {
+		super();
+		this.findpostID = findpostID;
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		this.title = title;
 		this.prefer = prefer;
 		this.matecontent = matecontent;
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	//내용 저장 리스트 보여줄 때 제목과 우대사항만 필요
 	public FindDTO(String title, String prefer) {
 		super();

@@ -7,10 +7,18 @@
 <%
 String userID = (String) session.getAttribute("userId");
 %>
+<<<<<<< HEAD
+=======
+function postList(targetUri) {
+	form.action = targetUri;
+	form.submit();
+}
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 </script>
 <head>
 <meta charset="UTF-8">
 <title>FreePost</title>
+<<<<<<< HEAD
 <link rel=stylesheet href="<c:url value='../css/main.css' />">
 <link rel=stylesheet href="<c:url value='../css/freepost.css' />">
 </head>
@@ -34,6 +42,12 @@ String userID = (String) session.getAttribute("userId");
   	<span  class="free">
   		<a href="<c:url value='/free/freelist' />">자유 게시판</a>
 	</span> 
+=======
+</head>
+<body>
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	<div class="main">
 	  	<!--<button class="cancle" onclick="">취소</button>
 	    <button class="register" type="submit">등록</button> -->
@@ -62,6 +76,7 @@ String userID = (String) session.getAttribute("userId");
 	  			<tr>
 	  				<td><textarea cols="150" rows="20" placeholder="내용을 입력하세요	"  name="content"></textarea></td>
 	  			</tr>
+<<<<<<< HEAD
 	  			<tr>
 	  				<td>
 	  					<input type="button" value="취소"> &nbsp;
@@ -69,6 +84,13 @@ String userID = (String) session.getAttribute("userId");
 	  				</td>
 	  			</tr>
 	  		</table>
+=======
+	  		</table>
+	  		<button class="cancle" ><a href="<c:url value='/free/freelist' />" >취소</a></button>
+			<button class="register" type="submit" id="btn" value="등록">등록</button>
+	  		<!-- <input type="button" value="취소"> &nbsp;
+		  	<input type="submit" value="등록" >-->
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		</form>
 	</div>
 </body>

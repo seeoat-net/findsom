@@ -19,7 +19,11 @@ function login() {
 		alert("비밀번호를 입력하십시오.");
 		form.password.focus();
 		return false;
+<<<<<<< HEAD
 	}		
+=======
+	}
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	form.submit();
 }
 
@@ -42,7 +46,11 @@ function userCreate(targetUri) {
         <c:if test="${loginFailed}">
 	  	  <br><font color="red"><c:out value="${exception.getMessage()}" /></font><br>
 	    </c:if>
+<<<<<<< HEAD
 	    <br>	  
+=======
+	    <br>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	    <table>
 	  	  <tr>
 			<td>
@@ -65,11 +73,21 @@ function userCreate(targetUri) {
 								'<c:url value='/findsom/SignupView.jsp'/>')">
 			</td>						
 		  </tr>
+<<<<<<< HEAD
 		  <tr height="40"><td>(관리자 로그인: admin/admin)</td></tr>
 	    </table>
 	  </td>	  
+=======
+		  <!-- <tr height="40"><td>(관리자 로그인: admin/admin)</td></tr> -->
+	    </table>
+	  </td>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 	</tr>
   </table>  
 </form>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12

@@ -35,22 +35,41 @@ public class FreeManager {
 	public FreeDTO create(FreeDTO post) throws SQLException{
 		return freeDAO.create(post);
 	}
+	
+	public FreeDTO freeCheckPost(int findpostID) throws SQLException{
+		return freeDAO.freeCheckPost(findpostID);
+	}
+	
 	//수정#postUpdateFindPost = update() //제목, 내용 수정
 	public int update(FreeDTO post) throws SQLException{
 		return freeDAO.update(post);
 	}	
 	//삭제 -> freepostID로 삭제
-	public int remove(String userId) throws SQLException{
-		return freeDAO.remove(userId);
+	public int remove(int freepostID) throws SQLException{
+		return freeDAO.remove(freepostID);
 	}
 	//검색()#searchPost() = search()
-	public FreeDTO search(String keyword) throws SQLException {
+	public List<FreeDTO> search(String keyword) throws SQLException {
 		return freeDAO.search(keyword);
 	}
 	
 	public List<FreeDTO> freePostList() throws SQLException {
-		return freeDAO.searchFreeList();
+		return freeDAO.totalFreeList();
 	}
+	
+	public List<FreeDTO> freeInfoList() throws SQLException {
+		return freeDAO.infoFreeList();
+	}
+	public List<FreeDTO> freePurchaseList() throws SQLException {
+		return freeDAO.purchaseFreeList();
+	}
+	public List<FreeDTO> freeShareList() throws SQLException {
+		return freeDAO.shareFreeList();
+	}
+	public List<FreeDTO> freeOtherList() throws SQLException {
+		return freeDAO.otherFreeList();
+	}
+	
 	
 	public FreeDAO getFindDAO() {
 		return this.freeDAO;
