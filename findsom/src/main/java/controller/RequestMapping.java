@@ -1,18 +1,16 @@
 package controller;
 
-/*import java.util.HashMap;
+import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import controller.match.MatchController;
-<<<<<<< Updated upstream
-import controller.noise.*;
-=======
 import controller.noise.NoiseController;
+import controller.notification.CommentController;
 import controller.notification.MessageController;
+import controller.find.*;
+import controller.free.*;
 import controller.user.*;
->>>>>>> Stashed changes
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -22,20 +20,6 @@ public class RequestMapping {
 
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
-<<<<<<< Updated upstream
-    	
-    	// 쉿!게시판 
-    	// 쉿 게시판 접근 시, roominfo가 있는 사람만!
-    	mappings.put("/noise", new NoiseController());
-    	mappings.put("/noise", new NoiseController());
-    	
-    	// 매칭 게시판
-    	mappings.put("/match/matching", new MatchController());
-    	mappings.put("/match/detail", new MatchController());
-   
-//        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
-       
-=======
         // <시은>─────────────────────────────────────────────────────────────────
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
@@ -50,19 +34,35 @@ public class RequestMapping {
         
         mappings.put("/user/delete", new DeleteUserController());
         
-//        // <다솔>─────────────────────────────────────────────────────────────────
-		
-		 // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
-         mappings.put("/noise", new NoiseController()); 
-         mappings.put("/noise", new NoiseController()); 
-		 // 매칭 게시판 // 
-		 mappings.put("/match/matching", new MatchController()); 
-		 mappings.put("/match/matching/detail", new MatchController()); 
-		 
-		// <소망>─────────────────────────────────────────────────────────────────
-		 mappings.put("/MessageController", new MessageController());
+        // <다솔>─────────────────────────────────────────────────────────────────
+        // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
+        mappings.put("/noise", new NoiseController()); 
+        mappings.put("/noise", new NoiseController()); 
 
->>>>>>> Stashed changes
+          // 매칭 게시판 // 
+        mappings.put("/match/matching", new MatchController()); 
+        mappings.put("/match/matching/detail", new MatchController());
+        
+        
+        // <예림>─────────────────────────────────────────────────────────────────
+        mappings.put("/find/findlist", new FindListController());
+        mappings.put("/find/findpost", new FindPostController());
+        mappings.put("/find/findsearch", new FindSearchContoller());
+        mappings.put("/find/findupdate", new FindUpdateController());
+        
+        mappings.put("/free/freelist", new FreeListController());
+        mappings.put("/free/freepost", new FreePostController());
+        mappings.put("/free/freeSearch", new FreeSearchController());
+        mappings.put("/free/freeUpdate", new FreeUpdateController());     
+        
+        // <소망>─────────────────────────────────────────────────────────────────
+        mappings.put("/notification/message/write", new MessageController());
+        mappings.put("/notification/message/view", new MessageController());
+
+        mappings.put("/free/comment", new CommentController());
+        mappings.put("/find/comment", new CommentController());
+        
+        
         logger.info("Initialized Request Mapping!");
     }
 
@@ -70,4 +70,4 @@ public class RequestMapping {
     	// 주어진 uri에 대응되는 controller 객체를 찾아 반환
         return mappings.get(uri);
     }
-}*/
+}

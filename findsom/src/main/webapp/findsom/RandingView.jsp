@@ -25,7 +25,7 @@ function login() {
 
 function userCreate(targetUri) {
 	form.action = targetUri;
-	form.method="GET";		// register form 요청
+	form.method="POST";		// register form 요청
 	form.submit();
 }
 </script>
@@ -42,16 +42,16 @@ function userCreate(targetUri) {
         <c:if test="${loginFailed}">
 	  	  <br><font color="red"><c:out value="${exception.getMessage()}" /></font><br>
 	    </c:if>
-	    <br>	  
+	    <br>
 	    <table>
 	  	  <tr>
 			<td>
-				<input id="input" type="text" name="Email" placeholder="Email">
+				<input id="input" type="text" name="userId" placeholder="사용자 ID">
 			</td>
 		  </tr>
 	  	  <tr>
 			<td>
-				<input id="input" type="password" placeholder="PASSWORD">
+				<input id="input" type="password" name="password" placeholder="PASSWORD">
 			</td>
 		  </tr>
 	    </table>
@@ -59,14 +59,15 @@ function userCreate(targetUri) {
 	    <table style="width:100%">
 		  <tr>
 			<td align=left>
-			<input type="button" id="btn1" value="로그인" onClick="login()"> &nbsp;
+			<input type="button" id="btn1" value="로그인" onClick="userCreate(
+								'<c:url value='/user/login'/>')"> &nbsp;
 			<input type="button" id="btn2" value="회원가입" onClick="userCreate(
-								'<c:url value='/user/register'/>')">
+								'<c:url value='/findsom/SignupView.jsp'/>')">
 			</td>						
 		  </tr>
-		  <tr height="40"><td>(관리자 로그인: admin/admin)</td></tr>
+		  <!-- <tr height="40"><td>(관리자 로그인: admin/admin)</td></tr> -->
 	    </table>
-	  </td>	  
+	  </td>
 	</tr>
   </table>  
 </form>

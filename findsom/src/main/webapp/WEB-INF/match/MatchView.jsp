@@ -20,6 +20,8 @@ function postMatch() {
 </head>
 
 <body>
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %>
 	<span>
 		<h1>매칭 게시판</h1>
 		<div>원하는 생활패턴을 선택하고 룸메이트를 찾아보세요!</div>

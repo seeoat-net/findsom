@@ -1,5 +1,7 @@
 package controller.find;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,12 +12,14 @@ import model.manager.FindManager;
 public class FindUpdateController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		
+		List<String> mycontent = (List<String>) request.getAttribute("lifepattern");
+		
 		FindDTO post = new FindDTO(
 				Integer.parseInt(request.getParameter("findpostID")),
 				request.getParameter("isAnonymous"),
 				request.getParameter("title"),
 				request.getParameter("prefer"),
-				request.getParameter("mycontent"),
+				mycontent,
 				request.getParameter("matecontent"),
 				request.getParameter("userID"));
 		

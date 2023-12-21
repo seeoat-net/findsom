@@ -1,6 +1,7 @@
 package controller.find;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ public class FindSearchContoller implements Controller{
 		    FindDAO findDAO = new FindDAO();
 		    
 		    // 검색어를 이용하여 구인 게시판 글 검색
-		    FindDTO foundPost = findDAO.search(keyword);
+		    List<FindDTO> foundPost = findDAO.search(keyword);
 
 		    if (foundPost != null) {
 		        // 검색 결과가 있다면 해당 글을 보여주는 페이지로 이동

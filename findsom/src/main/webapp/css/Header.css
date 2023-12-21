@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.headerWrap {
+	display: flex !important;
+	justify-content: space-between;
+	height: 150px;
+	text-align: center;
+	background-color: #FEF5F0;
+	vertical-align: center;
+	border-bottom: 1.5px solid #8B2842;
+}
+
+.headerTitle {
+	font-weight: bold ;
+	font-size: 25px;
+	color: #8B2842;
+	padding-top: 62px;
+	margin-left: 20px;
+}
+
+.bellImg {
+	float: right;
+	padding: 40px 40px;
+}

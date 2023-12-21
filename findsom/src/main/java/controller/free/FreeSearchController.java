@@ -5,11 +5,12 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.Controller;
 import model.FreeDTO;
 import model.dao.FreeDAO;
 import model.manager.FreeManager;
 
-public class FreeSearchController {
+public class FreeSearchController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {			
 		 String keyword = request.getParameter("searchText");
 		  

@@ -19,10 +19,16 @@ public class MessageDTO {
 
     // 쪽지를 받은 사용자의 식별자
     private String receiverID;
+    
+    private int freepostID; // 짝수
+    private int findpostID; // 홀수, 매칭은 null
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     private Integer freepostID; // 짝수
     private Integer findpostID; // 홀수, 매칭은 null
+=======
+>>>>>>> Stashed changes
 
     public MessageDTO(int messageID, String messageText, LocalDateTime createAt, String senderID, String receiverID, Integer freepostID, Integer findpostID) {
         this.messageID = messageID;
@@ -33,6 +39,7 @@ public class MessageDTO {
         this.freepostID = freepostID;
         this.findpostID = findpostID;
     }
+<<<<<<< Updated upstream
     
 	/*
 	 * //freepostID가 있는 DTO public void MessageFreeDTO(int messageID, String
@@ -60,6 +67,8 @@ public class MessageDTO {
         this.freepostID = freepostID;
         this.findpostID = findpostID;
     }
+=======
+>>>>>>> Stashed changes
    
 	public int getMessageID() {
 		return messageID;
@@ -84,6 +93,7 @@ public class MessageDTO {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public Integer getFreepostID() { return freepostID; }
     public void setFreepostID(Integer freepostID) {
 =======
@@ -91,11 +101,19 @@ public class MessageDTO {
     public void setFreepostID(int freepostID) {
 >>>>>>> Stashed changes
         if (freepostID % 2 == 0) {
+=======
+
+    public int getFreepostID() { return freepostID; }
+    public void setFreepostID(int freepostID) {
+
+    	if (freepostID % 2 != 0) {
+>>>>>>> Stashed changes
             throw new IllegalArgumentException("FreepostID must be even");
         }
         this.freepostID = freepostID;
     }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 	public Integer getFindpostID() { return findpostID; }
     public void setFindpostID(Integer findpostID) {
@@ -104,6 +122,12 @@ public class MessageDTO {
     public void setFindpostID(int findpostID) {
 >>>>>>> Stashed changes
         if (findpostID % 2 != 0) {
+=======
+	public int getFindpostID() { return findpostID; }
+    public void setFindpostID(int findpostID) {
+
+        if (findpostID % 2 == 0) {
+>>>>>>> Stashed changes
             throw new IllegalArgumentException("FindpostID must be odd");
         }
         this.findpostID = findpostID;
@@ -157,7 +181,13 @@ public class MessageDTO {
                 '}';
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 }
 =======
 }
+>>>>>>> Stashed changes
+=======
+
+}
+
 >>>>>>> Stashed changes

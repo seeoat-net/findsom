@@ -35,9 +35,14 @@ public class MessageManager {
         }
     }
 
-    // 쪽지 삭제하기 기능
-    public void deleteMessage(int messageID) throws SQLException {
-        messageDAO.deleteMessage(messageID);
+ // 쪽지 삭제하기 기능
+    public int deleteMessage(int messageID) {
+        try {
+            return messageDAO.deleteMessage(messageID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;  // 오류 발생 시 0 반환
+        }
     }
 <<<<<<< Updated upstream
 
@@ -56,8 +61,8 @@ public class MessageManager {
     	MessageManager messageManager = MessageManager.getInstance();
 
         try {
-            
         	LocalDateTime now = LocalDateTime.now();
+<<<<<<< Updated upstream
         	// messageID는 데이터베이스에서 자동으로 생성되므로 여기서는 설정하지 않습니다.
         	MessageDTO newMessage = new MessageDTO(13, "안녕하세요", now, "e", "c", 999, 1000);
 =======
@@ -107,15 +112,29 @@ public class MessageManager {
             // 쪽지 작성 테스트 여기서 그걸 홀수 짝수로 나눠줘야하나?
         	LocalDateTime now = LocalDateTime.now();
         	MessageDTO newMessage = new MessageDTO(1,"안녕하세요", now, "e", "c");
+=======
+        	MessageDTO newMessage = new MessageDTO(1,"저는 솜솜이인데요", now, "c", "d", 2, 4);
+>>>>>>> Stashed changes
 
             MessageDTO writtenMessage = messageManager.writeMessage(newMessage);
             System.out.println("쪽지 작성 결과: " + writtenMessage);
             
-            //쪽지 조회에서 
+          //쪽지 조회에서 
             // 수신자 ID를 기반으로 쪽지 목록 조회 테스트 
-            String receiverID = "e"; // 수신자 ID
+            String receiverID = "d"; // 수신자 ID
             List<MessageDTO> receivedMessages = messageManager.getMessagesForReceiver(receiverID);
             System.out.println("수신된 쪽지 목록: " + receivedMessages);
+            
+         // 쪽지 삭제 테스트
+            if (writtenMessage != null && writtenMessage.getMessageID() != 0) {
+                int deleteResult = messageManager.deleteMessage(writtenMessage.getMessageID());
+                if (deleteResult > 0) {
+                    System.out.println("쪽지가 성공적으로 삭제되었습니다. 삭제된 쪽지 ID: " + writtenMessage.getMessageID());
+                } else {
+                    System.out.println("쪽지 삭제에 실패했습니다.");
+                }
+            }
+            
 
             // 특정 쪽지에 대한 쪽지 목록 조회 테스트
             if (writtenMessage != null && writtenMessage.getMessageID() != 0) {
@@ -132,4 +151,8 @@ public class MessageManager {
     }
 
 }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+
 >>>>>>> Stashed changes
