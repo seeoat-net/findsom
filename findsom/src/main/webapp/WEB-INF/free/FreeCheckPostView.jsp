@@ -70,8 +70,8 @@ function postRemove() {
 	  		<table>
 		  		<tr>
 		  			<td>
-		  			<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="comment" maxlength="500">
-					<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
+			  			<input type="text"  name="comment" placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842"  maxlength="500">
+						<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white" onClick="">
 		  			</td>
 		  		</tr>
 		  		<!-- 작성된 댓글 표시
