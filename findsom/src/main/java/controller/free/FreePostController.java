@@ -11,9 +11,6 @@ import model.manager.FreeManager;
 
 public class FreePostController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
-		// 세션에서 userID 가져오기
-//        HttpSession session = request.getSession();
-//        String userID = (String) session.getAttribute("userId");
         
         FreeDAO freeDAO = new FreeDAO();
         if(request.getMethod().equals("GET")) {

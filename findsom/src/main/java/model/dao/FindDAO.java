@@ -204,6 +204,22 @@ public class FindDAO {
 		}
 		return null;
 	}
+	public int totalPosts() throws SQLException {
+	    String sql = "SELECT count(findpostID) FROM FINDBOARDPOST";
+	    jdbcUtil.setSqlAndParameters(sql, null); // JDBCUtil에 query문 설정
+
+	    try {
+	        ResultSet rs = jdbcUtil.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1); // 결과로부터 게시글 수를 반환
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        jdbcUtil.close(); // resource 반환
+	    }
+	    return 0; // 오류가 발생하거나 결과가 없는 경우 0을 반환
+	}
 	
 	/*** 구인 게시판 글 수정	-제목, 우대사항, 상대성향(title,matecontent,prefer 부분 */
 	public int update(FindDTO post) throws SQLException {
