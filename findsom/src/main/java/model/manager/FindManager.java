@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import model.FindDTO;
 import model.dao.FindDAO;
+import model.dto.CommentDTO;
 
 public class FindManager {
 	private static FindManager find = new FindManager();
@@ -30,6 +31,10 @@ public class FindManager {
 	
 	public FindDTO findCheckPost(int findpostID) throws SQLException{
 		return findDAO.findCheckPost(findpostID);
+	}
+	
+	public List<CommentDTO> findCommentByPostId(int postId) throws SQLException {
+		return findDAO.findCommentsByPostID(postId);
 	}
 	
 	public List<FindDTO> findPostList() throws SQLException {

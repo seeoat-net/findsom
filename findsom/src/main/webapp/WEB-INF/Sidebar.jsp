@@ -27,14 +27,10 @@
 		<hr class="sidebarLine">
 		<a class="sidebarItem" href="<c:url value='/noise' />">쉿! 게시판</a>
 		<hr class="sidebarLine">
-<<<<<<< Updated upstream
-		<a class="sidebarItem" href="<c:url value='/free/freelist' />">자유 게시판</a>
-=======
 		<a class="sidebarItem" href="<c:url value='/free/freelist' />">자유 게시판</a>	
 		<a class="sidebarItemFree" href="<c:url value='/free/freeinfo' />">이용 정보</a>
 		<a class="sidebarItemFree" href="<c:url value='/free/freepurchase' />">공동 구매</a>
 		<a class="sidebarItemFree" href="<c:url value='/free/freeshare' />">나눔</a>
 		<a class="sidebarItemFree" href="<c:url value='/free/freeother' />">기타</a>
->>>>>>> Stashed changes
 	</div>
 </body>
