@@ -1,5 +1,7 @@
 package controller.find;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.FindDTO;
+import model.dto.CommentDTO;
 import model.manager.FindManager;
 
 public class FindCheckPostController implements Controller{
@@ -18,7 +21,9 @@ public class FindCheckPostController implements Controller{
 		int postID = Integer.parseInt(request.getParameter("findpostID"));
 		log.debug("postid 입력 완료");
 		FindDTO post = manager.findCheckPost(postID);
+		List<CommentDTO> comments = manager.findCommentByPostId(postID);
 		request.setAttribute("findpost", post);		
+		request.setAttribute("comments", comments);
 		
 		return "/find/FindCheckPostView.jsp";       
 	 }

@@ -19,11 +19,12 @@ public class CommentController implements Controller {
         String content = request.getParameter("content");
         int freepostID = Integer.parseInt(request.getParameter("freepostID"));
         int findpostID = Integer.parseInt(request.getParameter("findpostID"));
-
+        
+        
         CommentManager commentManager = new CommentManager();
         
         if (request.getMethod().equals("GET")) {
-            /// 댓글 조회  	
+            /// 알림함 댓글 조회  	
         	if (freepostID % 2 == 0) {
             	List<CommentDTO> comments = commentManager.freeCommentsByUserID(userID);
                 request.setAttribute("comments", comments);
@@ -35,17 +36,31 @@ public class CommentController implements Controller {
                 return "CommPostListView.jsp"; 
         	}
              
-         } else if (request.getMethod().equals("POST")) {
+         } 
+        
+        else if (request.getMethod().equals("POST")) {
              // 댓글 작성 로직       
              CommentDTO newComment = new CommentDTO(
                      1, content, LocalDateTime.now(), userID, freepostID, findpostID);
              CommentDTO createdComment = commentManager.createComment(newComment);
              request.setAttribute("comment", createdComment);
+             
              if (freepostID % 2 == 0)
             	 return "/free/FreeCheckPostView.jsp"; 
              else
             	 return "/find/FindCheckPostView.jsp"; // 댓글 작성 확인	
-         } else if (request.getMethod().equals("DELETE")) {
+         }
+        
+        else if (request.getMethod().equals("GET")) {
+            /// 댓글 조회  	
+        	 if (freepostID % 2 == 0)
+            	 return "/free/FreeCheckPostView.jsp"; 
+             else
+            	 return "/find/FindCheckPostView.jsp";
+         } 
+        
+        else if (request.getMethod().equals("DELETE")) {
+        	//댓글 삭제 로직
              int commentID = Integer.parseInt(request.getParameter("commentID"));
              boolean isDeleted = commentManager.deleteComment(commentID);
 
