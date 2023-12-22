@@ -20,7 +20,7 @@ public class NoiseController implements Controller {
 			request.setAttribute("myNoiseCount", manager.myNoiseCount(user.getUserId()));				
 			request.setAttribute("noiseRanking", manager.findNoiseRank());
 
-	        return "/noise/NoiseMainView.jsp";
+	        return "/noise/NoiseView.jsp";
 		}
 		else {	//쉿! 게시판 신고
 			HttpSession session = request.getSession();
@@ -37,7 +37,7 @@ public class NoiseController implements Controller {
 			request.setAttribute("myNoiseCount", manager.myNoiseCount(userID));				
 			request.setAttribute("noiseRanking", manager.findNoiseRank());
 	
-	        return "/noise/NoiseMainView.jsp";
+	        return "/noise/NoiseView.jsp";
 		}
 	}
 }
