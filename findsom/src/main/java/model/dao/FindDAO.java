@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import model.FindDTO;
+import model.dto.CommentDTO;
 import model.dto.MatchDTO;
 
 public class FindDAO {
@@ -232,6 +233,34 @@ public class FindDAO {
 		}
 		return post;
 	}
+    
+	// 특정 포스트아이디로 댓글 조회
+    public List<CommentDTO> findCommentsByPostID(int postId) throws SQLException {
+        List<CommentDTO> comments = new ArrayList<CommentDTO>();
+        String sql = "SELECT * FROM CommentInfo WHERE findpostID = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{ postId });
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while (rs.next()) {
+                CommentDTO comment = new CommentDTO(
+                    rs.getInt("commentID"),
+                    rs.getString("content"),
+                    rs.getTimestamp("commentDate").toLocalDateTime(),
+                    rs.getString("userID"),
+                    rs.getInt("freepostID"),
+                    rs.getInt("findpostID")
+                );
+                comments.add(comment);
+            }
+        } catch (SQLException ex) {
+            log.error("fail", ex);
+            throw ex;
+        } finally {
+            jdbcUtil.close();
+        }
+        return comments;
+    }
 	
 	/*** 전체 구인 게시글 정보를 검색하여 List에 저장 및 반환	 */
 	public List<FindDTO> totalFindList() throws SQLException {

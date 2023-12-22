@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import model.FindDTO;
 import model.FreeDTO;
+import model.dto.CommentDTO;
 
 public class FreeDAO {
 	private static final Logger log = LoggerFactory.getLogger(FreeDAO.class);
@@ -76,6 +77,33 @@ public class FreeDAO {
 		return post;
 	}
 	
+	// 특정 포스트아이디로 댓글 조회
+    public List<CommentDTO> freeCommentsByPostID(int postId) throws SQLException {
+        List<CommentDTO> comments = new ArrayList<CommentDTO>();
+        String sql = "SELECT * FROM CommentInfo WHERE findpostID = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{ postId });
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while (rs.next()) {
+                CommentDTO comment = new CommentDTO(
+                    rs.getInt("commentID"),
+                    rs.getString("content"),
+                    rs.getTimestamp("commentDate").toLocalDateTime(),
+                    rs.getString("userID"),
+                    rs.getInt("freepostID"),
+                    rs.getInt("findpostID")
+                );
+                comments.add(comment);
+            }
+        } catch (SQLException ex) {
+            log.error("fail", ex);
+            throw ex;
+        } finally {
+            jdbcUtil.close();
+        }
+        return comments;
+    }
 
 	/*** 자유 게시판 글 수정	-제목, 내용(title,content)*/
 	public int update(FreeDTO post) throws SQLException {

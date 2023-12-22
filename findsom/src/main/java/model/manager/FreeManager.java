@@ -7,6 +7,7 @@ import model.FindDTO;
 import model.FreeDTO;
 import model.dao.FindDAO;
 import model.dao.FreeDAO;
+import model.dto.CommentDTO;
 
 /**
  * 사용자 관리 API를 사용하는 개발자들이 직접 접근하게 되는 클래스.
@@ -40,6 +41,13 @@ public class FreeManager {
 		return freeDAO.freeCheckPost(findpostID);
 	}
 	
+	public List<CommentDTO> findCommentByPostId(int postId) throws SQLException {
+		return freeDAO.freeCommentsByPostID(postId);
+	}
+	
+	public List<CommentDTO> freeCommentByPostId(int postId) throws SQLException {
+		return freeDAO.freeCommentsByPostID(postId);
+	}
 	//수정#postUpdateFindPost = update() //제목, 내용 수정
 	public int update(FreeDTO post) throws SQLException{
 		return freeDAO.update(post);

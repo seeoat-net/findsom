@@ -54,7 +54,7 @@ function postRemove() {
 					      익명
 					    </c:when>
 					    <c:otherwise>
-					      작성자:${findpost.userID}
+					      ${findpost.userID}
 					    </c:otherwise>
 					  </c:choose>
 					</td>
@@ -79,10 +79,11 @@ function postRemove() {
 		  			<td>
 		  			<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="comment" maxlength="500">
 					<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
+					<input type="submit" value="삭제" style="background-color:#8B2842; color:white; border-color:white">
 		  			</td>
 		  		</tr>
-		  		<!-- 작성된 댓글 표시
-		  		<c:forEach var="comment" items="${}">
+		  		<!-- 작성된 댓글 표시 -->
+		  		<c:forEach var="comments" items="${comments}">
 		    	<tr>
 		    		<td>                    
 		    		    <a href="<c:url value='//'>
@@ -93,7 +94,7 @@ function postRemove() {
 		            	<hr>
 		    		</td>
 		    	</tr>
-		    	</c:forEach>-->
+		    	</c:forEach>
 	  		</table>
 	  	</div>
 	</div>
