@@ -22,23 +22,30 @@ function clickBtn(targetUri) {
 		<%@ include file="../Header.jsp" %>
 		<div class="container">
 			<h1 class="naviText"> 알림함 </h1><br/>
-			<button class="notiBtn" onClick="clickBtn('<c:url value='/'/>')">작성글</button>
-			<button class="notiBtn" onClick="clickBtn('<c:url value='/'/>')">작성댓글</button>
-			<button class="notiBtn" onClick="clickBtn('<c:url value='/'/>')">댓글 알림</button>
-			<button class="notiBtn" onClick="clickBtn('<c:url value='/'/>')">쪽지함</button>
+			<button class="choiseBtn" onClick="clickBtn('<c:url value='/notification/post'/>')">작성글</button>
+			<button class="notiBtn" onClick="clickBtn('<c:url value='/notification/comment'/>')">작성댓글</button>
+			<button class="notiBtn" onClick="clickBtn('<c:url value='/notification/notiList'/>')">댓글 알림</button>
+			<button class="notiBtn" onClick="clickBtn('<c:url value='/notification/messageView'/>')">쪽지함</button>
 			<br/>
+			
 			<div class="itemBox">
-			<!-- 여기에 반복문 추가!! 리스트 보여주기!! -->
-				<div class="item"><div class="itemTitle">제목</div>글</div>
-				<div class="item"><div class="itemTitle">제목</div>글</div>
-				<div class="item"><div class="itemTitle">제목</div>글</div>
-				<div class="item"><div class="itemTitle">제목</div>글</div>
-				<div class="item"><div class="itemTitle">제목</div>글</div>
-				<div class="item"><div class="itemTitle">제목</div>글</div>
-			</div>
-				
-			</div>
-		</div>
+				<div class="itemBoxTitle" > 구인 게시판 </div>
+				<c:forEach var="post" items="${findpostlist}">
+					<div class="item" onClick="clickBtn('<c:url value='/find/findcheck'><c:param name='findpostID' value='${post.postId}'/></c:url>')">
+						<div class="itemTitle">${post.title}</div>${post.contents}
+					</div>
+				</c:forEach>
+			</div>	
+			<div class="itemBox">
+				<div class="itemBoxTitle" > 자유 게시판 </div>
+				<c:forEach var="post" items="${freepostlist}">
+					<div class="item" onClick="clickBtn('<c:url value='/free/freecheck'><c:param name='freepostID' value='${post.postId}'/></c:url>')">
+						<div class="itemTitle">${post.title}</div>${post.contents}
+					</div>
+				</c:forEach>
+			
+			</div>		
+		</div>	
 	</span>
 </body>
 </html>

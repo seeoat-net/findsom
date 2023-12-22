@@ -8,6 +8,7 @@ import controller.match.MatchController;
 import controller.noise.NoiseController;
 import controller.notification.CommentController;
 import controller.notification.MessageController;
+import controller.notification.PostController;
 import controller.find.*;
 import controller.free.*;
 import controller.user.*;
@@ -67,6 +68,7 @@ public class RequestMapping {
         mappings.put("/notification/message/view", new MessageController());
         mappings.put("/free/comment", new CommentController());
         mappings.put("/find/comment", new CommentController());
+        mappings.put("/notification/post", new PostController());
 
         logger.info("Initialized Request Mapping!");
     }

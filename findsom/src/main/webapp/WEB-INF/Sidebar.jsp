@@ -9,13 +9,13 @@
 <head>
 <meta charset="UTF-8">
 <title>SideBar</title>
-<link rel=stylesheet href="<c:url value='../css/Sidebar.css' />">
+<link rel=stylesheet href="<c:url value='/css/Sidebar.css' />">
 </head>
 <body>
 <!-- Sidebar-->
 	<div class="sidebarWrap">
 		<div class="userItem">
-			<img class="userImg" alt="./../images/somsom.png" src="./../images/somsom.png" />
+			<img class="userImg" alt="../images/somsom.png" src="../images/somsom.png" />
 			${user.getNickname()} <br> ${user.isRecruite()}
 		</div>
 		<div class="sidebarItem"></div>

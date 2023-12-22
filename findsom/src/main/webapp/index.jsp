@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>RandingView</title>
-<link rel=stylesheet href="<c:url value='./../css/Randing.css' />" >
+<link rel=stylesheet href="<c:url value='./css/Randing.css' />" >
 <script>
 function login() {
 	if (form.userId.value == "") {

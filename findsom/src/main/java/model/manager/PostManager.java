@@ -22,21 +22,14 @@ public class PostManager {
 		return postMan;
 	}
 	
-	//내 게시글 조회
-	public ArrayList<PostDTO> myPostList(String userID) throws SQLException {
+	//내 구인 게시글 조회
+	public ArrayList<PostDTO> myFindPostList(String userID) throws SQLException {
 		return postDAO.findPostById(userID);
 	}
 	
-	//DAO TEST
-	/*
-	public static void main(String[] args) throws SQLException {
-		PostDAO postDAO = new PostDAO();
-
-		ArrayList<PostDTO> posts = postDAO.findPostById("a");
-		for (PostDTO p : posts) {
-			System.out.println(p.getBoardType() + ", " + Integer.toString(p.getPostId())
-					+ ", " + p.getTitle() + ", " + p.getContents()); 
-		}
+	//내 자유 게시글 조회
+	public ArrayList<PostDTO> myFreePostList(String userID) throws SQLException {
+		return postDAO.freePostById(userID);
 	}
-	 */
+
 }
