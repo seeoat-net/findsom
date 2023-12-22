@@ -41,6 +41,10 @@ public class FindManager {
 		return findDAO.totalFindList();
 	}
 	
+	public int totalPosts() throws SQLException{
+		return findDAO.totalPosts();
+	}	
+	
 	//수정#postUpdateFindPost = update()
 	public int update(FindDTO post) throws SQLException{
 		return findDAO.update(post);

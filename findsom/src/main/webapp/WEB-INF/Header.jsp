@@ -19,7 +19,7 @@ function toNoti() {
 <body>
 	<div class="headerWrap" >
 		<div></div>
-		<div class="headerTitle">찾아주겠솜</div>
+		<div class="headerTitle">찾아주겠솜🏠</div>
 		<img class="bellImg" 
 			alt="./../images/bell.png" src="./../images/bell.png" 
 			onClick="toNoti()"
