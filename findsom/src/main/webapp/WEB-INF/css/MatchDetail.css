@@ -1,0 +1,56 @@
+.container {
+	display: flex;
+	width : 75%;
+	flex-wrap: wrap; 
+	justify-content: space-around;
+}
+
+.itemProfile {
+	flex-basis: 100%;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 100px;
+}
+
+.postBnt {
+	font-size: 20px;
+	border-radius: 5px;
+	padding: 0px 10px;
+	background-color: #FEF5F0;
+	border: 1px solid #8B2842;
+}
+
+.patternListBox {
+	flex-basis: 40%;
+}
+
+.patternListBox2 {
+	display: grid; 
+	grid-template-columns: 45% 1fr;
+}
+
+li{
+	height: 30px; 
+	width: 100px; 
+	margin: 10px; 
+}
+li::marker {
+  color: #8B2842;
+}
+.middleLine{
+	flex-basis: 0px;
+	border: 0.5px solid #8B2842;
+}
+.postList {
+	flex-basis: 40%;
+}
+.postItem {
+	flex-basis: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1.5px solid #8B2842;
+}
+.postTitle {
+	font-size: 20px;
+	margin-bottom: 5px;
+}

@@ -1,5 +1,6 @@
 package controller.match;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -42,10 +43,14 @@ public class MatchController implements Controller {
 		}
 		else if (request.getServletPath().equals("/match/detail")) {
 		    // 매칭 상세 기능 구현
+			
 			String userID = request.getParameter("matchingUserID");
+			System.out.print(userID);
 						
 			MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID);
-			request.setAttribute("matchingDetailResult", matchingDetailResult );
+			matchingDetailResult.setNickname(request.getParameter("matchingUserNickname"));
+			request.setAttribute("matchingDetail", matchingDetailResult );
+			System.out.println( matchingDetailResult.toString() );
 			
 			return "/match/MatchDetailView.jsp";
 		}
