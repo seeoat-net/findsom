@@ -58,14 +58,7 @@
 			</form>
 		</div>
 		<div class="rankArea">
-			<div class="rankTitle">소음 랭킹</div><br/>
-			<div class="rankBox">1기숙사 101호</div>
-			<div class="rankBox">1기숙사 101호</div>
-			<div class="rankBox">1기숙사 101호</div>
-			<div class="rankBox">1기숙사 101호</div>
-			<div class="rankBox">1기숙사 101호</div>
-			<div class="rankBox">1기숙사 101호</div>
-			
+			<div class="rankTitle">소음 랭킹</div><br/>			
 			<c:forEach var="ranking" items="${noiseRanking}">
 				<div class="rankBox">${ranking.roomInfo} ( ${ranking.count} )</div>
 			</c:forEach> 
