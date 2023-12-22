@@ -66,17 +66,13 @@ function userList(targetUri) {
 						</c:if>
 						<table>
 							<tr>
-								<td colspan=3 style="text-align: center;"><h2>회원가입</h2></td>
+								<td colspan=2 style="text-align: center;"><h2>회원가입</h2></td>
 							</tr>
 							<tr height="40">
 								<td width="130">이메일</td>
 								<td width="250" style="padding-left: 10"><input type="text" id="input_txt"
 									style="width: 240" name="email" placeholder="이메일" required
 									<c:if test="${registerFailed}">value="${user.email}"</c:if>>
-								</td>
-								<td width="70"><input type="button" id="btn" value="중복확인"
-									onClick="userCreate(
-								'<c:url value='/user/registerUser'/>')">
 								</td>
 							</tr>
 							<tr height="40">
@@ -103,10 +99,6 @@ function userList(targetUri) {
 									style="width: 240" name="phone" placeholder="전화번호를 입력해주세요."
 									<c:if test="${registerFailed}">value="${user.phone}"</c:if>>
 								</td>
-								<td width="70"><input type="button" id="btn" value="중복확인"
-									onClick="userCreate(
-								'<c:url value='/user/registerUser'/>')">
-								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">이름</td>
@@ -123,16 +115,12 @@ function userList(targetUri) {
 									required
 									<c:if test="${registerFailed}">value="${user.nickname}"</c:if>>
 								</td>
-								<td width="70"><input type="button" id="btn" value="중복확인"
-									onClick="userCreate(
-								'<c:url value='/user/registerUser'/>')">
-								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">기숙사</td>
 								<td width="250" style="padding-left: 10">
-									<label><input type="checkbox" name="isRecruite" value="recruiting"> 모집중</label>
-							        <label><input type="checkbox" name="isRecruite" value="recruited"> 모집완료</label>
+									<label><input type="radio" name="isRecruite" value="recruiting"> 모집중</label>
+							        <label><input type="radio" name="isRecruite" value="recruited"> 모집완료</label>
 								</td>
 							</tr>
 							<tr height="40">
