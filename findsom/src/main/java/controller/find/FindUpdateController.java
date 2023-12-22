@@ -1,10 +1,7 @@
 package controller.find;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.stream.Collectors;
->>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,19 +21,11 @@ public class FindUpdateController implements Controller{
 		List<String> lifepattern = (List<String>) request.getAttribute("lifepattern");
 		String mycontent = lifepattern.stream().collect(Collectors.joining(","));
 		
-		List<String> mycontent = (List<String>) request.getAttribute("lifepattern");
-		
 		FindDTO post = new FindDTO(
 				Integer.parseInt(request.getParameter("findpostID")),
 				request.getParameter("title"),
 				request.getParameter("prefer"),
-<<<<<<< HEAD
-				mycontent,
-				request.getParameter("matecontent"),
-				request.getParameter("userID"));
-=======
 				request.getParameter("matecontent"));
->>>>>>> db76e475bc2d191eccb977f44b093eee6671fe12
 		
 		FindManager manager = FindManager.getInstance();
 		manager.update(post);		

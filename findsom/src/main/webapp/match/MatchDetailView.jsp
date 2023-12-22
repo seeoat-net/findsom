@@ -29,7 +29,7 @@ function postMsg(targetUri) {
 	<div class="container">
 		<div class="itemProfile">
 			<h1> ${matchingDetail.nickname}님 </h1>
-			<button class="postBnt" onClick="postMsg('<c:url value='/notification/form'/>')">쪽지</button>
+			<button class="postBtn" onClick="postMsg('<c:url value='/notification/form'/>')">쪽지</button>
 		</div>
 		<div class="patternListBox">
 			<h3>${matchingDetail.nickname}의 생활패턴</h3>
