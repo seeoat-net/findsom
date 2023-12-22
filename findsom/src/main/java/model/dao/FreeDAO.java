@@ -80,7 +80,7 @@ public class FreeDAO {
 	// 특정 포스트아이디로 댓글 조회
     public List<CommentDTO> freeCommentsByPostID(int postId) throws SQLException {
         List<CommentDTO> comments = new ArrayList<CommentDTO>();
-        String sql = "SELECT * FROM CommentInfo WHERE findpostID = ?";
+        String sql = "SELECT * FROM CommentInfo WHERE freepostID = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{ postId });
 
         try {

@@ -54,7 +54,7 @@ function postRemove() {
 					      익명
 					    </c:when>
 					    <c:otherwise>
-					      작성자:${findpost.userID}
+					      ${findpost.userID}
 					    </c:otherwise>
 					  </c:choose>
 					</td>
@@ -75,25 +75,35 @@ function postRemove() {
 	  		</table>
 	  		<p>
 	  		<table>
-		  		<tr>
+<!-- 		  		<tr>
 		  			<td>
 		  			<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="comment" maxlength="500">
 					<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
+					<input type="submit" value="삭제" style="background-color:#8B2842; color:white; border-color:white">
 		  			</td>
 		  		</tr>
-		  		<!-- 작성된 댓글 표시
-		  		<c:forEach var="comment" items="${}">
+ -->
+
+		  		<form action="<c:url value='/find/comment' />" method="POST">
+    				<input type="hidden" name="userID" value="${userID}">
+    				<input type="hidden" name="findpostID" value="${findpost.findpostID}"> 
+    				<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text" name="content" maxlength="500">
+    				<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
+				</form>
+		  		
+		  		<!-- 작성된 댓글 표시 -->
+		  		<c:forEach var="comments" items="${comments}">
 		    	<tr>
 		    		<td>                    
 		    		    <a href="<c:url value='//'>
-						<c:param name='freepostID' value="${free.freepostID}"/>
+						<c:param name='findpostID' value="${find.findpostID}"/>
 						</c:url>" style="color: #8B2842; text-decoration: none;">
-				  		<h4>${free.title}</h4></a>
-		            	<h5>${free.content}</h5>
+				  		<h4>${find.title}</h4></a>
+		            	<h5>${find.content}</h5>
 		            	<hr>
 		    		</td>
 		    	</tr>
-		    	</c:forEach>-->
+		    	</c:forEach>
 	  		</table>
 	  	</div>
 	</div>

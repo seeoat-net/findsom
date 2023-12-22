@@ -63,7 +63,7 @@ public class CommentManager {
          try {
              // 댓글 생성 테스트   
              LocalDateTime now = LocalDateTime.now();
-             CommentDTO newComment = new CommentDTO(1, "솜솜아", now, "c", 2, 3);
+             CommentDTO newComment = new CommentDTO(1, "ehehe아", now, "c", 70, 91);
              CommentDTO createdComment = manager.createComment(newComment);
              System.out.println("댓글 작성 결과: " + createdComment);
 

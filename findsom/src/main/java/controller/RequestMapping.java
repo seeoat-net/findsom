@@ -37,11 +37,11 @@ public class RequestMapping {
         // <다솔>─────────────────────────────────────────────────────────────────
         // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
         mappings.put("/noise", new NoiseController()); 
-        mappings.put("/noise", new NoiseController()); 
 
           // 매칭 게시판 // 
         mappings.put("/match/matching", new MatchController()); 
-        mappings.put("/match/matching/detail", new MatchController());
+        mappings.put("/match/detail", new MatchController());
+
         
         
         // <예림>─────────────────────────────────────────────────────────────────
@@ -56,6 +56,11 @@ public class RequestMapping {
         mappings.put("/free/freesearch", new FreeSearchController());
         mappings.put("/free/freeupdate", new FreeUpdateController());  
         mappings.put("/free/freecheck", new FreeCheckPostController());
+        mappings.put("/free/freeinfo", new FreeListController());
+        mappings.put("/free/freepurchase", new FreeListController());
+        mappings.put("/free/freeshare", new FreeListController());
+        mappings.put("/free/freeother", new FreeListController());
+        
         
         // <소망>─────────────────────────────────────────────────────────────────
         mappings.put("/notification/message/write", new MessageController());
