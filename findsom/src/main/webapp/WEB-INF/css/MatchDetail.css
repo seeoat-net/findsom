@@ -2,7 +2,6 @@
 	display: flex;
 	width : 75%;
 	flex-wrap: wrap; 
-	align-items: flex-start;
 	justify-content: space-around;
 }
 

@@ -20,7 +20,6 @@
 .resultArea {
 	display: flex;
 	flex-wrap: wrap; 
-	border: solid;
 	justify-content: space-around;
 }
 .resultBox {
