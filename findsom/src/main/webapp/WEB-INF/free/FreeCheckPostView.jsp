@@ -59,9 +59,6 @@ function postRemove() {
 	  		 	<td>제목: ${freepost.title}</td>
 	  		</tr>
 	  		<tr>
-	  		 	<td>카테고리: ${freepost.category}</td>
-	  		</tr>
-	  		<tr>
 	  			<td>
 	  			<p>내가 작성한 글: ${freepost.content}</p>
 	  			</td>
