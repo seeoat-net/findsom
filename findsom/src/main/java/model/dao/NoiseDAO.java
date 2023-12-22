@@ -43,7 +43,7 @@ public class NoiseDAO {
 	public ArrayList<NoiseDTO> noiseRank() throws SQLException {
 		StringBuilder query = new StringBuilder();
 	    query.append("SELECT roominfo, count ");
-	    query.append("FROM ( SELECT roominfo, count FROM room ORDER BY count DESC ) ");
+	    query.append("FROM ( SELECT roominfo, count FROM room WHERE count > 0 ORDER BY count DESC ) ");
 	    query.append("WHERE ROWNUM < 10");
 	    jdbcUtil.setSqlAndParameters(query.toString(), null);
 	    
@@ -52,7 +52,12 @@ public class NoiseDAO {
 			ResultSet rs = jdbcUtil.executeQuery();
 			ArrayList<NoiseDTO> ranking = new ArrayList<NoiseDTO>();
 			while (rs.next()) {		// 검색 결과 존재
-				NoiseDTO dto = new NoiseDTO(rs.getString("roominfo"), rs.getInt("count"));
+				String room = rs.getString("roominfo");
+				String result = room.charAt(0) + "기숙사 ";
+				if (room.charAt(1) == '0') {  result += room.substring(2) + "호"; }
+				else { result += room.substring(1) + "호"; }
+				
+				NoiseDTO dto = new NoiseDTO(result, rs.getInt("count"));
 				ranking.add(dto);
 			}
 			return ranking;
