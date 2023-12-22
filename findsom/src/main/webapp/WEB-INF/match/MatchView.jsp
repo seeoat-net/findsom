@@ -131,7 +131,9 @@ function postMatch() {
 	<div class="resultArea">
 		<c:forEach var="user" items="${matchingResult}">
 			<div class="resultBox">
-				<a href="<c:url value='/match/matching/detail'><c:param name='userId' value='${user.userID}'/></c:url>">
+				<a href="<c:url value='/match/detail'>
+					<c:param name='matchingUserID' value='${user.userID}'/>
+					<c:param name='matchingUserNickname' value='${user.nickname}'/></c:url>">
 				<h1>${user.nickname}</h1>
 				<h3>${user.cnt}</h3>
 			</div>

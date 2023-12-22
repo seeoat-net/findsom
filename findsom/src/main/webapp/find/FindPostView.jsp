@@ -3,6 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>FindPost</title>
 <script>
 <%
 //JSP 페이지에서 세션에서 userID 가져오기
@@ -13,27 +16,17 @@ function postList(targetUri) {
 	form.submit();
 }
 </script>
-<head>
-<meta charset="UTF-8">
-<title>FindCreatePost</title>
-<link rel=stylesheet href="<c:url value='/css/Post.css' />" type="text/css">
 </head>
 <body>
-	<span class="span">
 	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %> 
 	<div>
 		<form class="mainpost" method="post" name="createpost" action="<c:url value='/find/findpost'/>" id="postform">
-		<h2>구인게시판 글쓰기</h2>
-		<div class="right">
-			<a href="<c:url value='/find/findlist' />"><button style="background-color:#8B2842; color:white; border-color:#8B2842">취소</button></a>
-			<button type="submit" id="btn" value="등록" style="background-color:#8B2842; color:white; border-color:#8B2842"><b>등록</b></button>
 			<input type="hidden" name="userID" value="<%= userID %>">
-		</div>
 	  		<table>
 	  			<tr>
 	  				<td>
-	  				<label class="anonymous"><input type="checkbox" name="isAnonymous" value="true"><b>익명</b></label>
+	  				<label class="anonymous"><input type="checkbox" name="isAnonymous" value="true"><b>익명</b></label> <!-- value값은 선택되었을 때 서버로 전송되는 값 -->
 	  				</td>
 	  			</tr>
 	  			<tr>
@@ -57,8 +50,9 @@ function postList(targetUri) {
 	  				</td>
 	  			</tr>
 	  		</table>		
+	  		<button class="cancle" ><a href="<c:url value='/find/findlist' />">취소</a></button>
+			<button class="register" type="submit" id="btn" value="등록">등록</button>
 		</form>
 	</div>
-	</span>
 </body>
 </html>

@@ -14,21 +14,24 @@ function postList(targetUri) {
 </script>
 <head>
 <meta charset="UTF-8">
-<title>FreePost</title>
+<title>FreeCreatePost</title>
+<link rel=stylesheet href="<c:url value='/css/Post.css' />" type="text/css">
 </head>
 <body>
+	<span>
 	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %>
 	<div class="main">
-	  	<!--<button class="cancle" onclick="">취소</button>
-	    <button class="register" type="submit">등록</button> -->
-	  	<form class="post" method="post" action="<c:url value='/free/freepost'/>">
+		<form class="post" method="post" action="<c:url value='/free/freepost'/>">
+	  	<h2>자유게시판 글쓰기</h2>
+	  	<div class="right">	  	
+	  		<a href="<c:url value='/free/freelist' />" ><button style="background-color:#8B2842; color:white; border-color:#8B2842">취소</button></a>
+			<button type="submit" id="btn" value="등록" style="background-color:#8B2842; color:white; border-color:#8B2842">등록</button>
+	  	</div>
 	  		<input type="hidden" name="userID" value="<%= userID %>">
 	  		<table>
 	  			<tr>
-	  				<td>
-	  				<label ><input type="checkbox" name="isAnonymous" value="true"><b>익명</b></label>
-	  				</td>
+	  				<label><input type="checkbox" name="isAnonymous" value="true"><b>익명</b></label>
 	  			</tr>
 	  			<tr>
 	  				<td>
@@ -42,17 +45,16 @@ function postList(targetUri) {
 	  				</td>
 	  			</tr>
 	  			<tr>
-	  				<td>제목:<input type="text" name="title"></td>
+	  				<td>
+	  				<p>제목:<input type="text" name="title"></p>
+	  				</td>
 	  			</tr>
 	  			<tr>
 	  				<td><textarea cols="150" rows="20" placeholder="내용을 입력하세요	"  name="content"></textarea></td>
 	  			</tr>
 	  		</table>
-	  		<button class="cancle" ><a href="<c:url value='/free/freelist' />" >취소</a></button>
-			<button class="register" type="submit" id="btn" value="등록">등록</button>
-	  		<!-- <input type="button" value="취소"> &nbsp;
-		  	<input type="submit" value="등록" >-->
 		</form>
 	</div>
+	</span>
 </body>
 </html>

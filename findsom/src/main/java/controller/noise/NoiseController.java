@@ -5,17 +5,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+import model.User;
 import model.manager.NoiseManager;
 
 public class NoiseController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equals("GET")) {	// 쉿! 게시판 조회
 			HttpSession session = request.getSession();
-			String userID = (String)session.getAttribute("userId");
+			User user = (User)session.getAttribute("user");
+			
 			
 			NoiseManager manager = NoiseManager.getInstance();
 
-			request.setAttribute("myNoiseCount", manager.myNoiseCount(userID));				
+			request.setAttribute("myNoiseCount", manager.myNoiseCount(user.getUserId()));				
 			request.setAttribute("noiseRanking", manager.findNoiseRank());
 
 	        return "/noise/NoiseMainView.jsp";
