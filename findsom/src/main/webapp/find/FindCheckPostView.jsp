@@ -3,65 +3,100 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<script>
+<%
+//JSP 페이지에서 세션에서 userID 가져오기
+String userID = (String) session.getAttribute("userID");
+%>
+function postList(targetUri) {
+	form.action = targetUri;
+	form.submit();
+}
+function postRemove() {
+	return confirm("정말 삭제하시겠습니까?");		
+}
+function postRemove() {
+    var form = document.createElement("form");
+    form.method = "POST";
+    form.action = "<c:url value='/find/findlist' />";
+    
+    var input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "findpostID";
+    input.value = "${findpost.findpostID}";
+    
+    form.appendChild(input);
+    document.body.appendChild(form);
+    
+    form.submit();
+    return false; // 이벤트 전파 방지
+}
+</script>
 <head>
 <meta charset="UTF-8">
 <title>FindPost</title>
-<link rel=stylesheet href="<c:url value='../css/main.css' />">
-<link rel=stylesheet href="<c:url value='../css/findcheck.css' />">
 </head>
 <body>
-	<div class="leftline"></div>
-	<div class="rightline"></div>
-	<div class="somsom"></div>
-	<span  class="title">찾아주겠솜🏠</span>
-	<div class="bell"></div>
-	<div class="line"></div>
-	<span  class="mypage">마이페이지</span>
-	<div class="line1"></div>
-	<span  class="find">
-  		<a href="FindMainView.jsp">구인 게시판</a>
-  	</span>
-  	<div class="line2"></div>
-  	<span  class="match">매칭 게시판</span>
-  	<div class="line3"></div>
-  	<span  class="shit">쉿! 게시판</span>
-  	<div class="line4"></div>
-  	<span  class="free">
-  		<a href="../free/FreeMainView.jsp">자유 게시판</a>
-	</span> 
+	<%@ include file="../Sidebar.jsp" %>
+	<%@ include file="../Header.jsp" %>
 	<div class="main">
-	  	<button class="cancle" onclick="history.back();">취소</button>
-	  	<button class="register" type="submit" form="postform">등록</button>
-	  	<div>작성글 확인</div>
+	   	<a href="<c:url value='/find/findlist' />"><input type="button" value="완료"></a>
+	   	<a href="#" onclick="postRemove();"><input type="button" value="삭제"></a>
+	<!-- 	<a href="<c:url value='/community/delete'>
+				   <c:param name='commId' value='${community.id}'/>
+			 	 </c:url>" onclick="return communityRemove();">삭제(미구현)</a> &nbsp; -->
+	  	<div>작성글 확인<p>
+	  		<table>
+		  		<tr>
+		  			<td>
+		  			 <c:choose>
+					    <c:when test="${findpost.isAnonymous eq 'true'}">
+					      익명
+					    </c:when>
+					    <c:otherwise>
+					      ${findpost.userID}
+					    </c:otherwise>
+					  </c:choose>
+					</td>
+				</tr>
+		  		<tr><td></td></tr>
+		  		<tr>
+		  		 <td>제목:${findpost.title}</td>
+		  		</tr>
+		  		<tr>
+		  		 <td>우대사항:${findpost.prefer}</td>
+		  		</tr>
+		  		<tr>
+		  			<td>내성향: ${findpost.mycontent}</td>
+		  		</tr>
+		  		<tr>
+		  			<td>내가 작성한 글: ${findpost.matecontent} </td>
+		  		</tr>
+	  		</table>
+	  		<p>
+	  		<table>
+		  		<tr>
+		  			<td>
+		  			<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="comment" maxlength="500">
+					<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
+					<input type="submit" value="삭제" style="background-color:#8B2842; color:white; border-color:white">
+		  			</td>
+		  		</tr>
+		  		<!-- 작성된 댓글 표시 -->
+		  		<c:forEach var="comments" items="${comments}">
+		    	<tr>
+		    		<td>                    
+		    		    <a href="<c:url value='//'>
+						<c:param name='freepostID' value="${free.freepostID}"/>
+						</c:url>" style="color: #8B2842; text-decoration: none;">
+				  		<h4>${free.title}</h4></a>
+		            	<h5>${free.content}</h5>
+		            	<hr>
+		    		</td>
+		    	</tr>
+		    	</c:forEach>
+	  		</table>
+	  	</div>
 	</div>
 </body>
 </html>
-<%--
-<%
-    // 사용자가 입력한 데이터 가져오기
-    String title = request.getParameter("title");
-    String content = request.getParameter("content");
-    String isAnonymous = request.getParameter("isAnonymous");
-    
-    // DAO 클래스의 create 메서드를 호출하여 데이터베이스에 데이터 저장
-    FindDAO findDAO = new FindDAO();
-    FindDTO post = new FindDTO();
-    post.setTitle(title);
-    post.setContent(content);
-    post.setIsAnonymous(isAnonymous);
-    
-    FindDTO result = findDAO.create(post);
-    try {
-        FindDTO result = findDAO.create(post); // create 메서드를 사용하여 데이터베이스에 데이터 저장
-        if (result != null) {
-            // 데이터베이스에 성공적으로 저장되었을 때 처리할 코드 작성
-            response.sendRedirect("SuccessPage.jsp"); // 성공 페이지로 이동
-        } else {
-            // 데이터베이스 저장에 실패한 경우 처리할 코드 작성
-            response.sendRedirect("ErrorPage.jsp"); // 에러 페이지로 이동
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        response.sendRedirect("ErrorPage.jsp"); // 에러 페이지로 이동
-    }
---%>

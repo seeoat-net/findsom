@@ -31,6 +31,8 @@ public class UserDAO {
      * 사용자 관리 테이블에 새로운 사용자 생성.
      */
     public int create(User user) throws SQLException {
+        log.debug(user.getUserId());
+        
         String sql = "INSERT INTO USERINFO (userid, email, password, phone, name, nickname, authentication, isrecruite, roominfo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] param = new Object[] {
                 user.getUserId(), 
@@ -125,9 +127,9 @@ public class UserDAO {
     /**
      * 기존의 사용자 정보를 수정.
      */
-    public int update(User user) throws SQLException {
+    public int updateUser(User user) throws SQLException {
         String sql = "UPDATE USERINFO "
-                + "SET email=?, password=?, phone=?, name=?, nickname=?, isRecruite=?, roominfo=? "
+                + "SET email=?, password=?, phone=?, name=?, nickname=?, isRecruite=? "
                 + "WHERE userid=?";
         Object[] param = new Object[] { 
                 user.getEmail(), 
@@ -136,7 +138,7 @@ public class UserDAO {
                 user.getName(),
                 user.getNickname(),
                 user.isRecruite(),
-                (!user.getRoomInfo().equals("배정받지 않음")) ? user.getRoomInfo() : null,
+//                user.getRoomInfo(),
                 user.getUserId()
         };
         jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil에 update문과 매개 변수 설정
@@ -157,8 +159,25 @@ public class UserDAO {
     /**
      * 사용자 ID에 해당하는 사용자를 삭제.
      */
-    public int remove(String userId) throws SQLException {
+    public int removeUser(String userId) throws SQLException {
         String sql = "DELETE FROM USERINFO WHERE userid=?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[] { userId }); // JDBCUtil에 delete문과 매개 변수 설정
+
+        try {
+            int result = jdbcUtil.executeUpdate(); // delete 문 실행
+            return result;
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close(); // resource 반환
+        }
+        return 0;
+    }
+    
+    public int removeLifePattern(String userId) throws SQLException {
+        String sql = "DELETE FROM LIFEPATTERNS WHERE userid=?";
         jdbcUtil.setSqlAndParameters(sql, new Object[] { userId }); // JDBCUtil에 delete문과 매개 변수 설정
 
         try {
@@ -178,7 +197,7 @@ public class UserDAO {
      * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 User 도메인 클래스에 저장하여 반환.
      */
     public User findUser(String userId) throws SQLException {
-        String sql = "SELECT email, password, phone, name, nickname, authentication, isRecruite, roominfo " 
+        String sql = "SELECT email, password, phone, name, nickname, authentication, isRecruite, roomInfo " 
                 + "FROM USERINFO u "
                 + "WHERE userid=? ";
         jdbcUtil.setSqlAndParameters(sql, new Object[] { userId }); // JDBCUtil에 query문과 매개 변수 설정
@@ -214,87 +233,80 @@ public class UserDAO {
     public LifePattern findLifePattern(String userId) throws SQLException {
         try {
             StringBuilder sql = new StringBuilder();
-            sql.append("SELECT LifePattern ");
-            sql.append("FROM LifePatterns ");
-            sql.append("WHERE userID = ? ");
-            
-            jdbcUtil.setSqlAndParameters(sql.toString(), new Object[]{ userId });
-            
-            ArrayList<LifePattern> lifePatternList = new ArrayList<LifePattern>();
+            sql.append("SELECT LIFEPATTERN ");
+            sql.append("FROM LIFEPATTERNS ");
+            sql.append("WHERE USERID=? ");
+
+            jdbcUtil.setSqlAndParameters(sql.toString(), new Object[]{userId});
+
             ResultSet rs = jdbcUtil.executeQuery();
+            LifePattern lifePattern = new LifePattern();  // 객체 생성
+
             while (rs.next()) {
-                String isMorningPerson = "", isSmoker = "", employmentPeriod = "", mbti = "", 
-                       showerTime = "", wakeUpTime = "", teethGrinding = "", snoring = "", ear = "",
-                       hasFriendship = "", hasEarphones = "", cleanliness = "", eatInRoom = "", age = "", bedPreference = "";
-                
-                if (rs.getString("LifePattern").equals("mornig") || rs.getString("LifePattern").equals("night")) {
-                    isMorningPerson = rs.getString("LifePattern");
+                String pattern = rs.getString("LifePattern");
+
+                // 각 컬럼에 따라서 LifePattern 객체에 데이터를 저장
+                switch (pattern) {
+                    case "morning": case "night":
+                        lifePattern.setIsMorningPerson(pattern);
+                        break;
+                    case "smoker": case "nonSmoker":
+                        lifePattern.setIsSmoker(pattern);
+                        break;
+                    case "semester": case "vacation":
+                        lifePattern.setEmploymentPeriod(pattern);
+                        break;
+                    case "istj": case "isfj": case "infj": case "intj": case "istp": case "isfp": case "infp": 
+                    case "estp": case "esfp": case "enfp": case "entp": case "estj": case "enfj": case "entj":
+                        lifePattern.setMbti(pattern);
+                        break;
+                    case "morningShower": case "nightShower":
+                        lifePattern.setShowerTime(pattern);
+                        break;
+                    case "one": case "many":
+                        lifePattern.setWakeUpTime(pattern);
+                        break;
+                    case "teethGrinding":
+                        lifePattern.setTeethGrinding(pattern);
+                        break;
+                    case "snoring":
+                        lifePattern.setSnoring(pattern);
+                        break;
+                    case "ear":
+                        lifePattern.setEar(pattern);
+                        break;
+                    case "yesFriendship": case "noFriendship":
+                        lifePattern.setHasFriendship(pattern);
+                        break;
+                    case "yesEarphones": case "noEarphones":
+                        lifePattern.setHasEarphones(pattern);
+                        break;
+                    case "yesclean": case "noclean":
+                        lifePattern.setCleanliness(pattern);
+                        break;
+                    case "yesEatInRoom": case "noEatInRoom":
+                        lifePattern.setEatInRoom(pattern);
+                        break;
+                    case "20": case "21": case "22": case "23": case "24": case "25":
+                        lifePattern.setAge(pattern);
+                        break;
+                    case "1": case "2":
+                        lifePattern.setBedPreference(pattern);
+                        break;
+                    default:
+                        break;
                 }
-                else if (rs.getString("LifePattern").equals("smoker") || rs.getString("LifePattern").equals("nonSmoker")) {
-                    isSmoker = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("semester") || rs.getString("LifePattern").equals("vacation")) {
-                    employmentPeriod = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("istj") || rs.getString("LifePattern").equals("isfj") || rs.getString("LifePattern").equals("infj")
-                        || rs.getString("LifePattern").equals("intj") || rs.getString("LifePattern").equals("istp") || rs.getString("LifePattern").equals("isfp")
-                        || rs.getString("LifePattern").equals("infp") || rs.getString("LifePattern").equals("intp") || rs.getString("LifePattern").equals("estp")
-                        || rs.getString("LifePattern").equals("esfp") || rs.getString("LifePattern").equals("enfp") || rs.getString("LifePattern").equals("entp")
-                        || rs.getString("LifePattern").equals("estj") || rs.getString("LifePattern").equals("esfj") || rs.getString("LifePattern").equals("enfj")
-                        || rs.getString("LifePattern").equals("entj")) {
-                    mbti = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("morningShower") || rs.getString("LifePattern").equals("nightShower")) {
-                    showerTime = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("one") || rs.getString("LifePattern").equals("nightShower")) {
-                    wakeUpTime = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("teethGrinding")) {
-                    teethGrinding = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("snoring")) {
-                    snoring = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("ear")) {
-                    ear = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("yesFriendship") || rs.getString("LifePattern").equals("noFriendship")) {
-                    hasFriendship = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("yesEarphones") || rs.getString("LifePattern").equals("noEarphones")) {
-                    hasEarphones = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("yesclean") || rs.getString("LifePattern").equals("noclean")) {
-                    cleanliness = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("yesEatInRoom") || rs.getString("LifePattern").equals("noEatInRoom")) {
-                    eatInRoom = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("20") || rs.getString("LifePattern").equals("21")
-                        || rs.getString("LifePattern").equals("22") || rs.getString("LifePattern").equals("23")
-                        || rs.getString("LifePattern").equals("24") || rs.getString("LifePattern").equals("25")) {
-                    age = rs.getString("LifePattern");
-                }
-                else if (rs.getString("LifePattern").equals("1") || rs.getString("LifePattern").equals("2")) {
-                    bedPreference = rs.getString("LifePattern");
-                }
-                
-                LifePattern lifePattern = new LifePattern(
-                        isMorningPerson, isSmoker, employmentPeriod, mbti, showerTime,
-                        wakeUpTime, teethGrinding, snoring, ear, hasFriendship, hasEarphones,
-                        cleanliness, eatInRoom, age, bedPreference);
-                
-                return lifePattern;
             }
+
+            return lifePattern;  // 루프가 끝난 후에 반환
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             jdbcUtil.close(); // resource 반환
         }
+
         return null;
     }
-
 
     /**
      * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사

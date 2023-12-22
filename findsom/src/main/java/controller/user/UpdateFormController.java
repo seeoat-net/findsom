@@ -19,28 +19,23 @@ public class UpdateFormController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {    	
-    	String updateId = request.getParameter("userId");
+    	String userId = request.getParameter("userId");
     	
-    	log.debug("Update Request : {}", updateId);
+    	log.debug("Update Request : {}", userId);
     	
     	UserManager manager = UserManager.getInstance();
-        User user = manager.findUser(updateId); // 수정하려는 사용자 정보 검색
-        request.setAttribute("user", user);        
-        LifePattern lifePattern = manager.findLifePattern(updateId);
+        User user = manager.findUser(userId); // 수정하려는 사용자 정보 검색
+        request.setAttribute("user", user);
+        LifePattern lifePattern = manager.findLifePattern(userId);
         request.setAttribute("lifePattern", lifePattern);
-        
-    	User updateUser = new User(
-                request.getParameter("userId"),
-                request.getParameter("email"),
-                request.getParameter("password"),
-                request.getParameter("phone"),
-                request.getParameter("name"),
-                request.getParameter("nickname"),
-                request.getParameter("isRecruite"),
-                request.getParameter("roomInfo"));
     	
-    	log.debug("UpdateForm User : {}", updateUser);
+    	log.debug("UpdateForm User : {}", user);
+    	log.debug("UpdateForm LifePattern : {}", lifePattern);
     	request.getSession().setAttribute("user", user); // User 객체를 세션에 저장
+    	request.setAttribute("user", user);
+    	request.getSession().setAttribute("lifePattern", lifePattern); // User 객체를 세션에 저장
+        request.setAttribute("lifePattern", lifePattern);
+
     	return "/findsom/MypageUpdateView.jsp";
     }
 }

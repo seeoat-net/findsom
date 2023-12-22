@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /***  FindBoardPost 테이블과 대응됨 */
 public class FindDTO {
 	private int findpostID;
@@ -22,7 +24,13 @@ public class FindDTO {
 		this.matecontent = matecontent;
 		this.userID = userID;
   }
-  
+	public FindDTO(int findpostID, String title, String prefer, String matecontent) {
+		super();
+		this.findpostID = findpostID;
+		this.title = title;
+		this.prefer = prefer;
+		this.matecontent = matecontent;
+  }
 	//내용 저장 리스트 보여줄 때 제목과 우대사항만 필요
 	public FindDTO(String title, String prefer) {
 		super();
@@ -89,7 +97,7 @@ public class FindDTO {
 	@Override
 	public String toString() {
 		return "FindDTO [findpostID=" + findpostID + ", isAnonymous=" + isAnonymous + ", title=" + title + ", prefer="
-				+ prefer + ", mycontent=" + mycontent + ", matecontent=" + matecontent + ", userID=" + userID + "]";	
+				+ prefer + ", mycontent=" + mycontent + ", matecontent=" + matecontent + ", userID=" + userID + "]";
 	}
 	
 }

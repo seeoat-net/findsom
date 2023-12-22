@@ -1,52 +1,79 @@
 package controller.notification;
 
-import model.dao.CommentDAO;
-import model.dto.CommentDTO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import java.sql.SQLException;
+import model.dto.CommentDTO;
+import model.manager.CommentManager;
+import controller.Controller;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public class CommentController {
-    private CommentDAO commentDAO;
+public class CommentController implements Controller {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-    public CommentController() {
-        commentDAO = new CommentDAO();
-    }
+        HttpSession session = request.getSession();
+        String userID = (String) session.getAttribute("userId"); 
+        
+        String content = request.getParameter("content");
+        int freepostID = Integer.parseInt(request.getParameter("freepostID"));
+        int findpostID = Integer.parseInt(request.getParameter("findpostID"));
+        
+        
+        CommentManager commentManager = new CommentManager();
+        
+        if (request.getMethod().equals("GET")) {
+            /// 알림함 댓글 조회  	
+        	if (freepostID % 2 == 0) {
+            	List<CommentDTO> comments = commentManager.freeCommentsByUserID(userID);
+                request.setAttribute("comments", comments);
+                return "CommPostListView.jsp"; 	
+        	}
+        	else {
+           	 List<CommentDTO> comments = commentManager.findCommentsByUserID(userID);
+                request.setAttribute("comments", comments);
+                return "CommPostListView.jsp"; 
+        	}
+             
+         } 
+        
+        else if (request.getMethod().equals("POST")) {
+             // 댓글 작성 로직       
+             CommentDTO newComment = new CommentDTO(
+                     1, content, LocalDateTime.now(), userID, freepostID, findpostID);
+             CommentDTO createdComment = commentManager.createComment(newComment);
+             request.setAttribute("comment", createdComment);
+             
+             if (freepostID % 2 == 0)
+            	 return "/free/FreeCheckPostView.jsp"; 
+             else
+            	 return "/find/FindCheckPostView.jsp"; // 댓글 작성 확인	
+         }
+        
+        else if (request.getMethod().equals("GET")) {
+            /// 댓글 조회  	
+        	 if (freepostID % 2 == 0)
+            	 return "/free/FreeCheckPostView.jsp"; 
+             else
+            	 return "/find/FindCheckPostView.jsp";
+         } 
+        
+        else if (request.getMethod().equals("DELETE")) {
+        	//댓글 삭제 로직
+             int commentID = Integer.parseInt(request.getParameter("commentID"));
+             boolean isDeleted = commentManager.deleteComment(commentID);
 
-    // 댓글 작성
-    public void writeComment(CommentDTO comment) {
-        try {
-            commentDAO.writeComment(comment);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 댓글 수정
-    public void modifyComment(CommentDTO comment) {
-        try {
-            commentDAO.modifyComment(comment);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 댓글 삭제
-    public void deleteComment(String commentID) {
-        try {
-            commentDAO.deleteComment(commentID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 특정 콘텐츠에 대한 댓글 조회
-    public List<CommentDTO> getCommentsForContent(String contentID) {
-        try {
-            return commentDAO.getCommentsForContent(contentID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-}
+             if (isDeleted) {
+                 request.setAttribute("message", "Comment deleted successfully.");
+             } else {
+                 request.setAttribute("error", "Failed to delete the comment.");
+             }
+             if (freepostID % 2 == 0)
+            	 return "/free/FreeCheckPostView.jsp"; 
+             else
+            	 return "/find/FindCheckPostView.jsp";
+         }
+         return "/error.jsp"; 
+     }
+ }

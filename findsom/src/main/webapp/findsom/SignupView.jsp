@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SignupView</title>
-<link rel=stylesheet href="<c:url value='../css/Signup.css' />">
+<link rel=stylesheet href="<c:url value='../css/Signup2.css' />">
 <script>
 function userCreate() {
 	if (form.userId.value == "") {
@@ -70,7 +70,7 @@ function userList(targetUri) {
 							</tr>
 							<tr height="40">
 								<td width="130">이메일</td>
-								<td width="250" style="padding-left: 10"><input type="text"
+								<td width="250" style="padding-left: 10"><input type="text" id="input_txt"
 									style="width: 240" name="email" placeholder="이메일" required
 									<c:if test="${registerFailed}">value="${user.email}"</c:if>>
 								</td>
@@ -81,25 +81,25 @@ function userList(targetUri) {
 							</tr>
 							<tr height="40">
 								<td width="130">사용자 ID</td>
-								<td width="250" style="padding-left: 10"><input type="text"
+								<td width="250" style="padding-left: 10"><input type="text" id="input_txt"
 									style="width: 240;" name="userId" value="${user.userId}"
 									placeholder="사용자 ID를 입력해주세요." required></td>
 							</tr>
 							<tr height="40">
 								<td width="130">비밀번호</td>
-								<td width="250" style="padding-left: 10"><input
+								<td width="250" style="padding-left: 10"><input id="input_txt" 
 									type="password" style="width: 240" name="password" value="${user.password}"
 									placeholder="4자 이상, 영문자와 숫자의 조합" required></td>
 							</tr>
 							<tr height="40">
 								<td width="130">비밀번호 확인</td>
-								<td width="250" style="padding-left: 10"><input
+								<td width="250" style="padding-left: 10"><input id="input_txt"
 									type="password" style="width: 240" name="password2" value="${user.password}"
 									placeholder="비밀번호를 다시 입력해주세요." required></td>
 							</tr>
 							<tr height="40">
 								<td width="130">전화번호</td>
-								<td width="250" style="padding-left: 10"><input type="text"
+								<td width="250" style="padding-left: 10"><input type="text" id="input_txt"
 									style="width: 240" name="phone" placeholder="전화번호를 입력해주세요."
 									<c:if test="${registerFailed}">value="${user.phone}"</c:if>>
 								</td>
@@ -110,7 +110,7 @@ function userList(targetUri) {
 							</tr>
 							<tr height="40">
 								<td width="130">이름</td>
-								<td width="250" style="padding-left: 10"><input type="text"
+								<td width="250" style="padding-left: 10"><input type="text" id="input_txt"
 									style="width: 240" name="name" placeholder="본명을 입력해주세요."
 									required
 									<c:if test="${registerFailed}">value="${user.name}"</c:if>>
@@ -118,7 +118,7 @@ function userList(targetUri) {
 							</tr>
 							<tr height="40">
 								<td width="130">닉네임</td>
-								<td width="250" style="padding-left: 10"><input type="text"
+								<td width="250" style="padding-left: 10"><input type="text" id="input_txt"
 									style="width: 240" name="nickname" placeholder="닉네임을 입력해주세요."
 									required
 									<c:if test="${registerFailed}">value="${user.nickname}"</c:if>>
@@ -131,17 +131,15 @@ function userList(targetUri) {
 							<tr height="40">
 								<td width="130">기숙사</td>
 								<td width="250" style="padding-left: 10">
-								<select style="width: 240" name="isRecruite">
-										<option value="recruiting">모집중</option>
-										<option value="recruited">모집완료</option>
-								</select>
+									<label><input type="checkbox" name="isRecruite" value="recruiting"> 모집중</label>
+							        <label><input type="checkbox" name="isRecruite" value="recruited"> 모집완료</label>
 								</td>
 							</tr>
 							<tr height="40">
 								<td width="130">기숙사 정보</td>
 								<td width="250" style="padding-left: 10">
 								<select style="width: 240" name="roomInfo">
-										<option value="null">배정받지 않음</option>
+										<option value="00000">배정받지 않음</option>
 										<option value="10101">1기숙사 101호</option>
 										<option value="10102">1기숙사 102호</option>
 										<option value="10103">1기숙사 103호</option>
