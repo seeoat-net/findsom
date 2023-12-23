@@ -57,6 +57,11 @@ public class RequestMapping {
         mappings.put("/free/freesearch", new FreeSearchController());
         mappings.put("/free/freeupdate", new FreeUpdateController());  
         mappings.put("/free/freecheck", new FreeCheckPostController());
+        mappings.put("/free/freeinfo", new FreeListController());
+        mappings.put("/free/freepurchase", new FreeListController());
+        mappings.put("/free/freeshare", new FreeListController());
+        mappings.put("/free/freeother", new FreeListController());
+        
         
         // <소망>─────────────────────────────────────────────────────────────────
         mappings.put("/notification/message/write", new MessageController());

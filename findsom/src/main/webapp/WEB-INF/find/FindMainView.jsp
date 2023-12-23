@@ -12,16 +12,18 @@ function postList(targetUri) {
 <head>
 <meta charset="UTF-8">
 <title>FindMain</title>
+<link rel=stylesheet href="<c:url value='/css/Post.css' />" type="text/css">
 </head>
 <body>
 	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %>
-	<span>
-  	<div>	 	
-  		<form method="post" name="search" action="<c:url value='/find/findsearch' />">
-  			<input type="text" name="searchText" style="background-color:#FEF5F0; border-color:#8B2842"  maxlength="100">
-			<input type="submit" value="검색" style="background-color:#8B2842; color:white; border-color:white">
-			<span class="create"><a href="<c:url value='/find/findpost' />">✏️</a></span>
+	<span class="span">
+	<h2>구인게시판</h2>
+  	<div class="center">	 	
+  		<form method="post" name="search" action="<c:url value='/find/findsearch' />" >
+  			<input type="text" name="searchText" style="background-color:#FEF5F0; border-color:#8B2842"  maxlength="300">
+			<input type="submit" value="검색" style="background-color:#8B2842; color:white; border-color:#8B2842">&emsp;
+			<span class="create"><a href="<c:url value='/find/findpost' />"><b>✏️작성</b></a></span>
 		</form>		
 	</div>
 	<div>
@@ -32,8 +34,8 @@ function postList(targetUri) {
 	    			<a href="<c:url value='/find/findcheck'>
 					<c:param name='findpostID' value="${find.findpostID}"/>
 					</c:url>" style="color: #8B2842; text-decoration: none;">
-			  		<h4>${find.title}</h4></a>
-	            	<h5>${find.prefer}</h5>
+			  		<b>${find.title}</b></a><br>
+	            	&nbsp;${find.prefer}
 	            	<hr>
 	    		</td>
 	    	</tr>

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import model.FindDTO;
 import model.LifePattern;
+import model.dto.CommentDTO;
 import model.dto.MatchDTO;
 
 public class FindDAO {
@@ -172,6 +173,65 @@ public class FindDAO {
 		return post;
 	}
 	
+	// 특정 포스트아이디로 댓글 조회
+    public List<CommentDTO> findCommentsByPostID(int postId) throws SQLException {
+        List<CommentDTO> comments = new ArrayList<CommentDTO>();
+        String sql = "SELECT * FROM CommentInfo WHERE findpostID = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{ postId });
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while (rs.next()) {
+                CommentDTO comment = new CommentDTO(
+                    rs.getInt("commentID"),
+                    rs.getString("content"),
+                    rs.getTimestamp("commentDate").toLocalDateTime(),
+                    rs.getString("userID"),
+                    rs.getInt("freepostID"),
+                    rs.getInt("findpostID")
+                );
+                comments.add(comment);
+            }
+        } catch (SQLException ex) {
+            log.error("fail", ex);
+            throw ex;
+        } finally {
+            jdbcUtil.close();
+        }
+        return comments;
+    }
+    
+
+    //작성한 게시글 목록을 조회
+    public List<FindDTO> findPostsByUserID(String userID) throws SQLException {
+        List<FindDTO> posts = new ArrayList<>();
+        String sql = "SELECT * FROM FINDBOARDPOST WHERE userID = ? ORDER BY findpostID DESC";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{userID});
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while (rs.next()) {
+                FindDTO post = new FindDTO(
+                    rs.getInt("findpostID"),
+                    rs.getString("isAnonymous"),
+                    rs.getString("title"),
+                    rs.getString("prefer"),
+                    rs.getString("mycontent"),
+                    rs.getString("matecontent"),
+                    rs.getString("userID")
+                );
+                posts.add(post);
+            }
+        } catch (SQLException ex) {
+            log.error("Error fetching user posts", ex);
+            throw ex;
+        } finally {
+            jdbcUtil.close();
+        }
+        return posts;
+    }
+
+	
 	/*** 전체 구인 게시글 정보를 검색하여 List에 저장 및 반환	 */
 	public List<FindDTO> totalFindList() throws SQLException {
 
@@ -203,6 +263,22 @@ public class FindDAO {
 			jdbcUtil.close();		// resource 반환
 		}
 		return null;
+	}
+	public int totalPosts() throws SQLException {
+	    String sql = "SELECT count(findpostID) FROM FINDBOARDPOST";
+	    jdbcUtil.setSqlAndParameters(sql, null); // JDBCUtil에 query문 설정
+
+	    try {
+	        ResultSet rs = jdbcUtil.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1); // 결과로부터 게시글 수를 반환
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        jdbcUtil.close(); // resource 반환
+	    }
+	    return 0; // 오류가 발생하거나 결과가 없는 경우 0을 반환
 	}
 	
 	/*** 구인 게시판 글 수정	-제목, 우대사항, 상대성향(title,matecontent,prefer 부분 */

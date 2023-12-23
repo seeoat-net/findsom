@@ -6,16 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>FreeSearch</title>
+<link rel=stylesheet href="<c:url value='/css/Post.css' />" type="text/css">
 </head>
 <body>
   	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %>
-	<span>
-  	<div>
-  		<a href="<c:url value='/free/freelist' />"><input type="button" name="searchText" value="완료" style="background-color:#FEF5F0; border-color:#8B2842"  maxlength="100"></a>
+	<span class="span">
+	<h2>자유게시판 검색결과</h2>
+  	<div class="right">
+  		<a href="<c:url value='/free/freelist' />"><input type="button" name="searchText" value="완료" style="background-color:#8B2842; color:white; border-color:#8B2842"></a>
 	</div>
 	<div>
-		검색 결과<p>
 		<table class="table">
 	    <c:forEach var="search" items="${searchPost}">
 	    	<tr>
@@ -23,8 +24,8 @@
 	    			<a href="<c:url value='/free/freecheck'>
 					<c:param name='freepostID' value="${search.freepostID}"/>
 					</c:url>" style="color: #8B2842; text-decoration: none;">
-			  		<h4>${search.title}</h4></a>
-	            	<h5>${search.content}</h5>
+			  		<b>${search.title}</b></a><br>
+	            	&nbsp;${search.content}
 	            	<hr>
 	    		</td>
 	    	</tr>

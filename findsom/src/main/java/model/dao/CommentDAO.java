@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,51 +50,31 @@ public class CommentDAO {
     }
 
  // 댓글 조회 기능
-	public List<CommentDTO> freeCommentsByUserID(String userID) throws SQLException {
-		List<CommentDTO> comments = new ArrayList<>();
-        String sql = "SELECT * FROM CommentInfo WHERE userID = ?";
-        jdbcUtil.setSqlAndParameters(sql, new Object[]{userID});
-
-        try {
-            ResultSet rs = jdbcUtil.executeQuery();
-            while (rs.next()) {
-                CommentDTO comment = new CommentDTO(
-                    rs.getInt("commentID"),
-                    rs.getString("content"),
-                    rs.getTimestamp("commentDate").toLocalDateTime(),
-                    rs.getString("userID"),
-                    rs.getInt("freepostID"),
-                    rs.getInt("findpostID")
-                );
-                comments.add(comment);
-            }
-        } catch (SQLException ex) {
-            log.error("fail", ex);
-            throw ex;
-        } finally {
-            jdbcUtil.close();
-        }
-        return comments;
-	}
-    
-    public List<CommentDTO> findCommentsByUserID(String userID) throws SQLException {
+    public List<CommentDTO> freeCommentsByFreepostID(int freepostID) throws SQLException {
         List<CommentDTO> comments = new ArrayList<>();
-        String sql = "SELECT * FROM CommentInfo WHERE userID = ?";
-        jdbcUtil.setSqlAndParameters(sql, new Object[]{userID});
+        String sql = "SELECT * FROM CommentInfo WHERE freepostID = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{freepostID});
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();
             while (rs.next()) {
+                LocalDateTime commentDate = null;
+                Timestamp timestamp = rs.getTimestamp("commentDate");
+                if (timestamp != null) {
+                    commentDate = timestamp.toLocalDateTime();
+                }
+
                 CommentDTO comment = new CommentDTO(
                     rs.getInt("commentID"),
                     rs.getString("content"),
-                    rs.getTimestamp("commentDate").toLocalDateTime(),
+                    commentDate,
                     rs.getString("userID"),
                     rs.getInt("freepostID"),
                     rs.getInt("findpostID")
                 );
                 comments.add(comment);
             }
+
         } catch (SQLException ex) {
             log.error("fail", ex);
             throw ex;
@@ -102,6 +83,35 @@ public class CommentDAO {
         }
         return comments;
     }
+
+    
+	public List<CommentDTO> findCommentsByFindpostID(int findpostID) throws SQLException {
+	    List<CommentDTO> comments = new ArrayList<>();
+	    String sql = "SELECT * FROM CommentInfo WHERE findpostID = ?";
+	    jdbcUtil.setSqlAndParameters(sql, new Object[]{findpostID});
+
+	    try {
+	        ResultSet rs = jdbcUtil.executeQuery();
+	        while (rs.next()) {
+	            CommentDTO comment = new CommentDTO(
+	                rs.getInt("commentID"),
+	                rs.getString("content"),
+	                rs.getTimestamp("commentDate").toLocalDateTime(),
+	                rs.getString("userID"),
+	                rs.getInt("freepostID"),
+	                rs.getInt("findpostID")
+	            );
+	            comments.add(comment);
+	        }
+	    } catch (SQLException ex) {
+	        log.error("fail", ex);
+	        throw ex;
+	    } finally {
+	        jdbcUtil.close();
+	    }
+	    return comments;
+	}
+
   
     // 댓글 삭제 기능
     public boolean deleteComment(int commentID) throws Exception {
