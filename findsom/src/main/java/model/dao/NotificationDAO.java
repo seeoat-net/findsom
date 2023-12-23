@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;  
 import java.util.ArrayList;
-
 import model.dto.NotificationDTO;
 
 public class NotificationDAO {
@@ -17,6 +16,7 @@ public class NotificationDAO {
     public void close() {
         jdbcUtil.close();
     }
+
 
 
     // 알람 DB에 추가
@@ -78,28 +78,31 @@ public class NotificationDAO {
             jdbcUtil.close();
         }
     }
-
-
-    // 유저가 확인하지 않은 알람 개수 조회
-    public int getNumberOfNotifications(NotificationDTO notification) throws SQLException {
-        String query = "SELECT COUNT(*) AS count FROM notification WHERE receiverID=? AND isChecked='1'";
-        //COUNT(*) AS count: 확인하지 않은 알림의 개수를 셈, isChecked='1': 확인되지 않은 알림을 필터링하는 조건
-        Object[] parameters = {notification.getReceiverID()};
-        jdbcUtil.setSqlAndParameters(query, parameters);
+    public String getNotificationType(int notificationID) throws SQLException {
+        String query = "SELECT notiType FROM notiInfo WHERE notificationID = ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[]{notificationID});
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();
-
             if (rs.next()) {
-                return rs.getInt("count");
+                return rs.getString("notiType");
             }
-
-            return 0;
+            return null;
         } finally {
-            jdbcUtil.commit();
             jdbcUtil.close();
         }
     }
+
+	/*
+	 * // 확인하지 않은 알림의 개수 조회 public int getNumberOfNotifications(String receiverID)
+	 * throws SQLException { String query =
+	 * "SELECT COUNT(*) AS count FROM notiInfo WHERE receiverID = ? AND isChecked = '1'"
+	 * ; jdbcUtil.setSqlAndParameters(query, new Object[]{receiverID});
+	 * 
+	 * try { ResultSet rs = jdbcUtil.executeQuery(); if (rs.next()) { return
+	 * rs.getInt("count"); } return 0; } finally { jdbcUtil.commit();
+	 * jdbcUtil.close(); } }
+	 */
 
     // 알림 확인 상태 변경
     public void markNotificationAsChecked(int notificationID, String receiverID) throws Exception {
@@ -113,5 +116,6 @@ public class NotificationDAO {
             jdbcUtil.close();
         }
     }
+
 
 }

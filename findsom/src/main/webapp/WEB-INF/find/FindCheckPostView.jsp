@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <script>
@@ -11,6 +12,9 @@ String userID = (String) session.getAttribute("userID");
 function postList(targetUri) {
 	form.action = targetUri;
 	form.submit();
+}
+function postRemove() {
+	return confirm("정말 삭제하시겠습니까?");		
 }
 function postRemove() {
     var form = document.createElement("form");
@@ -31,60 +35,64 @@ function postRemove() {
 </script>
 <head>
 <meta charset="UTF-8">
-<title>FindCheckPost</title>
-<link rel=stylesheet href="<c:url value='/css/Post.css' />" type="text/css">
+<title>FindPost</title>
 </head>
 <body>
 	<%@ include file="../Sidebar.jsp" %>
 	<%@ include file="../Header.jsp" %>
-	<span class="span">
-	<h2>구인게시판 작성 글 확인</h2>
-	<div class="right">
-	   	<a href="<c:url value='/find/findlist' />"><input type="button" value="완료" style="background-color:#8B2842; color:white; border-color:#8B2842"></a>
-	   	<a href="#" onclick="postRemove();"><input type="button" value="삭제" style="background-color:#8B2842; color:white; border-color:#8B2842"></a>
-	</div>  	
-	<div>
-		<table>
-	  		<tr>
-	  			<td>
-	  			 <c:choose>
-				    <c:when test="${findpost.isAnonymous eq 'true'}">
-				      <p>작성자: 익명 &emsp;<input type="button" value="쪽지" style="background-color:#8B2842; color:white; border-color:#8B2842"></p>
-				    </c:when>
-				    <c:otherwise>
-				      <p>작성자: ${findpost.userID} &emsp;<input type="button" value="쪽지" style="background-color:#8B2842; color:white; border-color:#8B2842"></p> 
-				    </c:otherwise>
-				  </c:choose>
-				</td>
-			</tr>
+	<div class="main">
+	   	<a href="<c:url value='/find/findlist' />"><input type="button" value="완료"></a>
+	   	<a href="#" onclick="postRemove();"><input type="button" value="삭제"></a>
+	<!-- 	<a href="<c:url value='/community/delete'>
+				   <c:param name='commId' value='${community.id}'/>
+			 	 </c:url>" onclick="return communityRemove();">삭제(미구현)</a> &nbsp; -->
+	  	<div>작성글 확인<p>
+	  		<table>
+		  		<tr>
+		  			<td>
+		  			 <c:choose>
+					    <c:when test="${findpost.isAnonymous eq 'true'}">
+					      익명
+					    </c:when>
+					    <c:otherwise>
+					      ${findpost.userID}
+					    </c:otherwise>
+					  </c:choose>
+					</td>
+				</tr>
+		  		<tr><td></td></tr>
+		  		<tr>
+		  		 <td>제목:${findpost.title}</td>
+		  		</tr>
+		  		<tr>
+		  		 <td>우대사항:${findpost.prefer}</td>
+		  		</tr>
+		  		<tr>
+		  			<td>내성향: ${findpost.mycontent}</td>
+		  		</tr>
+		  		<tr>
+		  			<td>내가 작성한 글: ${findpost.matecontent} </td>
+		  		</tr>
+	  		</table>
+	  		<p>
+	  		<table>
 
-	  		<tr>
-	  		 	<td>제목: ${findpost.title}</td>
-	  		</tr>
-	  		<tr>
-	  		 	<td>우대사항: ${findpost.prefer}</td>
-	  		</tr>
-	  		<tr>
-	  			<td>
-	  			<p>내성향: ${findpost.mycontent}</p>
-	  			</td>
-	  		</tr>
-	  		<tr>
-	  			<td>
-	  			<p>내가 작성한 글: ${findpost.matecontent}</p>
-	  			</td>
-	  		</tr>
-	 	</table>
-	 	<p><hr>
-	 	<table>
-	  		<tr>
-	  			<td>
-	  			<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text"  name="comment" maxlength="500">
-				<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:#8B2842">
-	  			</td>
-	  		</tr>
-	  	</table>
+		  		<!-- 댓글 표시 -->
+				<c:forEach items="${comments}" var="comment">
+				    <div>
+				        <p>${comment.userID}: ${comment.content}</p>
+    				</div>
+				</c:forEach>
+
+
+				<!-- 댓글 등록 폼 -->
+				<form action="<c:url value='/find/comment' />" method="POST">
+    				<input type="hidden" name="findpostID" value="${param.findpostID}">
+				 	<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text" name="content" maxlength="500">
+    				<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
+				</form>
+	  		</table>
+	  	</div>
 	</div>
-	</span>
 </body>
 </html>

@@ -16,73 +16,46 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class CommentController implements Controller {
+    private static final Logger log = LoggerFactory.getLogger(CommentController.class);
+
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
         String userID = (String) session.getAttribute("userId"); 
         
         String content = request.getParameter("content");
-        int freepostID = Integer.parseInt(request.getParameter("freepostID"));
-        int findpostID = Integer.parseInt(request.getParameter("findpostID"));
+
+        // freepostID와 findpostID 파싱 개선
+        int freepostID = parseParameterAsInt(request, "freepostID");
+        int findpostID = parseParameterAsInt(request, "findpostID");
         
-        
-        CommentManager commentManager = new CommentManager();
-        
-        if (request.getMethod().equals("GET")) {
-            /// 알림함 댓글 조회  	
-        	if (freepostID % 2 == 0) {
-            	List<CommentDTO> comments = commentManager.freeCommentsByFreepostID(freepostID);
+        CommentManager commentManager = new CommentManager(); 
+
+        if (request.getMethod().equals("POST")) {
+            CommentDTO newComment = new CommentDTO(1, content, LocalDateTime.now(), userID, freepostID, findpostID);
+            commentManager.createComment(newComment);
+            createCommentNotification(newComment, userID);
+            
+            if (freepostID > 0) {
+                return "redirect:/free/freecheck?freepostID=" + freepostID;
+            } else if (findpostID > 0) {
+                return "redirect:/find/findcheck?findpostID=" + findpostID;
+            }  	    
+        } else if (request.getMethod().equals("GET")) {
+            if (freepostID > 0) {
+                List<CommentDTO> comments = commentManager.freeCommentsByFreepostID(freepostID);
                 request.setAttribute("comments", comments);
-                return "CommPostListView.jsp"; 	
-        	}
-        	else {
-           	 List<CommentDTO> comments = commentManager.findCommentsByFindpostID(findpostID);
+                return "redirect:/free/freecheck?freepostID=" + freepostID;
+                } else if (findpostID > 0) {
+                List<CommentDTO> comments = commentManager.findCommentsByFindpostID(findpostID);
+
                 request.setAttribute("comments", comments);
-                return "CommPostListView.jsp"; 
-        	}
-             
-         } 
-        
-        else if (request.getMethod().equals("POST")) {
-             // 댓글 작성 로직       
-             CommentDTO newComment = new CommentDTO(
-                     1, content, LocalDateTime.now(), userID, freepostID, findpostID);
-             CommentDTO createdComment = commentManager.createComment(newComment);
-             request.setAttribute("comment", createdComment);
-             
-             if (freepostID % 2 == 0)
-            	 return "/free/FreeCheckPostView.jsp"; 
-             else
-            	 return "/find/FindCheckPostView.jsp"; // 댓글 작성 확인	
-         }
-        
-        else if (request.getMethod().equals("GET")) {
-            /// 댓글 조회  	
-        	 if (freepostID % 2 == 0)
-            	 return "/free/FreeCheckPostView.jsp"; 
-             else
-            	 return "/find/FindCheckPostView.jsp";
-         } 
-        
-        else if (request.getMethod().equals("DELETE")) {
-        	//댓글 삭제 로직
-             int commentID = Integer.parseInt(request.getParameter("commentID"));
-             boolean isDeleted = commentManager.deleteComment(commentID);
+                return "redirect:/find/findcheck?findpostID=" + findpostID;
+            }       
+        } 
 
-             if (isDeleted) {
-                 request.setAttribute("message", "Comment deleted successfully.");
-             } else {
-                 request.setAttribute("error", "Failed to delete the comment.");
-             }
-             if (freepostID % 2 == 0)
-            	 return "/free/FreeCheckPostView.jsp"; 
-             else
-            	 return "/find/FindCheckPostView.jsp";
-         }
-         return "/error.jsp"; 
-     }
-
-
+        return "/error.jsp"; 
+    }
     private int parseParameterAsInt(HttpServletRequest request, String paramName) {
         try {
             String paramValue = request.getParameter(paramName);
@@ -91,7 +64,6 @@ public class CommentController implements Controller {
             return 0; // 파싱에 실패할 경우 기본값으로 0을 반환
         }
     }
-    
 	
 	 //댓글 알림 
 	 private void createCommentNotification(CommentDTO comment, String senderID) { 
@@ -150,4 +122,3 @@ public class CommentController implements Controller {
 
 }
  
-
