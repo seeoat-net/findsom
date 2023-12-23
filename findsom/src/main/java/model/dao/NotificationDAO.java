@@ -17,28 +17,36 @@ public class NotificationDAO {
         jdbcUtil.close();
     }
 
+
+
+    // 알람 DB에 추가
+    //쪽지도 조인해야 함
     public void pushNotificationDB(NotificationDTO notiInfo) throws Exception {
-        String query = "INSERT INTO notification (notificationID, receiverID, senderID, commentID, messageID, postID, notiType, notiTypeID, isChecked) "
+        String query = "INSERT INTO notiInfo (notificationID, receiverID, senderID, commentID, messageID, postID, notiType, notiTypeID, isChecked) "
         		+ "VALUES (Sequence_notificationID.NEXTVAL,?, ?, ?, ?, ?, ?, ?, ?)";
+
         Object[] parameters = {
             notiInfo.getReceiverID(), 
             notiInfo.getSenderID(), 
-            notiInfo.getCommentID(),
-            notiInfo.getMessageID(),
-            notiInfo.getPostID(),
+            notiInfo.getCommentID() != 0 ? notiInfo.getCommentID() : null,
+            notiInfo.getMessageID() != 0 ? notiInfo.getMessageID() : null,
+            notiInfo.getPostID() != 0 ? notiInfo.getPostID() : null,
             notiInfo.getNotiType(), 
             notiInfo.getNotiTypeID(),
             notiInfo.getIsChecked() // 이 값은 '0' 또는 '1'로 설정, 새 알림은 기본적으로 "확인되지 않음" 상태
         };
-        jdbcUtil.setSqlAndParameters(query, parameters);
 
+        jdbcUtil.setSqlAndParameters(query, parameters);
+        int result = -1;
         try {
-            jdbcUtil.executeUpdate();
+            result = jdbcUtil.executeUpdate();
         } finally {
             jdbcUtil.commit();
             jdbcUtil.close();
         }
+        System.out.println("pushNotificationDB : " + result);
     }
+
     // 사용자의 알림 목록 가져오기
     public List<NotificationDTO> getNotifications(String userID) throws SQLException {
         String query = "SELECT * FROM notiInfo WHERE receiverID = ? ORDER BY notificationID DESC";
@@ -84,6 +92,7 @@ public class NotificationDAO {
             jdbcUtil.close();
         }
     }
+
 	/*
 	 * // 확인하지 않은 알림의 개수 조회 public int getNumberOfNotifications(String receiverID)
 	 * throws SQLException { String query =
@@ -94,6 +103,7 @@ public class NotificationDAO {
 	 * rs.getInt("count"); } return 0; } finally { jdbcUtil.commit();
 	 * jdbcUtil.close(); } }
 	 */
+
     // 알림 확인 상태 변경
     public void markNotificationAsChecked(int notificationID, String receiverID) throws Exception {
         String query = "UPDATE notiInfo SET isChecked = '0' WHERE notificationID = ? AND receiverID = ?";
