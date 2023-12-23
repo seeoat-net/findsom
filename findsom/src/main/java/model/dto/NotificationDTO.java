@@ -51,7 +51,7 @@ public class NotificationDTO {
         this.messageID = messageID;
     }
     
-    public int getPostID() {//짝수인지 홀수인지 구분 (findpost=홀수 freepost=짝수 sequence)
+    public int getPostID() {
         return postID;
     }
 

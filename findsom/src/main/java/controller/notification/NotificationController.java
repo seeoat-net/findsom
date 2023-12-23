@@ -2,14 +2,16 @@ package controller.notification;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+import model.manager.MessageManager;
 import model.manager.NotificationManager;
 import model.dto.NotificationDTO;
 
 public class NotificationController implements Controller {
 
-    @Override
+	@Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String action = request.getParameter("action");
 
@@ -17,69 +19,50 @@ public class NotificationController implements Controller {
             return pushNotification(request);
         } else if ("getNotifications".equals(action)) {
             return getNotifications(request);
-        } else if ("getUncheckedNotificationCount".equals(action)) {
-            return getUncheckedNotificationCount(request);
         } else if ("markNotificationAsChecked".equals(action)) {
             return markNotificationAsChecked(request);
         }
-		return "error.jsp";
-
- 
+        return "error.jsp";
     }
 
-    //새 알림 투가
-    private String pushNotification(HttpServletRequest request) {
-        try {
-            NotificationManager notificationManager = NotificationManager.getInstance();
+	private String pushNotification(HttpServletRequest request) {
+	    try {
+	        NotificationManager notificationManager = NotificationManager.getInstance();
 
-            NotificationDTO newNotification = new NotificationDTO();
-            newNotification.setUserIdx(request.getParameter("userIdx"));
-            newNotification.setWriterIdx(request.getParameter("writerIdx"));
-            newNotification.setContentIdx(request.getParameter("contentIdx"));
-            newNotification.setNotiType(request.getParameter("notiType"));
-            newNotification.setNotiTypeID(request.getParameter("notiTypeID"));
+	        NotificationDTO newNotification = new NotificationDTO();
+	        newNotification.setReceiverID(request.getParameter("receiverID"));
+	        newNotification.setSenderID(request.getParameter("senderID"));
+	        newNotification.setCommentID(parseParameterAsInt(request, "commentID"));
+	        newNotification.setMessageID(parseParameterAsInt(request, "messageID"));
+	        newNotification.setPostID(parseParameterAsInt(request, "postID"));
+	        newNotification.setNotiType(request.getParameter("notiType"));
+	        newNotification.setNotiTypeID(request.getParameter("notiTypeID"));
 
-            notificationManager.pushNotification(newNotification);
+	        notificationManager.pushNotification(newNotification);
 
-            notificationManager.close();
-            return "/notification/list.jsp";  
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error.jsp";  
-        }
-    }
+	        notificationManager.close();
+	        return "/notification/list.jsp";  
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "error.jsp";  
+	    }
+	}
 
-    //알림함 조회
+	private int parseParameterAsInt(HttpServletRequest request, String paramName) {
+	    try {
+	        return Integer.parseInt(request.getParameter(paramName));
+	    } catch (NumberFormatException e) {
+	        return 0; 
+	    }
+	}
+
+
+	//알림함 조회
     private String getNotifications(HttpServletRequest request) {
         try {
             NotificationManager notificationManager = NotificationManager.getInstance();
-
-            NotificationDTO userNotification = new NotificationDTO();
-            userNotification.setUserIdx(request.getParameter("userIdx"));
-
-           
-            request.setAttribute("userNotifications", notificationManager.getNotifications(userNotification));
-
-            notificationManager.close();
-            return "PostListView.jsp";  
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error.jsp";  
-        }
-    }
-
-    //이게 그 알림함 마크 옆에 알람 얼마나 쌓였는지 알려주는건데 이걸 하겠다고 했나요 안하겠다고 했나요?
-    private String getUncheckedNotificationCount(HttpServletRequest request) {
-        try {
-            NotificationManager notificationManager = NotificationManager.getInstance();
-
-            NotificationDTO userNotification = new NotificationDTO();
-            userNotification.setUserIdx(request.getParameter("userIdx"));
-
-            int uncheckedCount = notificationManager.getNumberOfNotifications(userNotification);
-
-            request.setAttribute("uncheckedCount", uncheckedCount);
-
+            String userID = request.getParameter("userID");
+            request.setAttribute("userNotifications", notificationManager.getNotifications(userID));
             notificationManager.close();
             return "PostListView.jsp";  
         } catch (Exception e) {
@@ -88,20 +71,30 @@ public class NotificationController implements Controller {
         }
     }
     
-    //A 사용자의 알림을 확인하는건데 게시물인지 댓글인지를 구분해서 해당 페이지로 이동해야하는데 아직 구현하지 못함 
-    //지금은 해당 알림이 누구의 알림인지만 구분하도록 되어 있음
+
     private String markNotificationAsChecked(HttpServletRequest request) {
         try {
             NotificationManager notificationManager = NotificationManager.getInstance();
+            int notificationID = Integer.parseInt(request.getParameter("notificationID"));
+            String receiverID = request.getParameter("receiverID");
 
-            NotificationDTO notificationToCheck = new NotificationDTO();
-            notificationToCheck.setUserIdx(request.getParameter("userIdx"));
-            notificationToCheck.setNotIdx(request.getParameter("notIdx"));
+            // 알림 종류 확인
+            String notiType = notificationManager.getNotificationType(notificationID);
 
-            notificationManager.markNotificationAsChecked(notificationToCheck);
+            // 알림 상태 변경
+            notificationManager.markNotificationAsChecked(notificationID, receiverID);
 
             notificationManager.close();
-            return "A.jsp"; 
+
+            // 페이지 이동 결정
+            if ("comment".equals(notiType)) {
+                return "CommPostListView.jsp";
+            } else if ("message".equals(notiType)) {
+                return "PostMessageMainView.jsp";
+            } else {
+                return "error.jsp";
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return "error.jsp"; 

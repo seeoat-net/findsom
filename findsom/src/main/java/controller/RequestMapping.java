@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import controller.match.MatchController;
 import controller.noise.NoiseController;
 import controller.notification.CommentController;
+import controller.notification.CommentListController;
 import controller.notification.MessageController;
+import controller.notification.NotificationController;
 import controller.notification.PostController;
 import controller.find.*;
 import controller.free.*;
@@ -69,6 +71,8 @@ public class RequestMapping {
         mappings.put("/free/comment", new CommentController());
         mappings.put("/find/comment", new CommentController());
         mappings.put("/notification/post", new PostController());
+        mappings.put("/notification/comment", new CommentListController());
+        //mappings.put("/notification/notiList", new NotificationController());
 
         logger.info("Initialized Request Mapping!");
     }

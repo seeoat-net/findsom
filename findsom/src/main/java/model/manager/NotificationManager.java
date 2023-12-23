@@ -10,11 +10,7 @@ public class NotificationManager {
     private NotificationDAO notificationDAO;
 
     private NotificationManager() {
-        try {
-            notificationDAO = new NotificationDAO();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        notificationDAO = new NotificationDAO();
     }
 
     public static NotificationManager getInstance() {
@@ -33,31 +29,41 @@ public class NotificationManager {
         }
     }
 
-    public List<NotificationDTO> getNotifications(NotificationDTO notification) {
+    public List<NotificationDTO> getNotifications(String userID) {
         List<NotificationDTO> notifications = null;
         try {
-            notifications = notificationDAO.getNotifications(notification);
+            notifications = notificationDAO.getNotifications(userID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return notifications;
     }
 
-    public int getNumberOfNotifications(NotificationDTO notification) {
+    /*
+    public int getNumberOfNotifications(String receiverID) {
         try {
-            return notificationDAO.getNumberOfNotifications(notification);
+            return notificationDAO.getNumberOfNotifications(receiverID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
     }
-
-    public void markNotificationAsChecked(NotificationDTO notification) {
+    */
+    
+    public String getNotificationType(int notificationID) {
         try {
-            notificationDAO.markNotificationAsChecked(notification);
+            return notificationDAO.getNotificationType(notificationID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void markNotificationAsChecked(int notificationID, String receiverID) {
+        try {
+            notificationDAO.markNotificationAsChecked(notificationID, receiverID);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
 }
