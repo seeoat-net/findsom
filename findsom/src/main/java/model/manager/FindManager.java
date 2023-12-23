@@ -33,13 +33,17 @@ public class FindManager {
 		return findDAO.findCheckPost(findpostID);
 	}
 	
-	public List<CommentDTO> findCommentByPostId(int postId) throws SQLException {
-		return findDAO.findCommentsByPostID(postId);
-	}
+//	public List<CommentDTO> findCommentByPostId(int postId) throws SQLException {
+//		return findDAO.findCommentsByPostID(postId);
+//	}
 	
 	public List<FindDTO> findPostList() throws SQLException {
 		return findDAO.totalFindList();
 	}
+	
+	public int totalPosts() throws SQLException{
+		return findDAO.totalPosts();
+	}	
 	
 	//수정#postUpdateFindPost = update()
 	public int update(FindDTO post) throws SQLException{

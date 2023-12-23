@@ -1,29 +1,56 @@
+.matchBox {
+	padding-left: 350px;
+	padding-top: 40px;
+}
+.mateText {
+	width: 200px;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 30px;
+	border: 1.5px solid #8B2842;
+	border-bottom: none;
+}
 .container {
 	display: flex;
 	width : 700px;
 	flex-wrap: wrap; 
 	border: solid;
 	justify-content: space-around;
+	background-color: #FEF5F0;
+	border: 1.5px solid #8B2842;
+	margin-bottom: 10px;
+	padding: 10px;
 }
 
 .item {
-	/* border: solid; */
 	width : 150px;
+	padding-bottom: 5px;
 }
 
 .mbti {
-	/* border: solid; */
-	width : 250px;
+	width : 150px;
+}
+
+.matchingBtn {
+	height: 30px;
+	width : 100px;
+	font-size: 15px;
+	background-color: #FEF5F0;
+	border: 1.5px solid #8B2842;
+	margin-left: 600px;
 }
 
 /* result */
 .resultArea {
 	display: flex;
 	flex-wrap: wrap; 
-	border: solid;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 .resultBox {
-	width : 300px; 
-	border: solid;
+	width : 400px; 
+	color: black;
+	text-decoration-line: none;
+	border: 1.5px solid #8B2842;
+	padding: 0px 10px 10px 10px;
+	margin: 20px 30px auto 0px;
 }

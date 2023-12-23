@@ -1,0 +1,45 @@
+
+.container {	
+	display: flex;
+	width : 70%; 
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.naviText {
+	flex-basis: 100%;
+	padding-bottom: 10px;
+}
+
+.item {
+	width : 70%;
+}
+
+.itemMyNoise {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.itemText {
+	text-align: center;
+	padding-bottom: 20px;
+}
+.itemForm{
+	text-align: center;
+}
+
+.rankArea {
+	width : 20%;
+	text-align: center;
+	background-color: #FEF5F0;
+	border: 1.5px solid #8B2842;
+	padding: 50px 30px;
+}
+.rankTitle {
+}
+.rankBox {
+	padding-top: 10px;
+}

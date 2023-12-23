@@ -1,12 +1,15 @@
 package controller.match;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+import model.User;
 import model.dto.MatchDTO;
 import model.dto.MatchDetailDTO;
 import model.manager.MatchManager;
@@ -16,6 +19,8 @@ public class MatchController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		MatchManager matchMan = MatchManager.getInstance();
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
 		
 		if (request.getServletPath().equals("/match/matching")) {
 			if (request.getMethod().equals("GET")) {
@@ -33,7 +38,7 @@ public class MatchController implements Controller {
 					System.out.print(s + " ");
 				}
 
-				ArrayList<MatchDTO> matchingResult = matchMan.matching(lifePatterns);
+				ArrayList<MatchDTO> matchingResult = matchMan.matching(lifePatterns, user.getUserId());
 				
 				request.setAttribute("matchingResult", matchingResult);
 				
@@ -42,32 +47,18 @@ public class MatchController implements Controller {
 		}
 		else if (request.getServletPath().equals("/match/detail")) {
 		    // 매칭 상세 기능 구현
+			
 			String userID = request.getParameter("matchingUserID");
+			System.out.print(userID);
 						
 			MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID);
-			request.setAttribute("matchingDetailResult", matchingDetailResult );
+			matchingDetailResult.setNickname(request.getParameter("matchingUserNickname"));
+			request.setAttribute("matchingDetail", matchingDetailResult );
+			System.out.println( matchingDetailResult.toString() );
 			
 			return "/match/MatchDetailView.jsp";
 		}
 		return null;
 	}
-	// matching Test
-	/*
-	public static void main(String[] args) throws SQLException {
-		MatchManager matchMan = MatchManager.getInstance();;
-		
-		ArrayList<String> pattern = new ArrayList<String>();
-		pattern.add("morning");
-		pattern.add("smoker");
-		pattern.add("yesclean");
-		pattern.add("yesEatInRoom");
-		pattern.add("2");	
-		
-		ArrayList<MatchDTO> matchingResult = matchMan.matching(pattern);
-		
-		for (MatchDTO u : matchingResult) {
-			System.out.println(u.toString());
-		}
-	}
-	*/
+
 }

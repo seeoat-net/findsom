@@ -1,28 +1,45 @@
 
 .container {	
 	display: flex;
-	width : 75%;
-	flex-wrap: wrap; 
-	justify-content: space-around;
-	border: 1px solid black;
+	width : 70%; 
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.naviText {
+	flex-basis: 100%;
+	padding-bottom: 10px;
 }
 
 .item {
-	border: 1px solid red;	
+	width : 70%;
 }
 
-.itemTitle {
-	border: 1px solid orange;
+.itemMyNoise {
+	text-align: center;
+	padding-bottom: 20px;
 }
 
 .itemText {
-	border: 1px solid yellow;
+	text-align: center;
+	padding-bottom: 20px;
+}
+.itemForm{
+	text-align: center;
 }
 
 .rankArea {
-	border: 1px solid green;
+	width : 20%;
+	text-align: center;
+	background-color: #FEF5F0;
+	border: 1.5px solid #8B2842;
+	padding: 50px 30px;
 }
-
+.rankTitle {
+}
 .rankBox {
-	border: 1px solid blue;
+	padding-top: 10px;
 }
