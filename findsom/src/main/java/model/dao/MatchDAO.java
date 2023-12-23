@@ -17,7 +17,7 @@ public class MatchDAO {
 	}
 	
 	//현재 룸메이트를 구인 중인 모든 유저의 MatchDTO
-	public ArrayList<MatchDTO> searchUsers() throws SQLException {
+	public ArrayList<MatchDTO> searchUsers(String userID) throws SQLException {
 		try {
 			StringBuilder query1 = new StringBuilder();
 	        query1.append("SELECT userID, nickname ");
@@ -29,8 +29,10 @@ public class MatchDAO {
     	 
 			ResultSet rs = jdbcUtil.executeQuery();
 			while (rs.next()) {		// 검색 결과 존재
-				MatchDTO matchDTO = new MatchDTO(rs.getString("userID"), rs.getString("nickname"));
-				matchDTOList.add(matchDTO);
+				if ( !rs.getString("userID").equals(userID) ) {
+					MatchDTO matchDTO = new MatchDTO(rs.getString("userID"), rs.getString("nickname"));
+					matchDTOList.add(matchDTO);
+				}
 			}
 			
 			StringBuilder query2 = new StringBuilder();
@@ -79,7 +81,6 @@ public class MatchDAO {
 				finds.add(dto);
 			}
 			
-			
 			StringBuilder query2 = new StringBuilder();
 	        query2.append("SELECT LifePattern ");
 	        query2.append("FROM LifePatterns ");
@@ -89,59 +90,11 @@ public class MatchDAO {
     		rs = jdbcUtil.executeQuery();
     		ArrayList<String> patterns = new ArrayList<String>();
 			while (rs.next()) {		
-				switch (rs.getString("LifePattern")) {
-                case "morning": 
-                	patterns.add("아침형"); break;
-                case "night":
-                    patterns.add("저녁형"); break;
-                case "smoker": 
-                	patterns.add("흡연자"); break;
-                case "nonSmoker":
-                	patterns.add("비흡연자"); break;
-                case "semester": 
-                	patterns.add("학기중"); break;
-                case "vacation":
-                	patterns.add("방학까지"); break;
-                case "morningShower": 
-                	patterns.add("아침사워"); break;
-                case "nightShower":
-                	patterns.add("밤샤워"); break;
-                case "one": 
-                	patterns.add("알람 한개"); break;
-                case "many":
-                	patterns.add("알람 여러개"); break;
-                case "teethGrinding":
-                	patterns.add("이갈이"); break;
-                case "snoring":
-                	patterns.add("코골이"); break;
-                case "ear":
-                	patterns.add("잠귀 밝음"); break;
-                case "yesFriendship": 
-                	patterns.add("친목O"); break;
-                case "noFriendship":
-                	patterns.add("친목X"); break;
-                case "yesEarphones": 
-                	patterns.add("이어폰O"); break;
-                case "noEarphones":
-                	patterns.add("이어폰X"); break;
-                case "yesclean": 
-                	patterns.add("청결유지"); break;
-                case "noclean":
-                	patterns.add("더러워도 됨"); break;
-                case "yesEatInRoom": 
-                	patterns.add("방 안 취식O"); break;
-                case "noEatInRoom":
-                	patterns.add("방 안 취식X"); break;
-                case "1": 
-                	patterns.add("1층 침대"); break;
-                case "2":
-                	patterns.add("2층 침대"); break;
-                default:
-                	patterns.add(rs.getString("LifePattern")); break;
-	            }
+				patterns.add(rs.getString("LifePattern")) ;
 			}
 			
-	        MatchDetailDTO detailDTO = new MatchDetailDTO(userID, patterns, finds);
+			MatchDetailDTO detailDTO = new MatchDetailDTO(userID, patterns, finds);
+			detailDTO.patternListChangeToKor();
 			
 			return detailDTO;
 		} catch (Exception ex) {
