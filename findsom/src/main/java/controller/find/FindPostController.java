@@ -32,6 +32,10 @@ public class FindPostController implements Controller{
         List<String> lifepattern = findDAO.getLifePatternsByUserID(userID);// JSP 페이지로 데이터 전달
         request.setAttribute("lifepattern", lifepattern);
         
+        // 사용자가 작성한 게시글 목록을 가져오기
+        List<FindDTO> userPosts = findDAO.findPostsByUserID(userID);
+        request.setAttribute("userPosts", userPosts);
+        
 		if(request.getMethod().equals("GET")) {
 			
 			return "/find/FindPostView.jsp";

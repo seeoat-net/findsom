@@ -27,18 +27,9 @@ public class CommentManager {
     }
     
     // 댓글 조회
-    public List<CommentDTO> freeCommentsByUserID(String userID) {
-    	try {
-            return commentDAO.freeCommentsByUserID(userID);
-        } catch (SQLException e) {
-            // 오류 처리
-            e.printStackTrace();
-            return new ArrayList<>(); // 오류가 발생한 경우, 빈 리스트 반환
-        }
-	}
-    public List<CommentDTO> findCommentsByUserID(String userID) {
+    public List<CommentDTO> freeCommentsByFreepostID(int freepostID) {
         try {
-            return commentDAO.findCommentsByUserID(userID);
+            return commentDAO.freeCommentsByFreepostID(freepostID);
         } catch (SQLException e) {
             // 오류 처리
             e.printStackTrace();
@@ -46,6 +37,15 @@ public class CommentManager {
         }
     }
 
+    public List<CommentDTO> findCommentsByFindpostID(int findpostID) {
+        try {
+            return commentDAO.findCommentsByFindpostID(findpostID);
+        } catch (SQLException e) {
+            // 오류 처리
+            e.printStackTrace();
+            return new ArrayList<>(); // 오류가 발생한 경우, 빈 리스트 반환
+        }
+    }
 
     // 댓글 삭제
     public boolean deleteComment(int commentID) throws Exception {
@@ -71,10 +71,6 @@ public class CommentManager {
              e.printStackTrace();
          }
      }
-
-	
-    
-
 
 
 }
