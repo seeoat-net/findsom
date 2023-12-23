@@ -4,17 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>PostListView</title>
 <link rel=stylesheet href="<c:url value='../css/PostList.css' />" >
-<script>
-
-function clickBtn(targetUri) {
-	form.action = targetUri;
-	form.method="GET";
-	form.submit();
-}
-
-</script>
 </head>
 <body>
 	<span>

@@ -28,21 +28,25 @@ public class MatchController implements Controller {
 			}
 			else {
 				// 매칭 기능 구현
-				ArrayList<String> lifePatterns = new ArrayList<String>();
-				String[] strs = request.getParameterValues("lifePatterns");
-				String mbti = request.getParameter("mbti");
-				lifePatterns.addAll(Arrays.asList(strs));
-				lifePatterns.add(mbti);
-				
-				for(String s : lifePatterns) {
-					System.out.print(s + " ");
+					ArrayList<String> lifePatterns = new ArrayList<String>();
+					String[] strs = request.getParameterValues("lifePatterns");
+					String mbti = request.getParameter("mbti");
+					lifePatterns.addAll(Arrays.asList(strs));
+					lifePatterns.add(mbti);
+					
+				try {
+					for(String s : lifePatterns) {
+						System.out.print(s + " ");
+					}
+	
+					ArrayList<MatchDTO> matchingResult = matchMan.matching(lifePatterns, user.getUserId());
+					
+					request.setAttribute("matchingResult", matchingResult);
+					
+					return "/match/MatchView.jsp";
+				} catch (Exception e) {  
+					 return "redirect:/findsom/RandingView.jsp";			
 				}
-
-				ArrayList<MatchDTO> matchingResult = matchMan.matching(lifePatterns, user.getUserId());
-				
-				request.setAttribute("matchingResult", matchingResult);
-				
-				return "/match/MatchView.jsp";
 			}
 		}
 		else if (request.getServletPath().equals("/match/detail")) {
@@ -50,15 +54,20 @@ public class MatchController implements Controller {
 			
 			String userID = request.getParameter("matchingUserID");
 			System.out.print(userID);
-						
-			MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID);
-			matchingDetailResult.setNickname(request.getParameter("matchingUserNickname"));
-			request.setAttribute("matchingDetail", matchingDetailResult );
-			System.out.println( matchingDetailResult.toString() );
 			
-			return "/match/MatchDetailView.jsp";
+			try {
+				MatchDetailDTO matchingDetailResult = matchMan.matchDetail(userID);
+				matchingDetailResult.setNickname(request.getParameter("matchingUserNickname"));
+				request.setAttribute("matchingDetail", matchingDetailResult );
+				System.out.println( matchingDetailResult.toString() );
+				
+				return "/match/MatchDetailView.jsp";
+			
+			} catch (Exception e) {  
+				 return "redirect:/match/matching";			
+			}
 		}
-		return null;
+		return "redirect:/user/mypageMain";
 	}
 
 }
