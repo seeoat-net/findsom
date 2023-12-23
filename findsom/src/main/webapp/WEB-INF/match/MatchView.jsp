@@ -20,12 +20,6 @@ function postMatch() {
 	form.submit();
 }
 
-function getUserDetail(targetUri) {
-	form.action = targetUri;
-	form.method="GET";
-	form.submit();
-}
-
 </script>
 </head>
 
