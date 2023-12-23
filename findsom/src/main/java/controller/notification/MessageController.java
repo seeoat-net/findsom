@@ -50,7 +50,7 @@ public class MessageController implements Controller {
             return "/error.jsp";
         }
     }
-    //쪽지 목록 조회
+    //쪽지 목록 조회//구인매칭자유 나눠야 함 
     private String handleViewMessages(HttpServletRequest request, HttpSession session, MessageManager messageManager) throws SQLException {
         String receiverID = (String) session.getAttribute("userID");
         List<MessageDTO> messages = messageManager.getMessagesForReceiver(receiverID);
