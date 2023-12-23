@@ -1,6 +1,8 @@
 package model.dto;
 
-public class NoiseDTO {
+import java.io.Serializable;
+
+public class NoiseDTO  implements Serializable {
 	private String roomInfo;
 	private int count;
 	

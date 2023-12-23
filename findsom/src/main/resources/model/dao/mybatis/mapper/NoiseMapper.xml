@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="model.dao.mybatis.mapper.NoiseMapper">
+	<cache />
+	
+	<select id="selectMyNoise" resultType="int">
+		SELECT count 
+		FROM room 
+		WHERE roominfo = (SELECT roominfo FROM USERINFO WHERE userID = #{userID} ) 
+	</select>
+	
+	<select id="selectNoiseRank" resultType="NoiseDTO">
+		<![CDATA[
+			SELECT roominfo, count
+			FROM ( SELECT roominfo, count FROM room WHERE count > 0 ORDER BY count DESC )
+			WHERE ROWNUM < 10 
+		]]>
+	</select>
+	
+	<update id="updateNoise">
+		UPDATE room 
+		SET count = (SELECT count FROM room WHERE roominfo = #{roomInfo}) + 1 
+		WHERE roominfo = #{roomInfo}
+	</update>
+</mapper>
