@@ -45,6 +45,7 @@ public class MatchController implements Controller {
 					
 					return "/match/MatchView.jsp";
 				} catch (Exception e) {  
+					 e.printStackTrace();
 					 return "redirect:/findsom/RandingView.jsp";			
 				}
 			}
