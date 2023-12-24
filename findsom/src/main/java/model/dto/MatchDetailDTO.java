@@ -8,12 +8,22 @@ import model.FindDTO;
 //MatchDTO + 게시글
 public class MatchDetailDTO extends MatchDTO {
 
+    //private String userId;
 	private ArrayList<FindDTO> finds;
 	
 	public MatchDetailDTO(String userID, ArrayList<String> patterns, ArrayList<FindDTO> finds) {
 		super(userID, patterns);
+		 //this.userId = userID;
 		this.finds = finds;
 	}
+	
+	//public String getUserId() {
+     //   return userId;
+    //}
+
+    //public void setUserId(String userId) {
+     //   this.userId = userId;
+    //}
 
 	public ArrayList<FindDTO> getFinds() {
 		return finds;
