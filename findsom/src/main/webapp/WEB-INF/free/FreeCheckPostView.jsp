@@ -25,6 +25,9 @@ function postRemove() {
     form.submit();
     return false; // 이벤트 전파 방지
 }
+function postMsg() {
+    window.location.href = "<c:url value='/notification/writeMessage'/>?receiverID=" + new URLSearchParams(window.location.search).get('matchingUserID');
+}
 </script>
 <head>
 <meta charset="UTF-8">
@@ -46,10 +49,10 @@ function postRemove() {
 	  			<td>
 	  			<c:choose>
 				    <c:when test="${freepost.isAnonymous eq 'true'}">
-				      <p>작성자: 익명 &emsp;<input type="button" value="쪽지" style="background-color:#8B2842; color:white; border-color:#8B2842"></p>
+				      <p>작성자: 익명 &emsp;<button class="postBtn" onclick="postMsg()" style="background-color:#8B2842; color:white; border-color:#8B2842">쪽지</button></p>
 				    </c:when>
 				    <c:otherwise>
-				      <p>작성자: ${freepost.userID} &emsp;<input type="button" value="쪽지" style="background-color:#8B2842; color:white; border-color:#8B2842"></p>
+				      <p>작성자: ${freepost.userID} &emsp;<button class="postBtn" onclick="postMsg()" style="background-color:#8B2842; color:white; border-color:#8B2842">쪽지</button></p>
 				    </c:otherwise>
 				  </c:choose>
 				</td>

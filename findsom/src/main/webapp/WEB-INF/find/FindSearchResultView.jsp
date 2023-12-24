@@ -17,27 +17,20 @@
   		<a href="<c:url value='/find/findlist' />"><input type="button" value="완료" style="background-color:#8B2842; color:white; border-color:#8B2842"></a>
 	</div>
 	<div>
-		<c:choose>
-	    <c:when test="${not empty searchPost}">
-	    	<table class="table">
-				<c:forEach var="search" items="${searchPost}">
-	                 <tr>
-	                     <td>
-	                         <a href="<c:url value='/find/findcheck'>
-	                             <c:param name='findpostID' value="${search.findpostID}"/>
-	                         </c:url>" style="color: #8B2842; text-decoration: none;">
-	                         <b>${search.title}</b></a><br>
-	                         &nbsp;${search.prefer}
-	                         <hr>
-	                     </td>
-	                 </tr>
-	             </c:forEach>
-	        </table>
-	    </c:when>
-	    <c:otherwise>
-           <p>${message}</p>
-        </c:otherwise>
-    	</c:choose>
+	    <table class="table">
+			<c:forEach var="search" items="${searchPost}">
+	              <tr>
+	                  <td>
+	                      <a href="<c:url value='/find/findcheck'>
+	                           <c:param name='findpostID' value="${search.findpostID}"/>
+	                      </c:url>" style="color: #8B2842; text-decoration: none;">
+	                      <b>${search.title}</b></a><br>
+	                      &nbsp;${search.prefer}
+	                      <hr>
+	                   </td>
+	              </tr>
+	          </c:forEach>
+	    </table>
 	</div>
   	</span>
 </body>

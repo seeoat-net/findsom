@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="model.User" %>
-<%@ page import="model.service.UserManager" %>
+<%@ page import="model.dto.User" %>
+<%@ page import="model.manager.UserManager" %>
 <%
     // 세션에서 User 객체 가져오기
     User user = (User) request.getSession().getAttribute("user");

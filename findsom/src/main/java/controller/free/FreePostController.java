@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.FreeDTO;
 import model.dao.FreeDAO;
+import model.dto.FreeDTO;
 import model.manager.FreeManager;
 
 public class FreePostController implements Controller{

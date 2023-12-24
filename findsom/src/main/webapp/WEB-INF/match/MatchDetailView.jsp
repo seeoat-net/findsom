@@ -11,15 +11,32 @@
 <meta charset="UTF-8">
 <title>MAtchDetailView</title>
 <link rel=stylesheet href="<c:url value='../css/MatchDetail.css' />" >
+<!--  <script>
+    function postMsg() {
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "<c:url value='/notification/messagePost'/>";
+
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "receiverID";
+        // URL의 쿼리 파라미터에서 matchingUserID 값을 가져옵니다.
+        input.value = new URLSearchParams(window.location.search).get('matchingUserID');
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+
+        form.submit();
+        return false; // 이벤트 전파 방지
+    }
+</script>-->
+
 <script>
-
-function postMsg(targetUri) {
-	form.action = targetUri;
-	form.method="GET";
-	form.submit();
-}
-
+    function postMsg() {
+        window.location.href = "<c:url value='/notification/writeMessage'/>?receiverID=" + new URLSearchParams(window.location.search).get('matchingUserID');
+    }
 </script>
+
 </head>
 
 <body>
@@ -29,7 +46,7 @@ function postMsg(targetUri) {
 	<div class="container">
 		<div class="itemProfile">
 			<h1> ${matchingDetail.nickname}님 </h1>
-			<button class="postBtn" onClick="postMsg('<c:url value='/notification/form'/>')">쪽지</button>
+			<button class="postBtn" onclick="postMsg()" style="background-color:#8B2842; color:white; border-color:#8B2842">쪽지</button>
 		</div>
 		<div class="patternListBox">
 			<h3>${matchingDetail.nickname}의 생활패턴</h3>

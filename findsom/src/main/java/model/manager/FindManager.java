@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import model.FindDTO;
 import model.dao.FindDAO;
 import model.dto.CommentDTO;
+import model.dto.FindDTO;
 
 public class FindManager {
 	private static FindManager find = new FindManager();

@@ -9,9 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.FreeDTO;
 import model.dao.FindDAO;
 import model.dao.FreeDAO;
+import model.dto.FreeDTO;
 import model.manager.FreeManager;
 
 public class FreeListController implements Controller{

@@ -5,6 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+<<<<<<< Updated upstream
+=======
+import model.dto.User;
+>>>>>>> Stashed changes
 import model.manager.NoiseManager;
 
 public class NoiseController implements Controller {

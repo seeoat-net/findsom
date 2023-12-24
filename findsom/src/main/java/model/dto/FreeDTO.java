@@ -1,4 +1,4 @@
-package model;
+package model.dto;
 
 /***  FreeBoardPost 테이블과 대응됨 */
 public class FreeDTO {

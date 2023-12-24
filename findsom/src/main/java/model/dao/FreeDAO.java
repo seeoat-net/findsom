@@ -11,9 +11,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import model.FindDTO;
-import model.FreeDTO;
 import model.dto.CommentDTO;
+import model.dto.FreeDTO;
 
 public class FreeDAO {
 	private static final Logger log = LoggerFactory.getLogger(FreeDAO.class);

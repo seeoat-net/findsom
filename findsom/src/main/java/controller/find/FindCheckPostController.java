@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.FindDTO;
 import model.dto.CommentDTO;
+import model.dto.FindDTO;
 import model.manager.FindManager;
 
 public class FindCheckPostController implements Controller{

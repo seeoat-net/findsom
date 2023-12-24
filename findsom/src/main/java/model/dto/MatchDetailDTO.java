@@ -2,10 +2,13 @@ package model.dto;
 
 import java.util.ArrayList;
 
+<<<<<<< Updated upstream
 import javax.naming.ldap.PagedResultsResponseControl;
 
 import model.FindDTO;
 
+=======
+>>>>>>> Stashed changes
 //match 상세에서 볼 수 있는 정보에 대한 DTO
 //MatchDTO + 게시글
 public class MatchDetailDTO extends MatchDTO {
