@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.User;
+import model.dto.User;
 import model.dto.MatchDTO;
 import model.dto.MatchDetailDTO;
 import model.dto.User;
