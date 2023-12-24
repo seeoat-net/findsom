@@ -97,4 +97,9 @@ public class MessageManager {
         }
     }
 
+   public List<MessageDTO> getMessagesForSender(String senderID) throws SQLException {
+	   return messageDAO.getMessagesForSender(senderID);
+   }
+
+
 }

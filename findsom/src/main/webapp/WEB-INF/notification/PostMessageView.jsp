@@ -35,12 +35,12 @@ function postMsg() {
 			<br/>
 			<div class="postBox">
 				<div class="postBoxTitle" > 쪽지 보내기 </div>
-				<form name="form" method="POST" action="<c:url value='/notification/writeMessage'/>">
-					    <input type="hidden" name="receiverID" value="${param.receiverID}" />
-					<textarea class="postBoxText" id="messageText" 
-						name="messageText" autocomplete="off" placeholder="쪽지 내용을 입력하세요!" ></textarea>
+				<form name="form" method="POST" action="<c:url value='/notification/messagePost'/>">
+				    <input type="hidden" name="receiverID" value="${param.receiverID}" />
+				    <textarea class="postBoxText" id="messageText" name="messageText" autocomplete="off" placeholder="쪽지 내용을 입력하세요!"></textarea>
+				    <input type="submit" class="postBtn" value="전송"/>
 				</form>
-				<input type="submit" class="postBtn" value="전송"/>	
+
 				
 			</div>		
 		</div>	

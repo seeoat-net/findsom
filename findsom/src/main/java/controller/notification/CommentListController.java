@@ -22,7 +22,7 @@ public class CommentListController implements Controller {
 
         request.setAttribute("commentList", commentList1);
         request.setAttribute("commentList", commentList2);
-        return "/comment/UserCommtView.jsp"; 
+        return "/notification/CommentListView.jsp"; 
     }
 
     private int parseParameterAsInt(HttpServletRequest request, String paramName) {

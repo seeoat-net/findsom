@@ -109,6 +109,34 @@ public class MessageDAO {
             jdbcUtil.close(); // 리소스 반환
         }
     }
+ // MessageDAO 클래스에 메서드 추가
+    public List<MessageDTO> getMessagesForSender(String senderID) throws SQLException {
+        String query = "SELECT * FROM MessageInfo WHERE senderID=?";
+        Object[] parameters = {senderID};
+
+        try {
+            jdbcUtil.setSqlAndParameters(query, parameters);
+            ResultSet rs = jdbcUtil.executeQuery();
+            List<MessageDTO> messages = new ArrayList<>();
+
+            while (rs.next()) {
+                MessageDTO message = new MessageDTO(
+                    rs.getInt("messageID"),
+                    rs.getString("messageText"),
+                    rs.getTimestamp("createAt").toLocalDateTime(), // Timestamp를 LocalDateTime으로 변환
+                    rs.getString("senderID"),
+                    rs.getString("receiverID"),
+                    rs.getInt("freepostID"),
+                    rs.getInt("findpostID")
+                );
+                messages.add(message);
+            }
+            return messages;
+        } finally {
+            jdbcUtil.close();
+        }
+    }
+
     
     // 쪽지 삭제
     public int deleteMessage(int messageID) throws SQLException {

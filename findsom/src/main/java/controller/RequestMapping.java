@@ -11,6 +11,7 @@ import controller.notification.CommentListController;
 import controller.notification.MessageController;
 import controller.notification.NotificationController;
 import controller.notification.PostController;
+import controller.notification.PostMessageListController;
 import controller.find.*;
 import controller.free.*;
 import controller.user.*;
@@ -74,7 +75,7 @@ public class RequestMapping {
         mappings.put("/find/comment", new CommentController());
         mappings.put("/notification/post", new PostController());
         mappings.put("/notification/comment", new CommentListController());
-        
+        //mappings.put("/notification/messagePost", new PostMessageListController());
         //mappings.put("/notification/notiList", new NotificationController());
         
         
