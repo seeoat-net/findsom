@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.service.UserManager;
-import model.LifePattern;
-import model.User;
+import model.dto.LifePattern;
+import model.dto.User;
+import model.manager.UserManager;
 
 public class UpdateUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);

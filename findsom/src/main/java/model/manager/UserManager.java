@@ -1,4 +1,4 @@
-package model.service;
+package model.manager;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.user.RegisterUserController;
-import model.LifePattern;
-import model.User;
 import model.dao.UserDAO;
+import model.dto.LifePattern;
+import model.dto.User;
 
 /**
  * 사용자 관리 API를 사용하는 개발자들이 직접 접근하게 되는 클래스.

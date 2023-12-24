@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.User;
-import model.service.UserManager;
+import model.dto.User;
+import model.manager.UserManager;
 
 public class LoginController implements Controller {
     @Override

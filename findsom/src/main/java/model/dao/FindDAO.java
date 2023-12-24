@@ -9,9 +9,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import model.FindDTO;
-import model.LifePattern;
 import model.dto.CommentDTO;
+import model.dto.FindDTO;
+import model.dto.LifePattern;
 import model.dto.MatchDTO;
 
 public class FindDAO {

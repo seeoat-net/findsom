@@ -12,6 +12,7 @@ import controller.Controller;
 import model.User;
 import model.dto.MatchDTO;
 import model.dto.MatchDetailDTO;
+import model.dto.User;
 import model.manager.MatchManager;
 
 public class MatchController implements Controller {

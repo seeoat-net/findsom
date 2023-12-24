@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.User;
 import model.dto.PostDTO;
+import model.dto.User;
 import model.manager.PostManager;
 
 public class PostController implements Controller {

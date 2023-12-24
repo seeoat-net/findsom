@@ -13,8 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.FindDTO;
 import model.dao.FindDAO;
+import model.dto.FindDTO;
 import model.dto.MatchDTO;
 import model.dto.MatchDetailDTO;
 import model.manager.FindManager;

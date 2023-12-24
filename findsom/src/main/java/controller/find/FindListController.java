@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import controller.free.FreeListController;
-import model.FindDTO;
+import model.dto.FindDTO;
 import model.manager.FindManager;
 import model.manager.FreeManager;
 

@@ -1,9 +1,7 @@
 package model.dto;
 
 import java.util.ArrayList;
-
-import model.FindDTO;
-
+import model.dto.FindDTO;
 //match 상세에서 볼 수 있는 정보에 대한 DTO
 //MatchDTO + 게시글
 public class MatchDetailDTO extends MatchDTO {

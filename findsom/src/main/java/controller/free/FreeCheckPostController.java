@@ -9,13 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.FindDTO;
-import model.FreeDTO;
 import model.dto.CommentDTO;
+import model.dto.FindDTO;
+import model.dto.FreeDTO;
 import model.manager.FreeManager;
 
 public class FreeCheckPostController implements Controller{
-	private static final Logger log = LoggerFactory.getLogger(FreeUpdateController.class);
+	private static final Logger log = LoggerFactory.getLogger(FreeCheckPostController.class);
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {			
 		 
 		FreeManager manager = FreeManager.getInstance();

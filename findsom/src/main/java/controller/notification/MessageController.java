@@ -2,6 +2,7 @@ package controller.notification;
 
 import model.User;
 import model.dto.MessageDTO;
+import model.dto.User;
 import model.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;

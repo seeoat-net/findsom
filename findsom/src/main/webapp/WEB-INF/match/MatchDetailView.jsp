@@ -46,7 +46,7 @@
 	<div class="container">
 		<div class="itemProfile">
 			<h1> ${matchingDetail.nickname}님 </h1>
-			<button class="postBtn" onclick="postMsg()">쪽지</button>
+			<button class="postBtn" onclick="postMsg()" style="background-color:#8B2842; color:white; border-color:#8B2842">쪽지</button>
 		</div>
 		<div class="patternListBox">
 			<h3>${matchingDetail.nickname}의 생활패턴</h3>

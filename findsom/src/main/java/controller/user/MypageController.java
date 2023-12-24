@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.LifePattern;
-import model.User;
-import model.service.UserManager;
+import model.dto.LifePattern;
+import model.dto.User;
+import model.manager.UserManager;
 
 public class MypageController implements Controller {
     @Override

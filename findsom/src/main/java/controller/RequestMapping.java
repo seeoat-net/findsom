@@ -36,7 +36,6 @@ public class RequestMapping {
         mappings.put("/user/updateForm", new UpdateFormController());
         mappings.put("/user/updateUser", new UpdateUserController());
         
-        mappings.put("/user/delete", new DeleteUserController());
         
         // <다솔>─────────────────────────────────────────────────────────────────
         // // 쉿!게시판
@@ -52,13 +51,11 @@ public class RequestMapping {
         mappings.put("/find/findlist", new FindListController()); //글 목록 
         mappings.put("/find/findpost", new FindPostController()); //글 작성
         mappings.put("/find/findsearch", new FindSearchController());
-        mappings.put("/find/findupdate", new FindUpdateController());
         mappings.put("/find/findcheck", new FindCheckPostController());
         
         mappings.put("/free/freelist", new FreeListController());
         mappings.put("/free/freepost", new FreePostController());
         mappings.put("/free/freesearch", new FreeSearchController());
-        mappings.put("/free/freeupdate", new FreeUpdateController());  
         mappings.put("/free/freecheck", new FreeCheckPostController());
         mappings.put("/free/freeinfo", new FreeListController());
         mappings.put("/free/freepurchase", new FreeListController());
@@ -73,12 +70,10 @@ public class RequestMapping {
         
         mappings.put("/free/comment", new CommentController());
         mappings.put("/find/comment", new CommentController());
+
         mappings.put("/notification/post", new PostController());
         mappings.put("/notification/comment", new CommentListController());
-        //mappings.put("/notification/messagePost", new PostMessageListController());
-        //mappings.put("/notification/notiList", new NotificationController());
-        
-        
+
         logger.info("Initialized Request Mapping!");
     }
 
