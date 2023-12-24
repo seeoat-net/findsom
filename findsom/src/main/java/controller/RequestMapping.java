@@ -38,7 +38,7 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
         
         // <다솔>─────────────────────────────────────────────────────────────────
-        // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
+        // // 쉿!게시판
         mappings.put("/noise", new NoiseController()); 
 
           // 매칭 게시판 // 
@@ -66,7 +66,7 @@ public class RequestMapping {
         
         
         // <소망>─────────────────────────────────────────────────────────────────
-        mappings.put("/notification/writeMessage", new CommentListController());
+        mappings.put("/notification/writeMessage", new MessageController());
         mappings.put("/notification/messagePost", new MessageController());
         mappings.put("/notification/messageView", new MessageController());
         
