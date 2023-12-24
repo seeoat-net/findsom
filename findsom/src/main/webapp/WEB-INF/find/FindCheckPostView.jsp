@@ -88,8 +88,8 @@ function postRemove() {
 			</c:forEach>
 
 				<!-- 댓글 등록 폼 -->
-			<form action="<c:url value='/free/comment' />" method="POST">
-   				<input type="hidden" name="freepostID" value="${param.freepostID}">
+			<form action="<c:url value='/find/comment' />" method="POST">
+   				<input type="hidden" name="findpostID" value="${param.findpostID}">
 			 	<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text" name="content" maxlength="500">
     			<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
 			</form>
