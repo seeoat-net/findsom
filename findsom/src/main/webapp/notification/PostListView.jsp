@@ -22,10 +22,18 @@ function clickBtn(targetUri) {
 		<%@ include file="../Header.jsp" %>
 		<div class="container">
 			<h1 class="naviText"> 알림함 </h1><br/>
-			<button class="choiseBtn" onClick="clickBtn('<c:url value='/notification/post'/>')">작성글</button>
-			<button class="notiBtn" onClick="clickBtn('<c:url value='/notification/comment'/>')">작성댓글</button>
-			<button class="notiBtn" onClick="clickBtn('<c:url value='/notification/notiList'/>')">댓글 알림</button>
-			<button class="notiBtn" onClick="clickBtn('<c:url value='/notification/messageView'/>')">쪽지함</button>
+			<a class="btnTag" href="<c:url value='/notification/post' />" >
+				<button class="choiseBtn">작성글</button>
+			</a>
+			<a class="btnTag" href="<c:url value='/notification/comment' />" >
+				<button class="notiBtn">작성댓글</button>
+			</a>
+			<a class="btnTag" href="<c:url value='/notification/notiList' />" >
+				<button class="notiBtn">댓글 알림</button>
+			</a>
+			<a class="btnTag" href="<c:url value='/notification/messageView' />" >
+				<button class="notiBtn">쪽지함</button>
+			</a>
 			<br/>
 			
 			<div class="itemBox">

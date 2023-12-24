@@ -50,7 +50,8 @@
 					<option value="08">8호</option>
 					<option value="09">9호</option>
 					<option value="10">10호</option>
-				</select>					<input type="button" value="신고" onClick="postCheck()">
+				</select>					
+				<input type="button" value="신고" onClick="postCheck()">
 			</form>
 		</div>
 		<div class="rankArea">

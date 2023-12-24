@@ -21,12 +21,9 @@ public class NotificationManager {
         notificationDAO.close();
     }
 
-    public void pushNotification(NotificationDTO notification) {
-        try {
-            notificationDAO.pushNotificationDB(notification);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void pushNotification(NotificationDTO notification) throws Exception {
+    	notificationDAO.pushNotificationDB(notification);
+
     }
 
     public List<NotificationDTO> getNotifications(String userID) {
