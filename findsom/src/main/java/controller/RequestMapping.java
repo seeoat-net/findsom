@@ -66,14 +66,18 @@ public class RequestMapping {
         
         
         // <소망>─────────────────────────────────────────────────────────────────
-        mappings.put("/notification/message/write", new MessageController());
-        mappings.put("/notification/message/view", new MessageController());
+        mappings.put("/notification/writeMessage", new CommentListController());
+        mappings.put("/notification/messagePost", new MessageController());
+        mappings.put("/notification/messageView", new MessageController());
+        
         mappings.put("/free/comment", new CommentController());
         mappings.put("/find/comment", new CommentController());
         mappings.put("/notification/post", new PostController());
         mappings.put("/notification/comment", new CommentListController());
+        
         //mappings.put("/notification/notiList", new NotificationController());
-
+        
+        
         logger.info("Initialized Request Mapping!");
     }
 

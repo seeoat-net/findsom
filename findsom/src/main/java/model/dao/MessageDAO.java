@@ -41,7 +41,7 @@ public class MessageDAO {
 
     public MessageDTO writeMessage(MessageDTO message) throws SQLException {
        String insertQuery = "INSERT INTO MessageInfo (messageID, messageText, createAt, senderID, receiverID, freepostID, findpostID) " +
-                "VALUES (Sequence_messageID.NEXTVAL, ?, ?, ?, ?, ?, ?)";//findpostID값에 null 넣기
+                "VALUES (Sequence_messageID.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
         // LocalDateTime을 java.sql.Timestamp로 변환
         java.sql.Timestamp sqlTimestamp = java.sql.Timestamp.valueOf(message.getCreateAt());
@@ -51,8 +51,8 @@ public class MessageDAO {
             sqlTimestamp, // java.sql.Timestamp 타입으로 변환된 날짜/시간
             message.getSenderID(),
             message.getReceiverID(),
-            message.getFreepostID() % 2 == 0 ? message.getFreepostID() : null, // 짝수인 경우만 설정
-            message.getFindpostID() % 2 != 0 ? message.getFindpostID() : null // 홀수인 경우만 설정
+            message.getFreepostID() != 0 ? message.getFreepostID() : null, 
+            message.getFindpostID() != 0 ? message.getFindpostID() : null 
             //message.getFreepostID(),
             //message.getFindpostID()
         };
