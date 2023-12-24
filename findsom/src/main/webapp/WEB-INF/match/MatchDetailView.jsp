@@ -62,7 +62,7 @@
 			<c:forEach var="findPost" items="${matchingDetail.finds}">
 				<div class="postItem">
 					<div class="postTitle">${findPost.title}</div>
-					${findPost.preper}
+					${findPost.prefer}
 				</div>
 			</c:forEach>
 		</div>
