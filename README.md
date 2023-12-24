@@ -29,6 +29,8 @@
 - 알림함 : 작성글 조회
 
 
-### Test User
+### Test User (시연)
 
-방 정보가 있는 사용자 (쉿!게시판)
+ID : love, PASSWORD : 2222  // 모집중
+
+ID : dd, PASSWORD : ddpw    // 모집완료
