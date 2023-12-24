@@ -30,14 +30,6 @@
 				<select name="floor" id="floor">
 					<option value="01">1층</option>
 					<option value="02">2층</option>
-					<option value="03">3층</option>
-					<option value="04">4층</option>
-					<option value="05">5층</option>
-					<option value="06">6층</option>
-					<option value="07">7층</option>
-					<option value="08">8층</option>
-					<option value="09">9층</option>
-					<option value="10">10층</option>
 				</select>
 				<select name="room" id="room">
 					<option value="01">1호</option>
@@ -45,11 +37,6 @@
 					<option value="03">3호</option>
 					<option value="04">4호</option>
 					<option value="05">5호</option>
-					<option value="06">6호</option>
-					<option value="07">7호</option>
-					<option value="08">8호</option>
-					<option value="09">9호</option>
-					<option value="10">10호</option>
 				</select>					
 				<input type="button" value="신고" onClick="postCheck()">
 			</form>
