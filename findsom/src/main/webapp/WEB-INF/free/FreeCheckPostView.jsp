@@ -68,8 +68,7 @@ function postMsg() {
 	  		</tr>
 	 	</table>
 	 	<p><hr>
-	 		  		<table>
-
+	 		  <table>
 		  		<!-- 댓글 표시 -->
 				<c:forEach items="${comments}" var="comment">
 				    <div>
