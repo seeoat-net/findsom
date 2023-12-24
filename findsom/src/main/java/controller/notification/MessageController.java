@@ -15,29 +15,31 @@ import java.util.List;
 
 public class MessageController implements Controller {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        MessageManager messageManager = MessageManager.getInstance();
-        HttpSession session = request.getSession();
-        
-        if ("/notification/writeMessage".equals(request.getServletPath())) {
-            if (request.getMethod().equals("POST")) {
-                return handleWriteMessage(request, session, messageManager);
-            }
-            else if (request.getMethod().equals("GET")){
-            	return handleWriteMessageView(request, session); 
-            }
-        } else if ("/notification/messageView".equals(request.getServletPath())) {
-            if ("GET".equalsIgnoreCase(request.getMethod())) {
-                return handleViewMessages(request, session, messageManager);
-            }
-        } else if ("/message/delete".equals(request.getServletPath())) {
-            if ("POST".equalsIgnoreCase(request.getMethod())) {
-                return handleDeleteMessage(request, messageManager);
-            }
-        }
-        return "/error.jsp";
-    }
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    MessageManager messageManager = MessageManager.getInstance();
+	    HttpSession session = request.getSession();
+	    
+	    if ("/notification/writeMessage".equals(request.getServletPath())) {
+	        if ("GET".equalsIgnoreCase(request.getMethod())) {
+	            return handleWriteMessageView(request, session);
+	        }
+	    } else if ("/notification/messagePost".equals(request.getServletPath())) {
+	        if ("POST".equalsIgnoreCase(request.getMethod())) {
+	            return handleWriteMessage(request, session, messageManager);
+	        }
+	    } else if ("/notification/messageView".equals(request.getServletPath())) {
+	        if ("GET".equalsIgnoreCase(request.getMethod())) {
+	            return handleViewMessages(request, session, messageManager);
+	        }
+	    } else if ("/message/delete".equals(request.getServletPath())) {
+	        if ("POST".equalsIgnoreCase(request.getMethod())) {
+	            return handleDeleteMessage(request, messageManager);
+	        }
+	    }
+	    return "/error.jsp";
+	}
+
     
 	//쪽지버튼 누르면 쪽지작성뷰(/notification/PostMessageMainView.jsp)
     private String handleWriteMessageView(HttpServletRequest request, HttpSession session) {
@@ -74,8 +76,10 @@ public class MessageController implements Controller {
         MessageDTO writtenMessage = messageManager.writeMessage(newMessage);
 
         if (writtenMessage != null) {
+        	System.out.println("쪽지작성뷰이동");
             request.setAttribute("message", "쪽지 작성 성공");
-            return "/notification/messageView"; 
+            request.setAttribute("sentMessage", writtenMessage); // 보낸 쪽지 정보를 속성으로 추가
+            return "/notification/PostMessageMainView.jsp"; 
         } else {
             return "/error.jsp";
         }
@@ -93,7 +97,7 @@ public class MessageController implements Controller {
         String receiverID = (String) session.getAttribute("userID");
         List<MessageDTO> messages = messageManager.getMessagesForReceiver(receiverID);
         request.setAttribute("messages", messages);
-        return "/message/PostMessageMainView.jsp";
+        return "/notification/PostMessageMainView.jsp";
     }
 
     //쪽지 삭제
