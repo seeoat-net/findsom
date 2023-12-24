@@ -20,12 +20,15 @@ public class PostController implements Controller {
 		User user = (User)session.getAttribute("user");
 		
 		try {
-			ArrayList<PostDTO> postList = postMan.myPostList(user.getUserId());
-			request.setAttribute("postlist", postList);
+			ArrayList<PostDTO> findpostList = postMan.myFindPostList(user.getUserId());
+			ArrayList<PostDTO> freepostList = postMan.myFreePostList(user.getUserId());
+			
+			request.setAttribute("findpostlist", findpostList);
+			request.setAttribute("freepostlist", freepostList);
 			
 			return "/notification/PostListView.jsp";
 		} catch (Exception e) {
-			return "redirect:/findsom/RandingView.jsp";
+			return "redirect:/findsom/MyPageMainView.jsp";
 		}
 	}
 

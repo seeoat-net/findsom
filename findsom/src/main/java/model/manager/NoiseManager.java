@@ -1,11 +1,9 @@
 package model.manager;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import model.dao.NoiseDAO;
+import model.dao.mybatis.NoiseDAO;
 import model.dto.NoiseDTO;
 
 public class NoiseManager {
@@ -39,29 +37,4 @@ public class NoiseManager {
 		return noiseDAO.noiseReport(roomInfo);
 	}
 
-	//DAO TEST
-	/*
-	public static void main(String[] args) throws SQLException {
-		NoiseDAO noiseDao = new NoiseDAO();
-		Scanner scanner = new Scanner(System.in);
-		
-		//방의 소음 개수 myNoise
-		System.out.print("roominfo : ");
-		String roominfo = scanner.next();
-        System.out.println("noise : " + noiseDao.myNoise(roominfo)); 	
-        
-        //소음 순위
-        ArrayList<NoiseDTO> noiseList = noiseDao.noiseRank();
-        for (NoiseDTO noise : noiseList) {
-        	System.out.println(noise.getRoomInfo() + " " + noise.getCount()); 
-        }
-        
-        //소음 신고 (-1 : 실패)
-        System.out.print("reportRoom : ");
-		String reportRoom = scanner.next();
-        System.out.println("reportRoom : " + noiseDao.noiseReport(reportRoom)); 	
-        
-		scanner.close();
-	}
-	*/
 }

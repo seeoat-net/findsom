@@ -256,8 +256,8 @@ public class UserDAO {
                     case "semester": case "vacation":
                         lifePattern.setEmploymentPeriod(pattern);
                         break;
-                    case "istj": case "isfj": case "infj": case "intj": case "istp": case "isfp": case "infp": 
-                    case "estp": case "esfp": case "enfp": case "entp": case "estj": case "enfj": case "entj":
+                    case "istj": case "isfj": case "infj": case "intj": case "istp": case "isfp": case "infp": case "intp":
+                    case "estp": case "esfp": case "enfp": case "entp": case "estj": case "enfj": case "entj": case "esfj":
                         lifePattern.setMbti(pattern);
                         break;
                     case "morningShower": case "nightShower":

@@ -21,11 +21,11 @@
 	<%@ include file="../Header.jsp" %>
 	
 	<div class="container">
-		<div class="itemTitle"> 쉿! 게시판</div>
+		<h1 class="naviText"> 쉿! 게시판 </h1><br/>
 		<div class="item">
 			<div class="itemMyNoise"> 내가 받은 민원 : ${myNoiseCount} </div>	
 			<div class="itemText">신고자의 익명은 보장되며, <br/>신고는 한달의 1번만 가능합니다.<br/>소음 민원을 제출하기 전에, <br/>이 호수가 소음 이슈와 관련이 있는지 확인하세요.<br/></div>
-			<form name="form" method="POST" action="<c:url value='/noise'/>">
+			<form class="itemForm" name="form" method="POST" action="<c:url value='/noise'/>">
 				<select name="residence" id="residence">
 				    <option value="1">1기숙사</option>
 				    <option value="2">2기숙사</option>
@@ -58,18 +58,18 @@
 			</form>
 		</div>
 		<div class="rankArea">
-			<div>소음 랭킹</div>
+			<div class="rankTitle">소음 랭킹</div><br/>
 			<div class="rankBox">1기숙사 101호</div>
 			<div class="rankBox">1기숙사 101호</div>
 			<div class="rankBox">1기숙사 101호</div>
 			<div class="rankBox">1기숙사 101호</div>
 			<div class="rankBox">1기숙사 101호</div>
 			<div class="rankBox">1기숙사 101호</div>
-			<!-- 
+			
 			<c:forEach var="ranking" items="${noiseRanking}">
 				<div class="rankBox">${ranking.roomInfo} ( ${ranking.count} )</div>
 			</c:forEach> 
-			 -->
+			
 		</div>
 	</div>
 </div>

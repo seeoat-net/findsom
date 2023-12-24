@@ -17,7 +17,7 @@ public class MatchDAO {
 	}
 	
 	//현재 룸메이트를 구인 중인 모든 유저의 MatchDTO
-	public ArrayList<MatchDTO> searchUsers() throws SQLException {
+	public ArrayList<MatchDTO> searchUsers(String userID) throws SQLException {
 		try {
 			StringBuilder query1 = new StringBuilder();
 	        query1.append("SELECT userID, nickname ");
@@ -29,8 +29,10 @@ public class MatchDAO {
     	 
 			ResultSet rs = jdbcUtil.executeQuery();
 			while (rs.next()) {		// 검색 결과 존재
-				MatchDTO matchDTO = new MatchDTO(rs.getString("userID"), rs.getString("nickname"));
-				matchDTOList.add(matchDTO);
+				if ( !rs.getString("userID").equals(userID) ) {
+					MatchDTO matchDTO = new MatchDTO(rs.getString("userID"), rs.getString("nickname"));
+					matchDTOList.add(matchDTO);
+				}
 			}
 			
 			StringBuilder query2 = new StringBuilder();
@@ -65,35 +67,34 @@ public class MatchDAO {
 	public MatchDetailDTO searchUserDetail(String userID) {
 		try {
 			StringBuilder query = new StringBuilder();
-	        query.append("SELECT p.findpostID, p.isAnonymous, p.title, p.prefer, p.userID, p.mycontent, p.matecontent, u.nickname ");
+	        query.append("SELECT p.findpostID, p.isAnonymous, p.title, p.prefer, p.mycontent, p.matecontent, u.nickname ");
 	        query.append("FROM findboardpost p, userinfo u ");
-	        query.append("WHERE p.userID = u.userID and u.userID = ? ");
+	        query.append("WHERE p.userID = u.userID and p.userID = ? ");
 	        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{ userID });
-	        
-	        ResultSet rs = jdbcUtil.executeQuery();
 	        ArrayList<FindDTO> finds = new ArrayList<FindDTO>();
-	        String nickname = null;
+	        ResultSet rs = jdbcUtil.executeQuery();
+
 	        
 			while (rs.next()) {
-				nickname = rs.getString("u.nickname");
-				FindDTO dto = new FindDTO(rs.getInt("p.findpostID"), rs.getString("p.isAnonymous"), rs.getString("p.title"),
-						rs.getString("p.prefer"), rs.getString("p.mycontent"), rs.getString("p.matecontent"), rs.getString("p.userID"));
+				FindDTO dto = new FindDTO(rs.getInt("findpostID"), rs.getString("isAnonymous"), rs.getString("title"),
+						rs.getString("prefer"), rs.getString("mycontent"), rs.getString("matecontent"), userID);
 				finds.add(dto);
 			}
-			MatchDetailDTO detailDTO = new MatchDetailDTO(userID, nickname, finds);
 			
 			StringBuilder query2 = new StringBuilder();
 	        query2.append("SELECT LifePattern ");
 	        query2.append("FROM LifePatterns ");
 	        query2.append("WHERE userID = ? ");
 	        jdbcUtil.setSqlAndParameters(query2.toString(), new Object[]{ userID });
-	    	
-	        rs = jdbcUtil.executeQuery();
-	    	ArrayList<String> patterns = new ArrayList<String>();
+	     
+    		rs = jdbcUtil.executeQuery();
+    		ArrayList<String> patterns = new ArrayList<String>();
 			while (rs.next()) {		
-				patterns.add(rs.getString("LifePattern"));
+				patterns.add(rs.getString("LifePattern")) ;
 			}
-			detailDTO.setLifePatternList(patterns);
+			
+			MatchDetailDTO detailDTO = new MatchDetailDTO(userID, patterns, finds);
+			detailDTO.patternListChangeToKor();
 			
 			return detailDTO;
 		} catch (Exception ex) {

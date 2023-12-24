@@ -7,7 +7,11 @@ import org.slf4j.LoggerFactory;
 import controller.match.MatchController;
 import controller.noise.NoiseController;
 import controller.notification.CommentController;
+import controller.notification.CommentListController;
 import controller.notification.MessageController;
+import controller.notification.NotificationController;
+import controller.notification.PostController;
+import controller.notification.PostMessageListController;
 import controller.find.*;
 import controller.free.*;
 import controller.user.*;
@@ -34,13 +38,13 @@ public class RequestMapping {
         
         
         // <다솔>─────────────────────────────────────────────────────────────────
-        // // 쉿!게시판 // // 쉿 게시판 접근 시, roominfo가 있는 사람만! 
-        mappings.put("/noise", new NoiseController()); 
+        // // 쉿!게시판
         mappings.put("/noise", new NoiseController()); 
 
           // 매칭 게시판 // 
         mappings.put("/match/matching", new MatchController()); 
-        mappings.put("/match/matching/detail", new MatchController());
+        mappings.put("/match/detail", new MatchController());
+
         
         
         // <예림>─────────────────────────────────────────────────────────────────
@@ -60,18 +64,16 @@ public class RequestMapping {
         
         
         // <소망>─────────────────────────────────────────────────────────────────
-        mappings.put("/notification/message/write", new MessageController());
-        mappings.put("/notification/message/view", new MessageController());
+        mappings.put("/notification/writeMessage", new MessageController());
+        mappings.put("/notification/messagePost", new MessageController());
+        mappings.put("/notification/messageView", new MessageController());
+        
         mappings.put("/free/comment", new CommentController());
         mappings.put("/find/comment", new CommentController());
-<<<<<<< Updated upstream
 
-=======
         mappings.put("/notification/post", new PostController());
         mappings.put("/notification/comment", new CommentListController());
-        
-        
->>>>>>> Stashed changes
+
         logger.info("Initialized Request Mapping!");
     }
 

@@ -68,14 +68,23 @@ function postMsg() {
 	  		</tr>
 	 	</table>
 	 	<p><hr>
-	 	<table>
-	  		<tr>
-	  			<td>
-		  		<input type="text"  name="comment" placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842"  maxlength="500">
-				<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:#8B2842" onClick="">
-	  			</td>
-	  		</tr>
-	 	</table>
+	 		  		<table>
+
+		  		<!-- 댓글 표시 -->
+				<c:forEach items="${comments}" var="comment">
+				    <div>
+				        <p>${comment.userID}: ${comment.content}</p>
+    				</div>
+				</c:forEach>
+
+
+				<!-- 댓글 등록 폼 -->
+				<form action="<c:url value='/free/comment' />" method="POST">
+    				<input type="hidden" name="freepostID" value="${param.freepostID}">
+				 	<input placeholder="댓글을 입력하세요" style="background-color:#FEF5F0; border-color:#8B2842" type="text" name="content" maxlength="500">
+    				<input type="submit" value="등록" style="background-color:#8B2842; color:white; border-color:white">
+				</form>
+	  		</table>
 	 </div>
 </span>
 </body>

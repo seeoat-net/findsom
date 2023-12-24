@@ -5,9 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import model.dto.MessageDTO;
 import model.dto.User;
+
 import model.manager.MessageManager;
 
 public class PostMessageListController {
