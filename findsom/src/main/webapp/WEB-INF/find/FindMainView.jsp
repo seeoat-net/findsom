@@ -29,17 +29,19 @@ function postList(targetUri) {
 	<div>
 		<table class="table">
 	    <c:forEach var="find" items="${findList}">
-	    	<tr>
-	    		<td>
-	    			<a href="<c:url value='/find/findcheck'>
-					<c:param name='findpostID' value="${find.findpostID}"/>
-					</c:url>" style="color: #8B2842; text-decoration: none;">
-			  		<b>${find.title}</b></a><br>
-	            	&nbsp;${find.prefer}
-	            	<hr>
-	    		</td>
-	    	</tr>
-	    </c:forEach>
+	    <c:if test="${not empty find.title}">
+	        <tr>
+	            <td>
+	                <a href="<c:url value='/find/findcheck'>
+	                <c:param name='findpostID' value="${find.findpostID}"/>
+	                </c:url>" style="color: #8B2842; text-decoration: none;">
+	                <b>${find.title}</b></a><br>
+	                &nbsp;${find.prefer}
+	                <hr>
+	            </td>
+	        </tr>
+	    </c:if>
+		</c:forEach>
 	    </table>
 	</div>
   	</span>
