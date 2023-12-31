@@ -36,6 +36,7 @@ function postList(targetUri, buttonClass) {
 	<div>
 		<table class="table">
 		 <c:forEach var="free" items="${freeList}">
+		 <c:if test="${not empty free.title}">
 		   	<tr>
 		   		<td>                    
 		   		    <a href="<c:url value='/free/freecheck'>
@@ -46,6 +47,7 @@ function postList(targetUri, buttonClass) {
 		           	<hr>
 		   		</td>
 		   	</tr>
+		</c:if>
 	   	</c:forEach>
 		</table>
 	</div>
